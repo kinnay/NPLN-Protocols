@@ -1,0 +1,180 @@
+
+syntax = "proto3";
+
+package nn.npln.gamesync.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/rpc/status.proto";
+import "proto/common/value.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/gamesync/v1;gamesync";
+option cc_enable_arenas = true;
+
+message Document {
+	string name = 1;
+	nn.npln.common.MapValue fields = 2;
+	google.protobuf.Timestamp create_time = 3;
+	google.protobuf.Timestamp update_time = 4;
+}
+
+message Deferment {
+	string name = 1;
+	repeated WriteOperation write_operations = 2;
+}
+
+message Target {
+	string name = 1;
+	oneof target_type {
+		DocumentsTarget documents = 2;
+		CollectionTarget collection = 3;
+	}
+}
+
+message WriteOperation {
+	oneof operation_type {
+		UpdateDocumentRequest update_document = 1;
+		MergeDocumentRequest merge_document = 2;
+		TransformDocumentRequest transform_document = 3;
+		DeleteDocumentRequest delete_document = 4;
+	}
+}
+
+message LazyWriteOperation {
+	oneof operation_type {
+		MergeDocumentRequest merge_document = 1;
+		TransformDocumentRequest transform_document = 2;
+	}
+}
+
+message ReadResult {
+	oneof result {
+		Document found = 1;
+		string missing = 2;
+	}
+}
+
+message UpdateResult {
+}
+
+message DeleteResult {
+}
+
+message TransformResult {
+	repeated nn.npln.common.Value results = 1;
+}
+
+message WriteResult {
+	oneof result_type {
+		UpdateResult update_result = 1;
+		TransformResult transform_result = 2;
+		DeleteResult delete_result = 3;
+	}
+}
+
+message UpdateDocumentRequest {
+	Document document = 1;
+	google.protobuf.FieldMask update_mask = 2;
+	Precondition current_document = 3;
+}
+
+message MergeDocumentRequest {
+	Document document = 1;
+}
+
+message TransformDocumentRequest {
+	string name = 1;
+	repeated FieldTransform field_transforms = 2;
+}
+
+message DeleteDocumentRequest {
+	string name = 1;
+	Precondition current_document = 2;
+}
+
+message Precondition {
+	oneof condition_type {
+		bool exists = 1;
+		google.protobuf.Timestamp update_time = 2;
+	}
+}
+
+message FieldTransform {
+	enum ServerValueType {
+		SERVER_VALUE_TYPE_UNSPECIFIED = 0;
+		REQUEST_TIME = 1;
+	}
+	
+	string field_path = 1;
+	oneof transform_type {
+		ServerValueType set_server_value = 2;
+		nn.npln.common.Value increment = 3;
+		nn.npln.common.Value maximum = 4;
+		nn.npln.common.Value minimum = 5;
+		string load_global_value = 6;
+		string store_global_value = 7;
+		string clear_global_value = 8;
+	}
+}
+
+message DefermentOperation {
+	oneof operation_type {
+		UpdateDefermentRequest update_deferment = 1;
+		DeleteDefermentRequest delete_deferment = 2;
+	}
+}
+
+message UpdateDefermentRequest {
+	Deferment deferment = 1;
+}
+
+message DeleteDefermentRequest {
+	string name = 1;
+}
+
+message DocumentsTarget {
+	repeated string documents = 1;
+}
+
+message CollectionTarget {
+	string collection = 1;
+}
+
+message DocumentChange {
+	enum DocumentChangeType {
+		DOCUMENT_CHANGE_TYPE_UNSPECIFIED = 0;
+		EXIST = 1;
+		UPDATED = 2;
+		DELETED = 3;
+	}
+	
+	string target_id = 1;
+	DocumentChangeType document_change_type = 2;
+	Document document = 3;
+}
+
+message TargetChange {
+	enum TargetChangeType {
+		TARGET_CHANGE_TYPE_UNSPECIFIED = 0;
+		UPDATED = 1;
+		LISTED = 2;
+		DELETED = 3;
+		FAILED = 4;
+	}
+	
+	string target_id = 1;
+	TargetChangeType target_change_type = 2;
+	google.rpc.Status cause = 3;
+}
+
+message Token {
+	string user_session = 1;
+	string access_token = 2;
+	string refresh_token = 3;
+	google.protobuf.Duration ttl = 4;
+}
+

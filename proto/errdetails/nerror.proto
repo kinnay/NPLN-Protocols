@@ -1,0 +1,104 @@
+
+syntax = "proto3";
+
+package nn.npln.errdetails;
+
+option go_package = "npln.nintendo.net/npln-practice/proto/errdetails";
+option cc_enable_arenas = true;
+
+message NError {
+	enum CancelledDetailCode {
+		CANCELLED_GENERIC = 0;
+	}
+	
+	enum UnknownDetailCode {
+		UNKNOWN_GENERIC = 0;
+	}
+	
+	enum InvalidArgumentDetailCode {
+		INVALID_ARGUMENT_GENERIC = 0;
+	}
+	
+	enum DeadlineExceededDetailCode {
+		DEADLINE_EXCEEDED_GENERIC = 0;
+	}
+	
+	enum NotFoundDetailCode {
+		NOT_FOUND_GENERIC = 0;
+	}
+	
+	enum AlreadyExistsDetailCode {
+		ALREADY_EXISTS_GENERIC = 0;
+	}
+	
+	enum PermissionDeniedDetailCode {
+		PERMISSION_DENIED_GENERIC = 0;
+	}
+	
+	enum ResourceExhaustedDetailCode {
+		RESOURCE_EXHAUSTED_GENERIC = 0;
+		RESOURCE_EXHAUSTED_OUT_OF_MEMORY_SERVER = 1;
+	}
+	
+	enum FailedPreconditionDetailCode {
+		FAILED_PRECONDITION_GENERIC = 0;
+		FAILED_PRECONDITION_USER_CREATION_LIMIT_EXCEEDED = 1;
+	}
+	
+	enum AbortedDetailCode {
+		ABORTED_GENERIC = 0;
+	}
+	
+	enum OutOfRangeDetailCode {
+		OUT_OF_RANGE_GENERIC = 0;
+	}
+	
+	enum UnimplementedDetailCode {
+		UNIMPLEMENTED_GENERIC = 0;
+	}
+	
+	enum InternalDetailCode {
+		INTERNAL_GENERIC = 0;
+	}
+	
+	enum UnavailableDetailCode {
+		UNAVAILABLE_GENERIC = 0;
+		UNAVAILABLE_UNDER_MAINTENANCE = 1;
+		UNAVAILABLE_OUT_OF_SERVICE_PERIOD = 2;
+		UNAVAILABLE_SERVICE_CLOSED = 3;
+	}
+	
+	enum DataLossDetailCode {
+		DATA_LOSS_GENERIC = 0;
+	}
+	
+	enum UnauthenticatedDetailCode {
+		UNAUTHENTICATED_GENERIC = 0;
+		UNAUTHENTICATED_UPDATE_REQUIRED = 1;
+		UNAUTHENTICATED_TOKEN_EXPIRED = 2;
+		UNAUTHENTICATED_UNAUTHENTICATED_DEVICE = 3;
+		UNAUTHENTICATED_TOKEN_INVALID = 4;
+		UNAUTHENTICATED_NEED_SUBSCRIPTION = 5;
+	}
+	
+	string trace_id = 1;
+	oneof detail_code_type {
+		CancelledDetailCode cancelled_detail_code = 2;
+		UnknownDetailCode unknown_detail_code = 3;
+		InvalidArgumentDetailCode invalid_argument_detail_code = 4;
+		DeadlineExceededDetailCode deadline_exceeded_detail_code = 5;
+		NotFoundDetailCode not_found_detail_code = 6;
+		AlreadyExistsDetailCode already_exists_detail_code = 7;
+		PermissionDeniedDetailCode permission_denied_detail_code = 8;
+		ResourceExhaustedDetailCode resource_exhausted_detail_code = 9;
+		FailedPreconditionDetailCode failed_precondition_detail_code = 10;
+		AbortedDetailCode aborted_detail_code = 11;
+		OutOfRangeDetailCode out_of_range_detail_code = 12;
+		UnimplementedDetailCode unimplemented_detail_code = 13;
+		InternalDetailCode internal_detail_code = 14;
+		UnavailableDetailCode unavailable_detail_code = 15;
+		DataLossDetailCode data_loss_detail_code = 16;
+		UnauthenticatedDetailCode unauthenticated_detail_code = 17;
+	}
+}
+

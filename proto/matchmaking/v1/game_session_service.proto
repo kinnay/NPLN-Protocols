@@ -1,0 +1,183 @@
+
+syntax = "proto3";
+
+package nn.npln.matchmaking.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/empty.proto";
+import "proto/common/resources.proto";
+import "proto/common/value.proto";
+import "proto/matchmaking/v1/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/matchmaking/v1;matchmaking";
+option cc_enable_arenas = true;
+
+enum GameSessionView {
+	GAME_SESSION_VIEW_UNSPECIFIED = 0;
+	BASIC = 1;
+	FULL = 2;
+}
+
+message CreateGameSessionCreationTicketRequest {
+	string parent = 1;
+	GameSessionCreationTicket game_session_creation_ticket = 2;
+	repeated string user_delegation_tokens = 3;
+}
+
+message TrackGameSessionCreationTicketRequest {
+	string name = 1;
+	repeated string user_delegation_tokens = 2;
+	repeated string include_id_token_users = 3;
+}
+
+message CancelGameSessionCreationTicketRequest {
+	string name = 1;
+}
+
+message GetGameSessionRequest {
+	string name = 1;
+	GameSessionView view = 2;
+}
+
+message BatchGetGameSessionsRequest {
+	string parent = 1;
+	repeated string names = 2;
+	GameSessionView view = 3;
+}
+
+message BatchGetGameSessionsResponse {
+	repeated GameSession game_sessions = 1;
+}
+
+message QueryGameSessionsRequest {
+	string tenant = 1;
+	GameSessionView view = 2;
+	string game_session_search_config = 3;
+	int32 min_vacancy_count = 4;
+	int32 min_participant_count = 5;
+	nn.npln.common.MapValue properties = 6;
+	repeated string users = 7;
+	int32 page_size = 8;
+	string page_token = 9;
+}
+
+message QueryGameSessionsResponse {
+	repeated GameSession game_sessions = 1;
+	string next_page_token = 2;
+}
+
+message JoinGameSessionRequest {
+	string name = 1;
+	string password = 2;
+	repeated UserDefinition user_definitions = 3;
+	repeated string user_delegation_tokens = 4;
+	repeated string include_id_token_users = 5;
+}
+
+message JoinGameSessionResponse {
+	repeated MatchedUserSession matched_user_sessions = 1;
+	GameSession game_session = 2;
+}
+
+message SyncGameSessionRequest {
+	GameSession game_session = 1;
+}
+
+message SyncGameSessionResponse {
+	repeated UserSession user_sessions = 1;
+}
+
+message ListUserSessionsRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListUserSessionsResponse {
+	repeated UserSession user_sessions = 1;
+	string next_page_token = 2;
+}
+
+message GetUserSessionRequest {
+	string name = 1;
+}
+
+message IssueMatchmakingIdTokenRequest {
+	string game_session = 1;
+	repeated string users = 2;
+	repeated string user_delegation_tokens = 3;
+	repeated string include_id_token_users = 4;
+}
+
+message IssueMatchmakingIdTokenResponse {
+	repeated MatchedUserSession matched_user_sessions = 1;
+	GameSession game_session = 2;
+}
+
+message IssuePublicKeyRequest {
+	string parent = 1;
+}
+
+message IssuePublicKeyResponse {
+	string key = 1;
+}
+
+message IssueUserDelegationTokenRequest {
+	string parent = 1;
+	string delegator_user = 2;
+	string mandatary_user = 3;
+	nn.npln.common.MapValue attributes = 4;
+	repeated DelegationAction delegation_actions = 5;
+}
+
+message IssueUserDelegationTokenResponse {
+	UserDelegationDetail user_delegation_detail = 1;
+}
+
+message CreateGameSessionShortAliasRequest {
+	string parent = 1;
+	GameSessionShortAlias game_session_short_alias = 2;
+}
+
+message GetGameSessionShortAliasRequest {
+	string name = 1;
+}
+
+message AllocateIceServerSetRequest {
+	string tenant = 1;
+	string user = 2;
+}
+
+message ListLatencyMeasurementServersRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListLatencyMeasurementServersResponse {
+	repeated LatencyMeasurementServer latency_measurement_servers = 1;
+	string next_page_token = 2;
+}
+
+service GameSessionService {
+	rpc CreateGameSessionCreationTicket(CreateGameSessionCreationTicketRequest) returns (GameSessionCreationTicket);
+	rpc TrackGameSessionCreationTicket(TrackGameSessionCreationTicketRequest) returns (stream GameSessionCreationTicket);
+	rpc CancelGameSessionCreationTicket(CancelGameSessionCreationTicketRequest) returns (google.protobuf.Empty);
+	rpc GetGameSession(GetGameSessionRequest) returns (GameSession);
+	rpc BatchGetGameSessions(BatchGetGameSessionsRequest) returns (BatchGetGameSessionsResponse);
+	rpc QueryGameSessions(QueryGameSessionsRequest) returns (QueryGameSessionsResponse);
+	rpc JoinGameSession(JoinGameSessionRequest) returns (JoinGameSessionResponse);
+	rpc SyncGameSession(SyncGameSessionRequest) returns (SyncGameSessionResponse);
+	rpc ListUserSessions(ListUserSessionsRequest) returns (ListUserSessionsResponse);
+	rpc GetUserSession(GetUserSessionRequest) returns (UserSession);
+	rpc IssueMatchmakingIdToken(IssueMatchmakingIdTokenRequest) returns (IssueMatchmakingIdTokenResponse);
+	rpc IssueUserDelegationToken(IssueUserDelegationTokenRequest) returns (IssueUserDelegationTokenResponse);
+	rpc IssuePublicKey(IssuePublicKeyRequest) returns (IssuePublicKeyResponse);
+	rpc CreateGameSessionShortAlias(CreateGameSessionShortAliasRequest) returns (GameSessionShortAlias);
+	rpc GetGameSessionShortAlias(GetGameSessionShortAliasRequest) returns (GameSessionShortAlias);
+	rpc AllocateIceServerSet(AllocateIceServerSetRequest) returns (IceServerSet);
+	rpc ListLatencyMeasurementServers(ListLatencyMeasurementServersRequest) returns (ListLatencyMeasurementServersResponse);
+}
+

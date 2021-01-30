@@ -1,0 +1,15 @@
+
+syntax = "proto3";
+
+package nn.npln.common;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/resource.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/common;common";
+option cc_enable_arenas = true;
+
+extend google.protobuf.FileOptions {
+	bool imported = 50000;
+}
+
