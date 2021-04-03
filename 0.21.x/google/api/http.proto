@@ -1,0 +1,37 @@
+
+syntax = "proto3";
+
+package google.api;
+
+option java_package = "com.google.api";
+option java_outer_classname = "HttpProto";
+option java_multiple_files = true;
+option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
+option cc_enable_arenas = true;
+option objc_class_prefix = "GAPI";
+
+message Http {
+	repeated HttpRule rules = 1;
+	bool fully_decode_reserved_expansion = 2;
+}
+
+message HttpRule {
+	string selector = 1;
+	oneof pattern {
+		string get = 2;
+		string put = 3;
+		string post = 4;
+		string delete = 5;
+		string patch = 6;
+		CustomHttpPattern custom = 8;
+	}
+	string body = 7;
+	string response_body = 12;
+	repeated HttpRule additional_bindings = 11;
+}
+
+message CustomHttpPattern {
+	string kind = 1;
+	string path = 2;
+}
+

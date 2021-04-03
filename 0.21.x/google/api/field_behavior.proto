@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+
+package google.api;
+
+import "google/protobuf/descriptor.proto";
+
+option java_package = "com.google.api";
+option java_outer_classname = "FieldBehaviorProto";
+option java_multiple_files = true;
+option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
+option cc_enable_arenas = true;
+option objc_class_prefix = "GAPI";
+
+extend google.protobuf.FieldOptions {
+	repeated google.api.FieldBehavior field_behavior = 1052;
+}
+
+enum FieldBehavior {
+	FIELD_BEHAVIOR_UNSPECIFIED = 0;
+	OPTIONAL = 1;
+	REQUIRED = 2;
+	OUTPUT_ONLY = 3;
+	INPUT_ONLY = 4;
+	IMMUTABLE = 5;
+}
+

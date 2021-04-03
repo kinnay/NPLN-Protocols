@@ -1,0 +1,158 @@
+
+syntax = "proto3";
+
+package nn.npln.gamesync.v1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/gamesync/v1/resources.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/gamesync/v1;gamesync";
+option cc_enable_arenas = true;
+
+message IssueTokenRequest {
+	string user_session = 1;
+	string matchmaking_id_token = 2;
+}
+
+message IssueTokenResponse {
+	Token token = 1;
+}
+
+message RefreshTokenRequest {
+	string user_session = 1;
+	string refresh_token = 2;
+}
+
+message RefreshTokenResponse {
+	Token token = 1;
+}
+
+message GetDocumentRequest {
+	string name = 1;
+	google.protobuf.FieldMask read_mask = 2;
+	bytes transaction = 3;
+}
+
+message ReadDocumentsRequest {
+	repeated string documents = 1;
+	google.protobuf.FieldMask read_mask = 2;
+	bytes transaction = 3;
+}
+
+message ReadDocumentsResponse {
+	repeated ReadResult results = 1;
+	google.protobuf.Timestamp read_time = 2;
+}
+
+message ListDocumentsRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+	google.protobuf.FieldMask read_mask = 4;
+	bool show_missing = 5;
+}
+
+message ListDocumentsResponse {
+	repeated Document documents = 1;
+	string next_page_token = 2;
+}
+
+message QueryCollectionIdsRequest {
+	string document = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message QueryCollectionIdsResponse {
+	repeated string collection_ids = 1;
+	string next_page_token = 2;
+}
+
+message WriteDocumentsRequest {
+	repeated WriteOperation write_operations = 1;
+	repeated DefermentOperation deferment_operations = 2;
+}
+
+message WriteDocumentsResponse {
+	repeated WriteResult write_results = 1;
+	google.protobuf.Timestamp commit_time = 2;
+}
+
+message LazyWriteDocumentsRequest {
+	repeated LazyWriteOperation write_operations = 1;
+	string lazy_write_config = 2;
+}
+
+message LazyWriteDocumentsResponse {
+	google.protobuf.Timestamp commit_time = 1;
+}
+
+message BeginTransactionRequest {
+}
+
+message BeginTransactionResponse {
+	bytes transaction = 1;
+}
+
+message CommitTransactionRequest {
+	repeated WriteOperation write_operations = 1;
+	repeated DefermentOperation deferment_operations = 2;
+	bytes transaction = 3;
+}
+
+message CommitTransactionResponse {
+	repeated WriteResult write_results = 1;
+	google.protobuf.Timestamp commit_time = 2;
+}
+
+message RollbackTransactionRequest {
+	bytes transaction = 1;
+}
+
+message KeepUserSessionRequest {
+	string name = 1;
+	oneof request_type {
+		string echo = 2;
+		UpdateTargetRequest update_target = 3;
+		DeleteTargetRequest delete_target = 4;
+	}
+}
+
+message KeepUserSessionResponse {
+	oneof response_type {
+		string echo = 1;
+		DocumentChange document_change = 2;
+		TargetChange target_change = 3;
+	}
+}
+
+message UpdateTargetRequest {
+	Target target = 1;
+}
+
+message DeleteTargetRequest {
+	string name = 1;
+}
+
+service Gamesync {
+	rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse);
+	rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+	rpc GetDocument(GetDocumentRequest) returns (Document);
+	rpc ReadDocuments(ReadDocumentsRequest) returns (ReadDocumentsResponse);
+	rpc ListDocuments(ListDocumentsRequest) returns (ListDocumentsResponse);
+	rpc QueryCollectionIds(QueryCollectionIdsRequest) returns (QueryCollectionIdsResponse);
+	rpc WriteDocuments(WriteDocumentsRequest) returns (WriteDocumentsResponse);
+	rpc LazyWriteDocuments(LazyWriteDocumentsRequest) returns (LazyWriteDocumentsResponse);
+	rpc BeginTransaction(BeginTransactionRequest) returns (BeginTransactionResponse);
+	rpc CommitTransaction(CommitTransactionRequest) returns (CommitTransactionResponse);
+	rpc RollbackTransaction(RollbackTransactionRequest) returns (google.protobuf.Empty);
+	rpc KeepUserSession(stream KeepUserSessionRequest) returns (stream KeepUserSessionResponse);
+}
+

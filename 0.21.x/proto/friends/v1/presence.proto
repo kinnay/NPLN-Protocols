@@ -1,0 +1,69 @@
+
+syntax = "proto3";
+
+package nn.npln.friends.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/field_mask.proto";
+import "proto/friends/v1/resources.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
+option cc_enable_arenas = true;
+
+message KeepAliveRequest {
+	message UpdatePresence {
+		Presence presence = 1;
+		google.protobuf.FieldMask update_mask = 2;
+	}
+	
+	oneof request {
+		UpdatePresence update_presence = 1;
+		Ack ack = 2;
+	}
+}
+
+message KeepAliveResponse {
+	Heartbeat heartbeat = 1;
+}
+
+message SubscribePresencesRequest {
+	string user = 1;
+	repeated string presences = 2;
+	google.protobuf.FieldMask read_mask = 3;
+	int32 max_presence_count = 4;
+	string resume_token = 5;
+}
+
+message SubscribePresencesResponse {
+	message Presences {
+		repeated Presence presences = 1;
+		string resume_token = 2;
+	}
+	
+	message PresenceEnumerationDone {
+	}
+	
+	oneof response {
+		Presences presences = 1;
+		PresenceEnumerationDone enumeration_done = 2;
+		Heartbeat heartbeat = 3;
+	}
+}
+
+message Heartbeat {
+	google.protobuf.Duration interval = 1;
+}
+
+message Ack {
+	string user = 1;
+}
+
+service PresenceService {
+	rpc KeepAlive(stream KeepAliveRequest) returns (stream KeepAliveResponse);
+	rpc SubscribePresences(SubscribePresencesRequest) returns (stream SubscribePresencesResponse);
+}
+

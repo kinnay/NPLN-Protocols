@@ -1,0 +1,71 @@
+
+syntax = "proto3";
+
+package nn.npln.auth.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/duration.proto";
+import "proto/auth/v1/resources.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/auth/v1;auth";
+option cc_enable_arenas = true;
+
+message CreateUserRequest {
+	string parent = 1;
+	User user = 2;
+	ExternalIdToken external_id_token = 3;
+}
+
+message IssueTokenRequest {
+	string user = 1;
+	ExternalIdToken external_id_token = 2;
+}
+
+message IssueTokenResponse {
+	Token token = 1;
+}
+
+message RefreshTokenRequest {
+	string user = 1;
+	string refresh_token = 2;
+}
+
+message RefreshTokenResponse {
+	Token token = 1;
+}
+
+message IssuePrearrangedUserTokenRequest {
+	string tenant = 1;
+	int32 user_index = 2;
+	ExternalIdToken external_id_token = 3;
+}
+
+message IssuePrearrangedUserTokenResponse {
+	User user = 1;
+	Token token = 2;
+}
+
+message Token {
+	string user = 1;
+	string access_token = 2;
+	string refresh_token = 3;
+	google.protobuf.Duration ttl = 4;
+}
+
+message ExternalIdToken {
+	oneof token {
+		string nsa_id_token = 1;
+		string dummy_ext_id_token = 2;
+	}
+}
+
+service Auth {
+	rpc CreateUser(CreateUserRequest) returns (User);
+	rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse);
+	rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+	rpc IssuePrearrangedUserToken(IssuePrearrangedUserTokenRequest) returns (IssuePrearrangedUserTokenResponse);
+}
+

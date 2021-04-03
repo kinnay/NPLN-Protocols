@@ -1,0 +1,41 @@
+
+syntax = "proto3";
+
+package nn.npln.auth.v1;
+
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/auth/v1;auth";
+option cc_enable_arenas = true;
+
+enum ExternalIdType {
+	EXTERNAL_ID_TYPE_UNSPECIFIED = 0;
+	NSA_ID = 1;
+	DUMMY_EXT_ID = 2;
+}
+
+message Account {
+	string name = 1;
+	bool banned = 2;
+	google.protobuf.Timestamp update_time = 3;
+}
+
+message User {
+	string name = 1;
+	string account = 2;
+}
+
+message UserExternalId {
+	string name = 1;
+	string user = 2;
+	ExternalId external_id = 3;
+}
+
+message ExternalId {
+	ExternalIdType type = 1;
+	string id = 2;
+}
+

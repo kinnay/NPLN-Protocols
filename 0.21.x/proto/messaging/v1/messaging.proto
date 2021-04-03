@@ -1,0 +1,82 @@
+
+syntax = "proto3";
+
+package nn.npln.messaging.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
+import "proto/common/value.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/messaging/v1;messaging";
+option cc_enable_arenas = true;
+
+message RecvMessageRequest {
+	string user = 1;
+	string message_resume_token = 2;
+	string ack_resume_token = 3;
+}
+
+message RecvMessageResponse {
+	oneof reply {
+		RecvMessage message = 1;
+		RecvAck ack = 2;
+		KeepAlive keep_alive = 3;
+	}
+}
+
+message SendAckRequest {
+	string user = 1;
+	repeated AckBody acks = 2;
+}
+
+message SendAckResponse {
+}
+
+message SendMessageRequest {
+	string user = 1;
+	repeated string receiver_users = 2;
+	MessageBody message_body = 3;
+}
+
+message SendMessageResponse {
+}
+
+message RecvMessage {
+	MessageBody message_body = 1;
+	string sender_user = 2;
+	string message_resume_token = 3;
+	google.protobuf.Timestamp send_time = 4;
+}
+
+message MessageBody {
+	string message_request_id = 1;
+	bool need_ack = 2;
+	nn.npln.common.MapValue fields = 3;
+	string message_type = 4;
+}
+
+message RecvAck {
+	AckBody ack = 1;
+	string receiver_user = 2;
+	string ack_resume_token = 3;
+	google.protobuf.Timestamp ack_send_time = 4;
+}
+
+message AckBody {
+	string message_request_id = 1;
+	string sender_user = 2;
+}
+
+message KeepAlive {
+}
+
+service Messaging {
+	rpc RecvMessage(RecvMessageRequest) returns (stream RecvMessageResponse);
+	rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+	rpc SendAck(SendAckRequest) returns (SendAckResponse);
+}
+

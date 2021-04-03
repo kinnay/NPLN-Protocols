@@ -1,0 +1,26 @@
+
+syntax = "proto3";
+
+package google.api;
+
+import "google/protobuf/descriptor.proto";
+
+option java_package = "com.google.api";
+option java_outer_classname = "ClientProto";
+option java_multiple_files = true;
+option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
+option cc_enable_arenas = true;
+option objc_class_prefix = "GAPI";
+
+extend google.protobuf.MethodOptions {
+	repeated string method_signature = 1051;
+}
+
+extend google.protobuf.ServiceOptions {
+	string default_host = 1049;
+}
+
+extend google.protobuf.ServiceOptions {
+	string oauth_scopes = 1050;
+}
+

@@ -1,0 +1,203 @@
+
+syntax = "proto3";
+
+package nn.npln.matchmaking.v1;
+
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
+import "proto/common/value.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/matchmaking/v1;matchmaking";
+option cc_enable_arenas = true;
+
+extend google.protobuf.FileOptions {
+	bool imported = 50005;
+}
+
+enum DelegationAction {
+	DELEGATION_ACTION_UNSPECIFIED = 0;
+	ANY_PARTICIPATION = 1;
+	ACCEPTION = 2;
+	INCLUDE_ID_TOKEN_FOR_SAME_CLIENT = 3;
+}
+
+message GameSessionCreationTicket {
+	enum State {
+		STATE_UNSPECIFIED = 0;
+		PENDING = 1;
+		SUCCEEDED = 2;
+		CANCELLED = 3;
+		TIMED_OUT = 4;
+		FAILED = 5;
+	}
+	
+	string name = 1;
+	string matchmaking_config = 2;
+	repeated UserDefinition user_definitions = 3;
+	State state = 4;
+	repeated MatchedUserSession matched_user_sessions = 5;
+	GameSession game_session = 6;
+}
+
+message UserDelegationDetail {
+	string delegator_user = 1;
+	string mandatary_user = 2;
+	nn.npln.common.MapValue attributes = 3;
+	repeated DelegationAction delegation_actions = 4;
+	string user_delegation_token = 5;
+	google.protobuf.Duration ttl = 6;
+}
+
+message UserSession {
+	enum State {
+		STATE_UNSPECIFIED = 0;
+		RESERVED = 1;
+		ACTIVE = 2;
+	}
+	
+	string name = 1;
+	string user = 2;
+	LatencyData latency_data = 3;
+	google.protobuf.Timestamp create_time = 4;
+	State state = 5;
+	string team = 6;
+	nn.npln.common.MapValue attributes = 7;
+}
+
+message GameSessionShortAlias {
+	string name = 1;
+	string game_session = 2;
+	google.protobuf.Timestamp expire_time = 3;
+}
+
+message MatchmakingTicket {
+	enum State {
+		STATE_UNSPECIFIED = 0;
+		SEARCHING = 1;
+		PLACING = 2;
+		SUCCEEDED = 3;
+		TIMED_OUT = 4;
+		FAILED = 5;
+		CANCELLED = 6;
+		REQUIRING_ACCEPTANCE = 7;
+		DECLINED = 8;
+	}
+	
+	string name = 1;
+	string matchmaking_config = 2;
+	Backfill backfill = 3;
+	repeated UserDefinition user_definitions = 4;
+	State state = 5;
+	repeated MatchedUserSession matched_user_sessions = 6;
+	GameSession game_session = 7;
+}
+
+message Backfill {
+	string game_session = 1;
+	string host = 2;
+	int32 port = 3;
+}
+
+message GameSession {
+	enum State {
+		STATE_UNSPECIFIED = 0;
+		CREATING = 1;
+		ACTIVE = 2;
+		TERMINATING = 3;
+		TERMINATED = 4;
+	}
+	
+	string name = 1;
+	int32 max_participant_count = 2;
+	int32 current_participant_count = 3;
+	bool can_participate = 4;
+	bool is_public = 5;
+	string password = 6;
+	State state = 7;
+	string host = 8;
+	int32 port = 9;
+	google.protobuf.Timestamp create_time = 10;
+	nn.npln.common.MapValue properties = 11;
+	repeated UserSession user_sessions = 12;
+}
+
+message MatchedUserSession {
+	UserDefinition user_definition = 1;
+	string user_session = 2;
+	string matchmaking_id_token = 3;
+}
+
+message UserDefinition {
+	string user = 1;
+	nn.npln.common.MapValue attributes = 2;
+	LatencyData latency_data = 3;
+	string team = 4;
+}
+
+message LatencyData {
+	map<string, google.protobuf.Duration> latencies = 1;
+}
+
+message Acceptance {
+	string name = 1;
+	repeated string users = 2;
+	bool accepted = 3;
+	repeated string user_delegation_tokens = 4;
+}
+
+message IceServerSet {
+	string name = 1;
+	StunServer stun_server = 2;
+	repeated TurnServer turn_servers = 3;
+	google.protobuf.Duration ttl = 4;
+	google.protobuf.Timestamp update_time = 5;
+	google.protobuf.Duration client_cache_duration = 6;
+}
+
+message StunServer {
+	enum Protocol {
+		PROTOCOL_UNSPECIFIED = 0;
+		UDP = 1;
+		TCP = 2;
+		TLS = 3;
+	}
+	
+	string host = 1;
+	int32 port = 2;
+	Protocol protocol = 3;
+}
+
+message TurnServer {
+	enum Protocol {
+		PROTOCOL_UNSPECIFIED = 0;
+		UDP = 1;
+		TCP = 2;
+		TLS = 3;
+	}
+	
+	string host = 1;
+	int32 port = 2;
+	Protocol protocol = 3;
+	string username = 4;
+	string password = 5;
+}
+
+message LatencyMeasurementServer {
+	enum Protocol {
+		PROTOCOL_UNSPECIFIED = 0;
+		UDP = 1;
+		TCP = 2;
+		HTTP = 3;
+	}
+	
+	string name = 1;
+	string region = 2;
+	string host = 3;
+	int32 port = 4;
+	Protocol protocol = 5;
+}
+
