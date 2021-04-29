@@ -10,3 +10,5 @@ The IPS patches disable SSL certificate verification in Monster Hunter Rise.
 | Full game `v0` | `5CAC0323CCBC04BFA6A8E26F2BA349854C027812` |
 | Full game `v2` | `6CDEC176EA1D12C5C4F85BF17213377C22D1EEEF` |
 | Full game `v4` | `2EEFBDB9786E1652308BF32B298727F77FBCFC77` |
+
+`generate_patch.py` generates an IPS patch automatically, given the filename of the main NSO.
