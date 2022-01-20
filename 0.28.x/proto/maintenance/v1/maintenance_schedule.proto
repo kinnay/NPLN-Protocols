@@ -1,0 +1,41 @@
+
+syntax = "proto3";
+
+package nn.npln.maintenance.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/duration.proto";
+import "google/rpc/status.proto";
+import "proto/common/value.proto";
+import "proto/maintenance/v1/resources.proto";
+
+message CreateContentRequest {
+	string parent = 1;
+	Content content = 2;
+}
+
+message GetContentRequest {} // Unknown
+
+message SubscribeMaintenanceSchedulesRequest {
+	string tenant = 1;
+}
+
+message SubscribeMaintenanceSchedulesResponse {
+	oneof schedule { // Is this correct?
+		// Are these types correct?
+		MaintenanceSchedule maintenance_schedule = 1;
+		SubscribeMaintenanceSchedulesResponseMessage response_message = 2;
+	}
+}
+
+message SubscribeMaintenanceSchedulesResponseMessage {
+	// Is this correct?
+	repeated MaintenanceSchedule schedules1 = 1;
+	repeated MaintenanceSchedule schedules2 = 2;
+}
+
+message KeepAlive {} // Empty message
+
+service MaintenanceScheduleService {
+	rpc SubscribeMaintenanceSchedules(SubscribeMaintenanceSchedulesRequest) returns (SubscribeMaintenanceSchedulesResponse);
+}

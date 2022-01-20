@@ -1,0 +1,16 @@
+
+syntax = "proto3";
+
+package nn.npln.maintenance.v1;
+
+message MaintenanceSchedule {
+	string name = 1;
+	string service_account = 2;
+	google.protobuf.Timestamp unk3 = 3;
+	google.protobuf.Timestamp unk4 = 4;
+	repeated int32 unk5 = 5; // Type is probably wrong
+	oneof updater {
+		string updater_service_account = 6;
+		string updater_user = 7;
+	}
+}
