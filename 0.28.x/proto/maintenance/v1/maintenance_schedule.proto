@@ -3,10 +3,6 @@ syntax = "proto3";
 
 package nn.npln.maintenance.v1;
 
-import "google/protobuf/empty.proto";
-import "google/protobuf/duration.proto";
-import "google/rpc/status.proto";
-import "proto/common/value.proto";
 import "proto/maintenance/v1/resources.proto";
 
 message CreateContentRequest {
