@@ -1,0 +1,34 @@
+
+syntax = "proto3";
+
+package nn.npln.auth.v1;
+
+import "google/protobuf/timestamp.proto";
+
+enum ExternalIdType {
+	EXTERNAL_ID_TYPE_UNSPECIFIED = 0;
+	NSA_ID = 1;
+	DUMMY_EXT_ID = 2;
+}
+
+message Account {
+	string name = 1;
+	bool banned = 2;
+	google.protobuf.Timestamp update_time = 3;
+}
+
+message User {
+	string name = 1;
+	string account = 2;
+}
+
+message UserExternalId {
+	string name = 1;
+	string user = 2;
+	ExternalId external_id = 3;
+}
+
+message ExternalId {
+	ExternalIdType type = 1;
+	string id = 2;
+}

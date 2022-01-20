@@ -1,0 +1,65 @@
+
+syntax = "proto3";
+
+package nn.npln.friends.v1;
+
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "proto/common/value.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
+option cc_enable_arenas = true;
+
+enum State {
+	STATE_UNSPECIFIED = 0;
+	ONLINE = 1;
+	OFFLINE = 2;
+	INACTIVE = 3;
+}
+
+enum Range {
+	RANGE_UNSPECIFIED = 0;
+	PRIVATE = 1;
+	FAVORITE_FRIENDS = 2;
+	FRIENDS = 3;
+}
+
+message FriendUser {
+	string name = 1;
+	string friend_user = 2;
+	string nsa_id = 3;
+}
+
+message BlockingUser {
+	string name = 1;
+	string blocking_user = 2;
+	string nsa_id = 3;
+}
+
+message Presence {
+	string name = 1;
+	State state = 2;
+	map<string, nn.npln.common.Value> attributes = 3;
+	google.protobuf.Timestamp last_online_time = 4;
+	bool unsubscribed = 5;
+}
+
+message FriendNsa {
+	string name = 1;
+	string friend_nsa = 2;
+	bool favorite = 3;
+}
+
+message BlockingNsa {
+	string name = 1;
+	string blocking_nsa = 2;
+}
+
+message NsaSettings {
+	string name = 1;
+	Range presence_open_range = 2;
+}
+

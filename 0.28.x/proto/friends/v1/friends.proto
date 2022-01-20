@@ -1,0 +1,62 @@
+
+syntax = "proto3";
+
+package nn.npln.friends.v1;
+
+import "proto/friends/v1/resources.proto";
+
+message ActivateUserRequest {
+	string name = 1;
+}
+
+message ActivateUserResponse {
+}
+
+message ListFriendUsersRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListFriendUsersResponse {
+	repeated FriendUser friend_users = 1;
+	string next_page_token = 2;
+}
+
+message ListBlockingUsersRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListBlockingUsersResponse {
+	repeated BlockingUser blocking_users = 1;
+	string next_page_token = 2;
+}
+
+message SubscribeFriendUsersRequest {
+	string user = 1;
+}
+
+message SubscribeFriendUsersResponse {
+	message FriendAccount {
+		string nsa_id = 1;
+		repeated FriendUser users = 2;
+	}
+	
+	message BlockingAccount {
+		string nsa_id = 1;
+		repeated BlockingUser users = 2;
+	}
+	
+	repeated FriendAccount friend_accounts = 1;
+	repeated BlockingAccount blocking_accounts = 2;
+}
+
+service Friends {
+	rpc ActivateUser(ActivateUserRequest) returns (ActivateUserResponse);
+	rpc ListFriendUsers(ListFriendUsersRequest) returns (ListFriendUsersResponse);
+	rpc ListBlockingUsers(ListBlockingUsersRequest) returns (ListBlockingUsersResponse);
+	rpc SubscribeFriendUsers(SubscribeFriendUsersRequest) returns (stream SubscribeFriendUsersResponse);
+}
+

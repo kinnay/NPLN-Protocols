@@ -1,0 +1,22 @@
+
+syntax = "proto3";
+
+package nn.npln.hydro.v1;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+message Content {
+	string name = 1;
+	string user = 2;
+	repeated int32 attributes = 3; // Type is probably wrong
+	google.protobuf.Timestamp unk4 = 4;
+	google.protobuf.Timestamp unk5 = 5;
+	string unk6 = 6;
+	int32 unk7 = 7; // Type is probably wrong
+	string etag = 8;
+	oneof unk { // I hope this is correct
+		google.protobuf.Timestamp unk9 = 9;
+		google.protobuf.Duration unk10 = 10;
+	}
+}
