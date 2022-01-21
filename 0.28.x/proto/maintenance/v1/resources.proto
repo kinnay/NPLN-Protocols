@@ -3,6 +3,8 @@ syntax = "proto3";
 
 package nn.npln.maintenance.v1;
 
+import "google/protobuf/timestamp.proto";
+
 message MaintenanceSchedule {
 	string name = 1;
 	string service_account = 2;

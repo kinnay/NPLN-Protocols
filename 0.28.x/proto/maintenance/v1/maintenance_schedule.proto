@@ -5,13 +5,6 @@ package nn.npln.maintenance.v1;
 
 import "proto/maintenance/v1/resources.proto";
 
-message CreateContentRequest {
-	string parent = 1;
-	Content content = 2;
-}
-
-message GetContentRequest {} // Unknown
-
 message SubscribeMaintenanceSchedulesRequest {
 	string tenant = 1;
 }

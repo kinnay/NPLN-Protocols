@@ -28,7 +28,7 @@ message SearchContentRequest {
 	int32 unk4 = 4;
 	string page_token = 5;
 	string search_type = 6;
-	proto.common.MapValue unk7 = 7;
+	nn.npln.common.MapValue unk7 = 7;
 }
 
 message SearchContentResponse {
@@ -59,7 +59,7 @@ message TransformContentRequest {
 }
 
 message TransformContentResponse {
-	google.rpc.Status status;
+	google.rpc.Status status = 1;
 }
 
 message BatchCreateContentRequest {
@@ -96,8 +96,8 @@ message BulkTransformContentResponse {
 
 message FieldTransform {
 	string field_path = 1;
-	proto.common.Value unk2 = 2;
-	proto.common.Value unk3 = 2;
+	nn.npln.common.Value unk2 = 2;
+	nn.npln.common.Value unk3 = 3;
 }
 
 message KeepAlive {

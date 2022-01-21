@@ -48,7 +48,7 @@ message IssueAnonymousUserTokenRequest {
 }
 
 message IssueAnonymousUserTokenResponse {
-	Token token;
+	Token token = 1;
 }
 
 message RefreshAnonymousTokenRequest {

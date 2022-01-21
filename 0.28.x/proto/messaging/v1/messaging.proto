@@ -4,7 +4,7 @@ syntax = "proto3";
 package nn.npln.messaging.v1;
 
 import "google/protobuf/timestamp.proto";
-import "proto/common/value.proto"
+import "proto/common/value.proto";
 
 message RecvMessageRequest {
 	string user = 1;
