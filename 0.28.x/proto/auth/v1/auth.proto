@@ -60,7 +60,10 @@ message RefreshAnonymousTokenResponse {
 	Token token = 1;
 }
 
-message ListUsersRequest {} // Unknown
+message ListUsersRequest {
+	string parent = 1;
+}
+
 message ListUsersResponse {} // Unknown
 message DeleteUserRequest {} // Unknown
 
