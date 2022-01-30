@@ -17,4 +17,3 @@ message Status {
 	string message = 2;
 	repeated google.protobuf.Any details = 3;
 }
-

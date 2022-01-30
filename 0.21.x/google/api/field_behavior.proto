@@ -24,4 +24,3 @@ enum FieldBehavior {
 	INPUT_ONLY = 4;
 	IMMUTABLE = 5;
 }
-

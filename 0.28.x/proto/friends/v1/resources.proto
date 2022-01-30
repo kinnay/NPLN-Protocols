@@ -3,8 +3,12 @@ syntax = "proto3";
 
 package nn.npln.friends.v1;
 
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
 import "proto/common/value.proto";
+import "proto/common/resources.proto";
 
 option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
 option cc_enable_arenas = true;
@@ -58,4 +62,3 @@ message NsaSettings {
 	string name = 1;
 	Range presence_open_range = 2;
 }
-

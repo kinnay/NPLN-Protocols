@@ -272,4 +272,3 @@ message TimestampRules {
 	optional bool gt_now = 8;
 	optional google.protobuf.Duration within = 9;
 }
-

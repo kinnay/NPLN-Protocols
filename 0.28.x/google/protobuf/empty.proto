@@ -13,4 +13,3 @@ option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 
 message Empty {
 }
-

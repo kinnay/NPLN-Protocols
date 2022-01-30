@@ -182,4 +182,3 @@ service GameSessionService {
 	rpc AllocateIceServerSet(AllocateIceServerSetRequest) returns (IceServerSet);
 	rpc ListLatencyMeasurementServers(ListLatencyMeasurementServersRequest) returns (ListLatencyMeasurementServersResponse);
 }
-

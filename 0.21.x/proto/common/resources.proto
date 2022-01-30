@@ -12,4 +12,3 @@ option cc_enable_arenas = true;
 extend google.protobuf.FileOptions {
 	bool imported = 50000;
 }
-

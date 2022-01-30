@@ -3,7 +3,13 @@ syntax = "proto3";
 
 package nn.npln.auth.v1;
 
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/auth/v1;auth";
+option cc_enable_arenas = true;
 
 enum ExternalIdType {
 	EXTERNAL_ID_TYPE_UNSPECIFIED = 0;

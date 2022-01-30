@@ -68,4 +68,3 @@ service Auth {
 	rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
 	rpc IssuePrearrangedUserToken(IssuePrearrangedUserTokenRequest) returns (IssuePrearrangedUserTokenResponse);
 }
-

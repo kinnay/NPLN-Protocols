@@ -43,4 +43,3 @@ message ResourceReference {
 	string type = 1;
 	string child_type = 2;
 }
-

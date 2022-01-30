@@ -14,4 +14,3 @@ option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 message FieldMask {
 	repeated string paths = 1;
 }
-

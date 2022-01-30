@@ -101,4 +101,3 @@ message NError {
 		UnauthenticatedDetailCode unauthenticated_detail_code = 17;
 	}
 }
-

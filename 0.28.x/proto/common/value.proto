@@ -5,6 +5,10 @@ package nn.npln.common;
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/common;common";
+option cc_enable_arenas = true;
 
 message Value {
 	oneof value_type {
@@ -28,4 +32,3 @@ message ArrayValue {
 message MapValue {
 	map<string, Value> fields = 1;
 }
-

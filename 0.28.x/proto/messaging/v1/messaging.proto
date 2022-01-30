@@ -3,8 +3,16 @@ syntax = "proto3";
 
 package nn.npln.messaging.v1;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
 import "proto/common/value.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/messaging/v1;messaging";
+option cc_enable_arenas = true;
 
 message RecvMessageRequest {
 	string user = 1;
@@ -71,4 +79,3 @@ service Messaging {
 	rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
 	rpc SendAck(SendAckRequest) returns (SendAckResponse);
 }
-

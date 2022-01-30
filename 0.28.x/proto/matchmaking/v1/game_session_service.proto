@@ -3,7 +3,11 @@ syntax = "proto3";
 
 package nn.npln.matchmaking.v1;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
+import "proto/common/resources.proto";
 import "proto/common/value.proto";
 import "proto/matchmaking/v1/resources.proto";
 
@@ -178,4 +182,3 @@ service GameSessionService {
 	rpc AllocateIceServerSet(AllocateIceServerSetRequest) returns (IceServerSet);
 	rpc ListLatencyMeasurementServers(ListLatencyMeasurementServersRequest) returns (ListLatencyMeasurementServersResponse);
 }
-

@@ -62,4 +62,3 @@ message NsaSettings {
 	string name = 1;
 	Range presence_open_range = 2;
 }
-

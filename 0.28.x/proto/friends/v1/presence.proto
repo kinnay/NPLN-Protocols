@@ -3,9 +3,16 @@ syntax = "proto3";
 
 package nn.npln.friends.v1;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "proto/friends/v1/resources.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
+option cc_enable_arenas = true;
 
 message KeepAliveRequest {
 	message UpdatePresence {
@@ -59,4 +66,3 @@ service PresenceService {
 	rpc KeepAlive(stream KeepAliveRequest) returns (stream KeepAliveResponse);
 	rpc SubscribePresences(SubscribePresencesRequest) returns (stream SubscribePresencesResponse);
 }
-

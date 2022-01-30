@@ -3,7 +3,14 @@ syntax = "proto3";
 
 package nn.npln.friends.v1;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "proto/friends/v1/resources.proto";
+import "proto/common/resources.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
+option cc_enable_arenas = true;
 
 message ActivateUserRequest {
 	string name = 1;
@@ -59,4 +66,3 @@ service Friends {
 	rpc ListBlockingUsers(ListBlockingUsersRequest) returns (ListBlockingUsersResponse);
 	rpc SubscribeFriendUsers(SubscribeFriendUsersRequest) returns (stream SubscribeFriendUsersResponse);
 }
-

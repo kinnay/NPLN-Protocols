@@ -23,4 +23,3 @@ extend google.protobuf.ServiceOptions {
 extend google.protobuf.ServiceOptions {
 	string oauth_scopes = 1050;
 }
-

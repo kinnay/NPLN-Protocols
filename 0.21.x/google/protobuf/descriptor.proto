@@ -292,4 +292,3 @@ message GeneratedCodeInfo {
 	
 	repeated Annotation annotation = 1;
 }
-

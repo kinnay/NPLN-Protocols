@@ -34,4 +34,3 @@ message CustomHttpPattern {
 	string kind = 1;
 	string path = 2;
 }
-

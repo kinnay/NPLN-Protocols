@@ -79,4 +79,3 @@ service Messaging {
 	rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
 	rpc SendAck(SendAckRequest) returns (SendAckResponse);
 }
-

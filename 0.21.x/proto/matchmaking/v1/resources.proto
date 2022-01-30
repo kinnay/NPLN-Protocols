@@ -200,4 +200,3 @@ message LatencyMeasurementServer {
 	int32 port = 4;
 	Protocol protocol = 5;
 }
-

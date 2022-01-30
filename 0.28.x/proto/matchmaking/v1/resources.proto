@@ -3,9 +3,12 @@ syntax = "proto3";
 
 package nn.npln.matchmaking.v1;
 
+import "google/api/resource.proto";
+import "google/api/field_behavior.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/common/resources.proto";
 import "proto/common/value.proto";
 
 option go_package = "npln.nintendo.net/npln-practice/proto/matchmaking/v1;matchmaking";
@@ -197,4 +200,3 @@ message LatencyMeasurementServer {
 	int32 port = 4;
 	Protocol protocol = 5;
 }
-

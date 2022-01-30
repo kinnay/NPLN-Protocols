@@ -32,4 +32,3 @@ message ArrayValue {
 message MapValue {
 	map<string, Value> fields = 1;
 }
-

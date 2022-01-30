@@ -3,10 +3,18 @@ syntax = "proto3";
 
 package nn.npln.gamesync.v1;
 
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "proto/gamesync/v1/resources.proto";
+import "validate/validate.proto";
+
+option go_package = "npln.nintendo.net/npln-practice/proto/gamesync/v1;gamesync";
+option cc_enable_arenas = true;
 
 message IssueTokenRequest {
 	string user_session = 1;
@@ -147,4 +155,3 @@ service Gamesync {
 	rpc RollbackTransaction(RollbackTransactionRequest) returns (google.protobuf.Empty);
 	rpc KeepUserSession(stream KeepUserSessionRequest) returns (stream KeepUserSessionResponse);
 }
-

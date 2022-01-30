@@ -33,4 +33,3 @@ message Value {
 message ListValue {
 	repeated Value values = 1;
 }
-

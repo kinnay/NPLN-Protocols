@@ -38,4 +38,3 @@ message ExternalId {
 	ExternalIdType type = 1;
 	string id = 2;
 }
-

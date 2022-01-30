@@ -177,4 +177,3 @@ message Token {
 	string refresh_token = 3;
 	google.protobuf.Duration ttl = 4;
 }
-

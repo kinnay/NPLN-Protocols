@@ -66,4 +66,3 @@ service PresenceService {
 	rpc KeepAlive(stream KeepAliveRequest) returns (stream KeepAliveResponse);
 	rpc SubscribePresences(SubscribePresencesRequest) returns (stream SubscribePresencesResponse);
 }
-

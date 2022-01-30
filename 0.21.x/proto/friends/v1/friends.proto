@@ -66,4 +66,3 @@ service Friends {
 	rpc ListBlockingUsers(ListBlockingUsersRequest) returns (ListBlockingUsersResponse);
 	rpc SubscribeFriendUsers(SubscribeFriendUsersRequest) returns (stream SubscribeFriendUsersResponse);
 }
-
