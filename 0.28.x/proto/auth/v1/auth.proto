@@ -15,7 +15,7 @@ option go_package = "npln.nintendo.net/npln-practice/proto/auth/v1;auth";
 option cc_enable_arenas = true;
 
 message CreateUserRequest {
-	int32 parent = 1;
+	string parent = 1;
 	User user = 2;
 	ExternalIdToken external_id_token = 3;
 }
