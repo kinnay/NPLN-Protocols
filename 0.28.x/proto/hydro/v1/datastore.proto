@@ -14,7 +14,9 @@ message CreateContentRequest {
 	Content content = 2;
 }
 
-message GetContentRequest {} // Unknown
+message GetContentRequest {
+	string name = 1;
+}
 
 message DeleteContentRequest {
 	string name = 1;
@@ -24,11 +26,11 @@ message DeleteContentRequest {
 message SearchContentRequest {
 	string tenant = 1;
 	string user = 2;
-	repeated int32 attributes = 3; // Type is probably wrong
-	int32 unk4 = 4;
+	int32 unk = 3; // Type is unknown too
+	int32 page_size = 4;
 	string page_token = 5;
 	string search_type = 6;
-	nn.npln.common.MapValue unk7 = 7;
+	nn.npln.common.MapValue params = 7;
 }
 
 message SearchContentResponse {
@@ -47,14 +49,15 @@ message TrackContentResponse {
 		Content content = 1;
 	}
 	
-	Content unk1 = 1;
-	TrackedContent unk2 = 2;
-	KeepAlive unk3 = 3;
+	// Is this correct? How does this work?
+	Content content = 1;
+	TrackedContent tracked_content = 2;
+	KeepAlive keep_alive = 3;
 }
 
 message TransformContentRequest {
 	string name = 1;
-	repeated FieldTransform transform = 2;
+	repeated FieldTransform field_transforms = 2;
 	string etag = 3;
 }
 
@@ -64,30 +67,39 @@ message TransformContentResponse {
 
 message BatchCreateContentRequest {
 	string parent = 1;
-	int32 unk = 2;
+	repeated CreateContentRequest requests = 2;
 }
 
 message BatchCreateContentResponse {
 	repeated Content contents = 1;
 }
 
-message BatchDeleteContentRequest {} // Unknown
+message BatchDeleteContentRequest {
+	string parent = 1;
+	repeated DeleteContentRequest requests = 2;
+}
 
 message BulkDeleteContentRequest {
 	string parent = 1;
-	int32 unk = 2;
+	repeated DeleteContentRequest requests = 2;
 }
 
 message BulkDeleteContentResponse {
 	repeated google.rpc.Status status = 1;
 }
 
-message BatchTransformContentRequest {} // Unknown
-message BatchTransformContentResponse {} // Unknown
+message BatchTransformContentRequest {
+	string parent = 1;
+	repeated BatchTransformContentRequest requests = 2;
+}
+
+message BatchTransformContentResponse {
+	repeated TransformContentResponse responses = 1;
+}
 
 message BulkTransformContentRequest {
 	string parent = 1;
-	int32 unk = 2;
+	repeated TransformContentRequest requests = 2;
 }
 
 message BulkTransformContentResponse {	
@@ -96,8 +108,10 @@ message BulkTransformContentResponse {
 
 message FieldTransform {
 	string field_path = 1;
-	nn.npln.common.Value unk2 = 2;
-	nn.npln.common.Value unk3 = 3;
+	oneof transform_type {
+		nn.npln.common.Value set = 2;
+		nn.npln.common.Value increment = 3;
+	}
 }
 
 message KeepAlive {
@@ -109,7 +123,7 @@ service Datastore {
 	rpc GetContent(GetContentRequest) returns (Content);
 	rpc DeleteContent(DeleteContentRequest) returns (google.protobuf.Empty);
 	rpc SearchContent(SearchContentRequest) returns (SearchContentResponse);
-	rpc TrackContent(TrackContentRequest) returns (TrackContentResponse);
+	rpc TrackContent(TrackContentRequest) returns (stream TrackContentResponse);
 	rpc TransformContent(TransformContentRequest) returns (TransformContentResponse);
 	rpc BatchCreateContent(BatchCreateContentRequest) returns (BatchCreateContentResponse);
 	rpc BatchDeleteContent(BatchDeleteContentRequest) returns (google.protobuf.Empty);

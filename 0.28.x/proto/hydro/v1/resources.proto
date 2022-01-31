@@ -5,18 +5,19 @@ package nn.npln.hydro.v1;
 
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
 
 message Content {
 	string name = 1;
 	string user = 2;
-	repeated int32 attributes = 3; // Type is probably wrong
-	google.protobuf.Timestamp unk4 = 4;
-	google.protobuf.Timestamp unk5 = 5;
-	string unk6 = 6;
-	int32 unk7 = 7; // Type is probably wrong
+	int32 unk = 3; // Type is unknown too
+	google.protobuf.Timestamp create_time = 4;
+	google.protobuf.Timestamp update_time = 5;
+	bytes payload = 6;
+	map<int32, int32> attributes = 7;
 	string etag = 8;
-	oneof unk { // I hope this is correct
-		google.protobuf.Timestamp unk9 = 9;
-		google.protobuf.Duration unk10 = 10;
+	oneof expiration_type {
+		google.protobuf.Timestamp expire_time = 9;
+		google.protobuf.Duration ttl = 10;
 	}
 }

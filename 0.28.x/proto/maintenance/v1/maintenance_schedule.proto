@@ -10,15 +10,13 @@ message SubscribeMaintenanceSchedulesRequest {
 }
 
 message SubscribeMaintenanceSchedulesResponse {
-	oneof schedule { // Is this correct?
-		// Are these types correct?
-		MaintenanceSchedule maintenance_schedule = 1;
-		SubscribeMaintenanceSchedulesResponseMessage response_message = 2;
-	}
+	// Are these types correct?
+	MaintenanceSchedule schedule = 1;
+	SubscribeMaintenanceSchedulesResponseMessage message = 2;
 }
 
 message SubscribeMaintenanceSchedulesResponseMessage {
-	// Is this correct?
+	// This is probably wrong
 	repeated MaintenanceSchedule schedules1 = 1;
 	repeated MaintenanceSchedule schedules2 = 2;
 }
@@ -26,5 +24,5 @@ message SubscribeMaintenanceSchedulesResponseMessage {
 message KeepAlive {} // Empty message
 
 service MaintenanceScheduleService {
-	rpc SubscribeMaintenanceSchedules(SubscribeMaintenanceSchedulesRequest) returns (SubscribeMaintenanceSchedulesResponse);
+	rpc SubscribeMaintenanceSchedules(SubscribeMaintenanceSchedulesRequest) returns (stream SubscribeMaintenanceSchedulesResponse);
 }
