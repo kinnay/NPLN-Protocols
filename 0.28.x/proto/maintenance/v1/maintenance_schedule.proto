@@ -10,18 +10,12 @@ message SubscribeMaintenanceSchedulesRequest {
 }
 
 message SubscribeMaintenanceSchedulesResponse {
-	// Are these types correct?
-	MaintenanceSchedule schedule = 1;
-	SubscribeMaintenanceSchedulesResponseMessage message = 2;
+	// [UNKNOWN] unknown = 1
+	// [UNKNOWN] unknown = 2
 }
 
-message SubscribeMaintenanceSchedulesResponseMessage {
-	// This is probably wrong
-	repeated MaintenanceSchedule schedules1 = 1;
-	repeated MaintenanceSchedule schedules2 = 2;
+message KeepAlive {
 }
-
-message KeepAlive {} // Empty message
 
 service MaintenanceScheduleService {
 	rpc SubscribeMaintenanceSchedules(SubscribeMaintenanceSchedulesRequest) returns (stream SubscribeMaintenanceSchedulesResponse);

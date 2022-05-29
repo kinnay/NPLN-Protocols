@@ -8,15 +8,21 @@ import "google/protobuf/timestamp.proto";
 import "proto/common/value.proto";
 
 message Content {
+	enum ContentPermission {
+		CONTENT_PERMISSION_UNSPECIFIED = 0;
+		READ = 1;
+		UPDATE = 2;
+	}
+	
 	string name = 1;
 	string user = 2;
-	int32 unk = 3; // Type is unknown too
+	ContentPermission permissions = 3;
 	google.protobuf.Timestamp create_time = 4;
 	google.protobuf.Timestamp update_time = 5;
 	bytes payload = 6;
 	map<int32, int32> attributes = 7;
 	string etag = 8;
-	oneof expiration_type {
+	oneof expiration {
 		google.protobuf.Timestamp expire_time = 9;
 		google.protobuf.Duration ttl = 10;
 	}

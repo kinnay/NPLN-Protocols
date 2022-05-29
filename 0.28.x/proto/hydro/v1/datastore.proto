@@ -26,7 +26,7 @@ message DeleteContentRequest {
 message SearchContentRequest {
 	string tenant = 1;
 	string user = 2;
-	int32 unk = 3; // Type is unknown too
+	// [UNKNOWN] unknown = 3
 	int32 page_size = 4;
 	string page_token = 5;
 	string search_type = 6;
@@ -45,14 +45,9 @@ message TrackContentRequest {
 }
 
 message TrackContentResponse {
-	message TrackedContent {
-		Content content = 1;
-	}
-	
-	// Is this correct? How does this work?
-	Content content = 1;
-	TrackedContent tracked_content = 2;
-	KeepAlive keep_alive = 3;
+	// [UNKNOWN] unknown = 1
+	// [UNKNOWN] unknown = 2
+	// [UNKNOWN] unknown = 3
 }
 
 message TransformContentRequest {
