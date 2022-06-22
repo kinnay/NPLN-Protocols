@@ -61,7 +61,7 @@ message GetHolderRequest {
 }
 
 message SearchHoldersRequest {
-	// [UNKNOWN]
+	string tenant = 1;
 }
 
 message SearchHoldersResponse {
@@ -79,7 +79,7 @@ message RegisterScoreRequest {
 }
 
 message GetScoreRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message DeleteScoreRequest {
@@ -112,7 +112,7 @@ message PurgeScoreHoldersResponse {
 }
 
 message PurgeUserScoresRequest {
-	// [UNKNOWN]
+	string user = 1;
 }
 
 message PurgeUserScoresResponse {
@@ -121,7 +121,7 @@ message PurgeUserScoresResponse {
 }
 
 message GetCategoryRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message GetChartRequest {
@@ -129,7 +129,7 @@ message GetChartRequest {
 }
 
 message BatchGetChartsRequest {
-	// [UNKNOWN]
+	repeated string names = 1;
 }
 
 message BatchGetChartsResponse {
