@@ -1,0 +1,154 @@
+
+syntax = "proto3";
+
+package nn.npln.leaderboard.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/leaderboard/v1/resources.proto";
+
+message Leaderboard {
+	enum UpdateType {
+		UPDATE_TYPE_UNSPECIFIED = 0;
+		EXCEED = 1;
+		ALWAYS = 2;
+	}
+	
+	string season = 1;
+	repeated ScoreHolder scores = 2;
+	string prev_page_token = 3;
+	string next_page_token = 4;
+	google.protobuf.Timestamp rank_update_time = 5;
+	int32 total_count = 6;
+	google.protobuf.Timestamp season_start_time = 7;
+	google.protobuf.Timestamp season_end_time = 8;
+	bool score_order_asc = 9;
+	bool update_time_order_asc = 10;
+	UpdateType update_type = 11;
+}
+
+message UserLeaderboardFilter {
+	string target_holder = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message NearLeaderboardFilter {
+	int32 offset = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+	string move_top_holder = 4;
+}
+
+message RangeLeaderboardFilter {
+	repeated string holders = 1;
+	string order_by = 2;
+}
+
+message CreateHolderRequest {
+	string parent = 1;
+	Holder holder = 2;
+}
+
+message UpdateHolderRequest {
+	Holder holder = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message GetHolderRequest {
+	string name = 1;
+}
+
+message SearchHoldersRequest {
+	// [UNKNOWN]
+}
+
+message SearchHoldersResponse {
+	repeated Holder holders = 1;
+	string next_page_token = 2;
+}
+
+message DeleteHolderRequest {
+	string name = 1;
+}
+
+message RegisterScoreRequest {
+	ScoreHolder score = 1;
+	bool force = 2;
+}
+
+message GetScoreRequest {
+	// [UNKNOWN]
+}
+
+message DeleteScoreRequest {
+	string name = 1;
+}
+
+message BrowseLeaderboardRequest {
+	string season = 1;
+	oneof filter {
+		UserLeaderboardFilter user_leaderboard = 2;
+		NearLeaderboardFilter near_leaderboard = 3;
+		RangeLeaderboardFilter range_leaderboard = 4;
+	}
+}
+
+message BrowseLeaderboardResponse {
+	Leaderboard leaderboard = 1;
+}
+
+message PurgeScoreHoldersRequest {
+	string season = 1;
+	string filter = 2;
+	string holder = 3;
+	bool force = 4;
+}
+
+message PurgeScoreHoldersResponse {
+	int32 purge_count = 1;
+	repeated string purge_sample = 2;
+}
+
+message PurgeUserScoresRequest {
+	// [UNKNOWN]
+}
+
+message PurgeUserScoresResponse {
+	int32 purge_count = 1;
+	repeated string purge_sample = 2;
+}
+
+message GetCategoryRequest {
+	// [UNKNOWN]
+}
+
+message GetChartRequest {
+	string name = 1;
+}
+
+message BatchGetChartsRequest {
+	// [UNKNOWN]
+}
+
+message BatchGetChartsResponse {
+	repeated Chart charts = 1;
+}
+
+service LeaderboardService {
+	rpc CreateHolder(CreateHolderRequest) returns (Holder);
+	rpc UpdateHolder(UpdateHolderRequest) returns (Holder);
+	rpc GetHolder(GetHolderRequest) returns (Holder);
+	rpc SearchHolders(SearchHoldersRequest) returns (SearchHoldersResponse);
+	rpc DeleteHolder(DeleteHolderRequest) returns (google.protobuf.Empty);
+	rpc RegisterScore(RegisterScoreRequest) returns (ScoreHolder);
+	rpc GetScore(GetScoreRequest) returns (ScoreHolder);
+	rpc DeleteScore(DeleteScoreRequest) returns (google.protobuf.Empty);
+	rpc BrowseLeaderboard(BrowseLeaderboardRequest) returns (BrowseLeaderboardResponse);
+	rpc PurgeScoreHolders(PurgeScoreHoldersRequest) returns (PurgeScoreHoldersResponse);
+	rpc PurgeUserScores(PurgeUserScoresRequest) returns (PurgeUserScoresResponse);
+	rpc GetCategory(GetCategoryRequest) returns (Category);
+	rpc GetChart(GetChartRequest) returns (Chart);
+	rpc BatchGetCharts(BatchGetChartsRequest) returns (BatchGetChartsResponse);
+}

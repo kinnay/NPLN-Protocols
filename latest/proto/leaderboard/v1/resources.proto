@@ -1,0 +1,61 @@
+
+syntax = "proto3";
+
+package nn.npln.leaderboard.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
+
+message Category {
+	string name = 1;
+	int32 current_season = 2;
+	int32 min_season = 3;
+}
+
+message Chart {
+	string name = 1;
+	int32 bins_size = 2;
+	bool score_order_asc = 3;
+	int64 highest_bin_score = 4;
+	int64 lowest_bin_score = 5;
+	int64 bins_width = 6;
+	repeated int64 quantities = 7 [packed=true];
+	google.protobuf.Timestamp chart_update_time = 8;
+	google.protobuf.Timestamp rank_update_time = 9;
+	int32 total_count = 10;
+	int64 highest_score = 11;
+	int64 lowest_score = 12;
+	int64 median_score = 13;
+	string attribute = 14;
+}
+
+message Holder {
+	string name = 1;
+	int64 type = 2;
+	string display_name = 3;
+	nn.npln.common.MapValue fields = 4;
+	string owner = 5;
+	string resource_link = 6;
+	google.protobuf.Timestamp create_time = 7;
+	google.protobuf.Timestamp update_time = 8;
+}
+
+message Rank {
+	int32 rank = 1;
+	int32 index = 2;
+}
+
+message ScoreHolder {
+	string name = 1;
+	string holder = 2;
+	int64 score = 3;
+	string resource_link = 4;
+	nn.npln.common.MapValue fields = 5;
+	google.protobuf.Timestamp update_time = 6;
+	Holder holder_detail = 7;
+	Rank rank = 8;
+}
+
+message Season {
+	// [UNKNOWN]
+}

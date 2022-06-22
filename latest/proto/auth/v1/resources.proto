@@ -32,6 +32,7 @@ message UserExternalId {
 	string name = 1;
 	string user = 2;
 	ExternalId external_id = 3;
+	google.protobuf.Timestamp token_last_issue_time = 4;
 }
 
 message ExternalId {

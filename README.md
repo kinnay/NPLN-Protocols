@@ -5,4 +5,4 @@ This repo contains protobuf files for Nintendo's [NPLN services](https://github.
 
 The protobuf files for NPLN version 0.20.x and 0.21.x were decompiled automatically from reflection data that is stored in the Monster Hunter Rise game.
 
-Unfortunately, Nintendo enabled the [LITE_RUNTIME](https://developers.google.com/protocol-buffers/docs/proto#options) optimization in version 0.28.x, which means that the reflection data is no longer available. The Datastore and MaintenanceScheduleService had to be reverse engineered from scratch.
+Unfortunately, Nintendo enabled the [LITE_RUNTIME](https://developers.google.com/protocol-buffers/docs/proto#options) optimization in later versions, which means that the reflection data is no longer available. The protobuf files in the `latest` folder were decompiled manually using various sources.
