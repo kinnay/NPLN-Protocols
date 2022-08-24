@@ -1,0 +1,10 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service Replay {
+	// rpc RegisterDocument
+	// rpc ResolveReplayCode
+	// rpc FulfillReservations
+}

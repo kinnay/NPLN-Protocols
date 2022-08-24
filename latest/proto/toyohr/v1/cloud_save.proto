@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service CloudSave {
+	// rpc CreateSaveRecord
+	// rpc GetSaveRecord
+	// rpc ValidateSaveRecord
+	// rpc WriteSaveRecord
+	// rpc ChangeUserName
+	// rpc DeleteSaveRecord
+}

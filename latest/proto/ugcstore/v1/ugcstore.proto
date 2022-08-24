@@ -1,0 +1,16 @@
+
+syntax = "proto3";
+
+package nn.npln.ugcstore.v1;
+
+service Ugcstore {
+	// rpc GetDocument
+	// rpc BulkGetDocuments
+	// rpc RunQuery
+	// rpc CommitDocuments
+	// rpc IssueAttachmentUri
+	// rpc BulkIssueAttachmentUri
+	// rpc IssueUploadUri
+	// rpc CreateDocumentShortAlias
+	// rpc GetDocumentShortAlias
+}

@@ -1,0 +1,11 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service Schedule {
+	// rpc SelectVsParams
+	// rpc SelectVsSchedules
+	// rpc SelectCoopSchedules
+	// rpc SelectSeasonSchedules
+}

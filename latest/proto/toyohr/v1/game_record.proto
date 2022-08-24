@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service GameRecord {
+	// rpc CreateBankaraChallenge
+	// rpc InitializeAttributes
+	// rpc CreateFestPowerMeasurement
+	// rpc InitializeTag
+	// rpc GetTag
+	// rpc SelectTag
+}

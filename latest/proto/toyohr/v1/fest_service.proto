@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+message GetFestDecryptionKeyRequest {
+	string name = 1;
+}
+
+message GetFestDecryptionKeyResponse {
+	// Unknown
+}
+
+service FestService {
+	// rpc CreateFestEntry
+	// rpc GetFestEntry
+	// rpc GetFestResult
+	// rpc SelectFestSchedule
+	rpc GetFestDecryptionKey(GetFestDecryptionKeyRequest) returns (GetFestDecryptionKeyResponse);
+}

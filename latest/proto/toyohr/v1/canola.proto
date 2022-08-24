@@ -1,0 +1,10 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service Canola {
+	// rpc IkasuDocument
+	// rpc SelectDocuments
+	// rpc RegisterDocument
+}
