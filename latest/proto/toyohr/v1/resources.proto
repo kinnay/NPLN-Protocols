@@ -24,11 +24,34 @@ message FestEntry {
 }
 
 message FestResult {
-	string unk1 = 1;
-	UnknownStruct1 unk2 = 2;
-	UnknownStruct2 unk3 = 3;
-	UnknownStruct3 unk4 = 4;
-	UnknownStruct4 unk5 = 5;
+	string name = 1;
+	FestResultYobisai yobisai = 2;
+	FestResultRegular regular = 3;
+	FestResultChallenge challenge = 4;
+	FestResultPlayerCount player_count = 5;
+}
+
+message FestResultChallenge {
+	bool unk1 = 1;
+	repeated UnknownStruct6 unk2 = 2;
+	repeated UnknownStruct6 unk3 = 3;
+	repeated UnknownStruct6 unk4 = 4;
+}
+
+message FestResultPlayerCount {
+	bool unk1 = 1;
+	repeated UnknownStruct7 unk2 = 2;
+	nn.npln.common.MapValue unk3 = 3;
+}
+
+message FestResultRegular {
+	bool unk1 = 1;
+	repeated UnknownStruct6 unk2 = 2;
+}
+
+message FestResultYobisai {
+	bool unk1 = 1;
+	repeated UnknownStruct6 unk2 = 2;
 }
 
 message FestSchedule {
@@ -38,9 +61,17 @@ message FestSchedule {
 	string type = 4;
 	string unk = 5;
 	string key = 6;
-	UnknownStruct5 unk7 = 7;
+	FestScheduleTimes times = 7;
 	// unknown unk8 = 8;
 	nn.npln.common.MapValue unk9 = 9;
+}
+
+message FestScheduleTimes {
+	google.protobuf.Timestamp timestamp1 = 1;
+	google.protobuf.Timestamp timestamp2 = 2;
+	google.protobuf.Timestamp timestamp3 = 3;
+	google.protobuf.Timestamp timestamp4 = 4;
+	google.protobuf.Timestamp timestamp5 = 5;
 }
 
 message SaveRecord {
@@ -50,22 +81,13 @@ message SaveRecord {
 	google.protobuf.Timestamp update_Time = 4;
 }
 
-message UnknownStruct1 {
-	// Unknown
+message UnknownStruct6 {
+	string unk1 = 1;
+	// unknown unk2 = 2;
 }
 
-message UnknownStruct2 {
-	// Unknown
-}
-
-message UnknownStruct3 {
-	// Unknown
-}
-
-message UnknownStruct4 {
-	// Unknown
-}
-
-message UnknownStruct5 {
-	// Unknown
+message UnknownStruct7 {
+	string unk1 = 1;
+	// unknown unk2 = 2;
+	
 }
