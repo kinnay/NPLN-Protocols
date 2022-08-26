@@ -27,9 +27,17 @@ instrs2 = [
 	0x2201889A  #CSEL X2, X9, X8, EQ
 ]
 
+instrs3 = [
+	0xE00316AA, #MOV X0, X22
+	0x21008052, #MOV W1, #1
+	0x5F010071, #CMP W10, #0
+	0x2201889A  #CSEL X2, X9, X8, EQ
+]
+
 patches = [
 	Patch(instrs1, 0x1F2003D5, -0x24), #NOP
-	Patch(instrs2, 0x2A008052, -0x14)  #MOV W10, #1
+	Patch(instrs2, 0x2A008052, -0x14), #MOV W10, #1
+	Patch(instrs3, 0x2A008052, -0x14), #MOV W10, #1
 ]
 
 
