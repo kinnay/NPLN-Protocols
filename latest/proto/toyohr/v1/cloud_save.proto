@@ -3,11 +3,50 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
+import "proto/toyohr/v1/resources.proto";
+
+message CreateSaveRecordRequest {
+	string parent = 1;
+	string save_record_id = 2;
+	SaveRecord record = 3;
+}
+
+message GetSaveRecordRequest {
+	string name = 1;
+}
+
+message WriteSaveRecordRequest {
+	string name = 1;
+	google.protobuf.Timestamp update_time = 2;
+	string save_event_type = 3;
+	nn.npln.common.MapValue unk3 = 4;
+	SaveRecord record = 5;
+}
+
+message WriteSaveRecordResponse {
+	google.protobuf.Timestamp timestamp = 1;
+}
+
+message ChangeUserNameRequest {
+	string save_record = 1;
+	string user_name = 2;
+	google.protobuf.Timestamp update_time = 3;
+	string unk = 4;
+}
+
+message ChangeUserNameResponse {
+	string unk1 = 1;
+	google.protobuf.Timestamp unk2 = 2;
+	google.protobuf.Timestamp unk3 = 3;
+}
+
 service CloudSave {
-	// rpc CreateSaveRecord
-	// rpc GetSaveRecord
+	rpc CreateSaveRecord(CreateSaveRecordRequest) returns (SaveRecord);
+	rpc GetSaveRecord(GetSaveRecordRequest) returns (SaveRecord);
 	// rpc ValidateSaveRecord
-	// rpc WriteSaveRecord
-	// rpc ChangeUserName
+	rpc WriteSaveRecord(WriteSaveRecordRequest) returns (WriteSaveRecordResponse);
+	rpc ChangeUserName(ChangeUserNameRequest) returns (ChangeUserNameResponse);
 	// rpc DeleteSaveRecord
 }

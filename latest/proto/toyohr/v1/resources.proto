@@ -1,0 +1,71 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
+
+message FestDecryptionKey {
+	string unk1 = 1;
+	string unk2 = 2;
+	string unk3 = 3;
+	string unk4 = 4;
+	string unk5 = 5;
+	string unk6 = 6;
+	string unk7 = 7;
+	string unk8 = 8;
+}
+
+message FestEntry {
+	string unk1 = 1;
+	string unk2 = 2;
+	string unk3 = 3;
+}
+
+message FestResult {
+	string unk1 = 1;
+	UnknownStruct1 unk2 = 2;
+	UnknownStruct2 unk3 = 3;
+	UnknownStruct3 unk4 = 4;
+	UnknownStruct4 unk5 = 5;
+}
+
+message FestSchedule {
+	string unk1 = 1;
+	string unk2 = 2;
+	// unknown unk3 = 3;
+	string unk4 = 4;
+	string unk5 = 5;
+	string unk6 = 6;
+	UnknownStruct5 unk7 = 7;
+	// unknown unk8 = 8;
+	nn.npln.common.MapValue unk9 = 9;
+}
+
+message SaveRecord {
+	string unk1 = 1;
+	nn.npln.common.MapValue unk2 = 2;
+	google.protobuf.Timestamp unk3 = 3;
+	google.protobuf.Timestamp unk4 = 4;
+}
+
+message UnknownStruct1 {
+	// Unknown
+}
+
+message UnknownStruct2 {
+	// Unknown
+}
+
+message UnknownStruct3 {
+	// Unknown
+}
+
+message UnknownStruct4 {
+	// Unknown
+}
+
+message UnknownStruct5 {
+	// Unknown
+}

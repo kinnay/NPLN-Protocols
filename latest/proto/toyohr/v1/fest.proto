@@ -1,0 +1,42 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+import "proto/toyohr/v1/resources.proto";
+
+message CreateFestEntryRequest {
+	string name = 1;
+	FestEntry entry = 2;
+}
+
+message GetFestEntryRequest {
+	string name = 1;
+}
+
+message GetFestResultRequest {
+	string name = 1;
+}
+
+message SelectFestScheduleRequest {
+	string tenant = 1;
+	string region = 2;
+	string unk = 3;
+}
+
+message SelectFestScheduleResponse {
+	FestSchedule schedule = 1;
+}
+
+message GetFestDecryptionKeyRequest {
+	string name = 1;
+	bool show_all_keys = 2;
+}
+
+service FestService {
+	rpc CreateFestEntry(CreateFestEntryRequest) returns (FestEntry);
+	rpc GetFestEntry(GetFestEntryRequest) returns (FestEntry);
+	rpc GetFestResult(GetFestResultRequest) returns (FestResult);
+	rpc SelectFestSchedule(SelectFestScheduleRequest) returns (SelectFestScheduleResponse);
+	rpc GetFestDecryptionKey(GetFestDecryptionKeyRequest) returns (FestDecryptionKey);
+}
