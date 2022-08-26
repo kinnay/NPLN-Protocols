@@ -10,7 +10,7 @@ import "proto/toyohr/v1/resources.proto";
 message CreateSaveRecordRequest {
 	string parent = 1;
 	string save_record_id = 2;
-	SaveRecord record = 3;
+	SaveRecord save_record = 3;
 }
 
 message GetSaveRecordRequest {
@@ -21,8 +21,8 @@ message WriteSaveRecordRequest {
 	string name = 1;
 	google.protobuf.Timestamp update_time = 2;
 	string save_event_type = 3;
-	nn.npln.common.MapValue unk3 = 4;
-	SaveRecord record = 5;
+	nn.npln.common.MapValue attributes = 4;
+	SaveRecord save_record = 5;
 }
 
 message WriteSaveRecordResponse {

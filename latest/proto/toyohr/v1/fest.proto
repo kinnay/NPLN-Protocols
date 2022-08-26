@@ -21,7 +21,7 @@ message GetFestResultRequest {
 message SelectFestScheduleRequest {
 	string tenant = 1;
 	string region = 2;
-	string unk = 3;
+	string type = 3;
 }
 
 message SelectFestScheduleResponse {
