@@ -8,13 +8,13 @@ import "proto/common/value.proto";
 
 message FestDecryptionKey {
 	string name = 1;
-	string key = 2;
-	string unk3 = 3;
-	string unk4 = 4;
+	string key1 = 2;
+	string key2 = 3;
+	string key3 = 4;
 	string unk5 = 5;
 	string unk6 = 6;
 	string unk7 = 7;
-	string unk8 = 8;
+	string team = 8;
 }
 
 message FestEntry {
@@ -25,33 +25,43 @@ message FestEntry {
 
 message FestResult {
 	string name = 1;
-	FestResultYobisai yobisai = 2;
-	FestResultRegular regular = 3;
-	FestResultChallenge challenge = 4;
-	FestResultPlayerCount player_count = 5;
+	FestResultUnk1 unk1 = 2;
+	FestResultUnk2 unk2 = 3;
+	FestResultUnk3 unk3 = 4;
+	FestResultWinPoints win_points = 5;
 }
 
-message FestResultChallenge {
-	bool unk1 = 1;
-	repeated UnknownStruct6 unk2 = 2;
-	repeated UnknownStruct6 unk3 = 3;
-	repeated UnknownStruct6 unk4 = 4;
+message FestResultDouble {
+	string team = 1;
+	double score = 2;
 }
 
-message FestResultPlayerCount {
-	bool unk1 = 1;
-	repeated UnknownStruct7 unk2 = 2;
-	nn.npln.common.MapValue unk3 = 3;
+message FestResultU64 {
+	string team = 1;
+	uint64 score = 2;
 }
 
-message FestResultRegular {
-	bool unk1 = 1;
-	repeated UnknownStruct6 unk2 = 2;
+message FestResultUnk1 {
+	bool is_valid = 1;
+	repeated FestResultDouble data = 2;
 }
 
-message FestResultYobisai {
-	bool unk1 = 1;
-	repeated UnknownStruct6 unk2 = 2;
+message FestResultUnk2 {
+	bool is_valid = 1;
+	repeated FestResultDouble data = 2;
+}
+
+message FestResultUnk3 {
+	bool is_valid = 1;
+	repeated FestResultDouble data1 = 2;
+	repeated FestResultDouble data2 = 3;
+	repeated FestResultDouble data3 = 4;
+}
+
+message FestResultWinPoints {
+	bool is_valid = 1;
+	repeated FestResultU64 points = 2;
+	nn.npln.common.MapValue weigts = 3;
 }
 
 message FestSchedule {
@@ -67,27 +77,16 @@ message FestSchedule {
 }
 
 message FestScheduleTimes {
-	google.protobuf.Timestamp timestamp1 = 1;
-	google.protobuf.Timestamp timestamp2 = 2;
-	google.protobuf.Timestamp timestamp3 = 3;
-	google.protobuf.Timestamp timestamp4 = 4;
-	google.protobuf.Timestamp timestamp5 = 5;
+	google.protobuf.Timestamp publish_time = 1;
+	google.protobuf.Timestamp start_time = 2;
+	google.protobuf.Timestamp mid_time = 3;
+	google.protobuf.Timestamp end_time = 4;
+	google.protobuf.Timestamp hide_time = 5;
 }
 
 message SaveRecord {
 	string name = 1;
 	nn.npln.common.MapValue attributes = 2;
 	google.protobuf.Timestamp create_time = 3;
-	google.protobuf.Timestamp update_Time = 4;
-}
-
-message UnknownStruct6 {
-	string unk1 = 1;
-	// unknown unk2 = 2;
-}
-
-message UnknownStruct7 {
-	string unk1 = 1;
-	// unknown unk2 = 2;
-	
+	google.protobuf.Timestamp update_time = 4;
 }
