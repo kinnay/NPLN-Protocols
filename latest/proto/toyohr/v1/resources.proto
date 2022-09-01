@@ -10,11 +10,11 @@ message FestDecryptionKey {
 	string name = 1;
 	string key1 = 2;
 	string key2 = 3;
-	string key3 = 4;
-	string unk5 = 5;
-	string unk6 = 6;
-	string unk7 = 7;
-	string team = 8;
+	string winner_key = 4;
+	string alpha_key = 5;
+	string bravo_key = 6;
+	string charlie_key = 7;
+	string winning_team = 8;
 }
 
 message FestEntry {
