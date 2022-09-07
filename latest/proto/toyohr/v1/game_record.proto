@@ -3,11 +3,81 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "proto/common/value.proto";
+import "proto/toyohr/v1/resources.proto";
+
+message CreateBankaraChallengeRequest {
+	string parent = 1;
+	BankaraChallenge challenge = 2;
+}
+
+message InitializeAttributesRequest {
+	message InitialVs {
+		uint32 unk1 = 1;
+		uint32 unk2 = 2;
+		bool unk3 = 3;
+	}
+	
+	message Area {}
+	message Lift {}
+	message Goal {}
+	message Clam {}
+	
+	message XPowerArea {}
+	message XPowerLift {}
+	message XPowerGoal {}
+	message XPowerClam {}
+	
+	message InitialCoop {}
+	
+	message CoopShift {
+		string shift_id = 1;
+		string job_type = 2;
+	}
+	
+	message CoopGrade {
+		uint32 unk = 1;
+	}
+	
+	message NewSeason {
+		uint32 unk = 1;
+	}
+	
+	string user = 1;
+	string initialize_type = 2;
+	uint32 unk1 = 3;
+	uint32 unk2 = 4;
+	string season = 5;
+	InitialVs initial_vs = 6;
+	Area area = 7;
+	Lift lift = 8;
+	Goal goal = 9;
+	Clam clam = 10;
+	XPowerArea x_power_area = 11;
+	XPowerLift x_power_lift = 12;
+	XPowerGoal x_power_goal = 13;
+	XPowerClam x_power_clam = 14;
+	InitialCoop initial_coop = 15;
+	CoopShift coop_shift = 16;
+	CoopGrade coop_grade = 17;
+	NewSeason new_season = 18;
+}
+
+message InitializeAttributesResponse {
+	nn.npln.common.MapValue attributes = 1;
+	string document = 2;
+}
+
+message CreateFestPowerMeasurementRequest {
+	string parent = 1;
+	FestPowerMeasurement measurement = 2;
+}
+
 service GameRecord {
-	// rpc CreateBankaraChallenge
-	// rpc InitializeAttributes
-	// rpc CreateFestPowerMeasurement
-	// rpc InitializeTag
-	// rpc GetTag
-	// rpc SelectTag
+	rpc CreateBankaraChallenge(CreateBankaraChallengeRequest) returns (BankaraChallenge);
+	rpc InitializeAttributes(InitializeAttributesRequest) returns (InitializeAttributesResponse);
+	rpc CreateFestPowerMeasurement(CreateFestPowerMeasurementRequest) returns (FestPowerMeasurement);
+	// [UNKNOWN] rpc InitializeTag
+	// [UNKNOWN] rpc GetTag
+	// [UNKNOWN] rpc SelectTags
 }

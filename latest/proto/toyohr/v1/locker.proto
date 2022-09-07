@@ -3,8 +3,17 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "proto/toyohr/v1/common.proto";
+
+message LockerRegisterDocumentRequest {
+	string name = 1;
+}
+
+message LockerRegisterDocumentResponse {
+}
+
 service Locker {
-	// rpc IkasuDocument
-	// rpc SelectDocuments
-	// rpc RegisterDocument
+	rpc IkasuDocument(IkasuDocumentRequest) returns (IkasuDocumentResponse);
+	rpc SelectDocuments(SelectDocumentsRequest) returns (SelectDocumentsResponse);
+	rpc RegisterDocument(LockerRegisterDocumentRequest) returns (LockerRegisterDocumentResponse);
 }

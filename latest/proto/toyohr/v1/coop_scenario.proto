@@ -3,7 +3,26 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "proto/toyohr/v1/resources.proto";
+import "proto/ugcstore/v1/resources.proto";
+
+message CoopScenarioRegisterDocumentRequest {
+	string name = 1;
+}
+
+message CoopScenarioRegisterDocumentResponse {
+	CoopScenarioCode code = 1;
+}
+
+message ResolveCoopScenarioCodeRequest {
+	string name = 1;
+}
+
+message ResolveCoopScenarioCodeResponse {
+	nn.npln.ugcstore.v1.Document document = 1;
+}
+
 service CoopScenario {
-	// rpc RegisterDocument
-	// rpc ResolveCoopScenarioCode
+	rpc RegisterDocument(CoopScenarioRegisterDocumentRequest) returns (CoopScenarioRegisterDocumentResponse);
+	rpc ResolveCoopScenarioCode(ResolveCoopScenarioCodeRequest) returns (ResolveCoopScenarioCodeResponse);
 }

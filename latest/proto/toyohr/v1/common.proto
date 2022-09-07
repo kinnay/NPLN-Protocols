@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+import "proto/common/value.proto";
+import "proto/ugcstore/v1/resources.proto";
+
+message IkasuDocumentRequest {
+	string name = 1;
+}
+
+message IkasuDocumentResponse {
+}
+
+message SelectDocumentsRequest {
+	string tenant = 1;
+	string type = 2;
+	nn.npln.common.MapValue attributes = 3;
+}
+
+message SelectDocumentsResponse {
+	repeated nn.npln.ugcstore.v1.Document documents = 1;
+}

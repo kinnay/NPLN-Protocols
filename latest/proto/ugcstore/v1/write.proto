@@ -1,0 +1,67 @@
+
+syntax = "proto3";
+
+package nn.npln.ugcstore.v1;
+
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
+import "proto/common/value.proto";
+import "proto/ugcstore/v1/resources.proto";
+
+message FieldTransform {
+	string field_path = 1;
+	uint32 unk = 2;
+	nn.npln.common.Value value1 = 3;
+	nn.npln.common.Value value2 = 4;
+	nn.npln.common.Value value3 = 5;
+}
+
+message Precondition {
+	bool unk = 1;
+	google.protobuf.Timestamp timestamp = 2;
+}
+
+message UpdateDocumentRequest {
+	Document document = 1;
+	google.protobuf.FieldMask field_mask = 2;
+	Precondition precondition = 3;
+}
+
+message DeleteDocumentRequest {
+	string name = 1;
+	Precondition precondition = 2;
+}
+
+message SetAttachmentRequest {
+	string parent = 1;
+	string attachment = 2;
+}
+
+message UnsetAttachmentRequest {
+	string parent = 1;
+}
+
+message ImportAttachmentRequest {
+	string parent = 1;
+	string uri = 2;
+}
+
+message TransformDocumentRequest {
+	string name = 1;
+	repeated FieldTransform transform = 2;
+}
+
+message WriteOperation {
+	UpdateDocumentRequest update = 1;
+	DeleteDocumentRequest delete = 2;
+	SetAttachmentRequest set_attachment = 3;
+	UnsetAttachmentRequest unset_attachment = 4;
+	ImportAttachmentRequest import_attachment = 5;
+	TransformDocumentRequest transform_document = 6;
+}
+
+message WriteResult {
+	google.protobuf.Timestamp timestamp = 1;
+	nn.npln.common.Value value = 2;
+}

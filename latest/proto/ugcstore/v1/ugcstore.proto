@@ -3,14 +3,64 @@ syntax = "proto3";
 
 package nn.npln.ugcstore.v1;
 
+import "google/protobuf/duration.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
+import "proto/ugcstore/v1/query.proto";
+import "proto/ugcstore/v1/resources.proto";
+import "proto/ugcstore/v1/write.proto";
+
+message GetDocumentRequest {
+	string name = 1;
+	google.protobuf.FieldMask field_mask = 2;
+}
+
+message RunQueryRequest {
+	string parent = 1;
+	StructuredQuery query = 2;
+}
+
+message RunQueryResponse {
+	// [UNKNOWN]
+}
+
+message CommitDocumentsRequest {
+	string tenant = 1;
+	repeated WriteOperation write_operations = 2;
+}
+
+message CommitDocumentsResponse {
+	repeated WriteResult write_results = 1;
+	google.protobuf.Timestamp timestamp = 2;
+}
+
+message IssueAttachmentUriRequest {
+	string parent = 1;
+	google.protobuf.Timestamp timestamp = 2;
+	google.protobuf.Duration duration = 3;
+}
+
+message IssueAttachmentUriResponse {
+	string uri = 1;
+}
+
+message IssueUploadUriRequest {
+	string parent = 1;
+}
+
+message IssueUploadUriResponse {
+	string uri = 1;
+}
+
 service Ugcstore {
-	// rpc GetDocument
-	// rpc BulkGetDocuments
-	// rpc RunQuery
-	// rpc CommitDocuments
-	// rpc IssueAttachmentUri
+	rpc GetDocument(GetDocumentRequest) returns (Document);
+	// [UNKNOWN] rpc BulkGetDocuments
+	rpc RunQuery(RunQueryRequest) returns (RunQueryResponse);
+	rpc CommitDocuments(CommitDocumentsRequest) returns (CommitDocumentsResponse);
+	rpc IssueAttachmentUri(IssueAttachmentUriRequest) returns (IssueAttachmentUriResponse);
 	// rpc BulkIssueAttachmentUri
-	// rpc IssueUploadUri
+	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
 	// rpc CreateDocumentShortAlias
 	// rpc GetDocumentShortAlias
 }

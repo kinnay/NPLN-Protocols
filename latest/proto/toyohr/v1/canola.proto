@@ -3,8 +3,18 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "proto/toyohr/v1/common.proto";
+
+message CanolaRegisterDocumentRequest {
+	string name = 1;
+	string tweet_id = 2;
+}
+
+message CanolaRegisterDocumentResponse {
+}
+
 service Canola {
-	// rpc IkasuDocument
-	// rpc SelectDocuments
-	// rpc RegisterDocument
+	rpc IkasuDocument(IkasuDocumentRequest) returns (IkasuDocumentResponse);
+	rpc SelectDocuments(SelectDocumentsRequest) returns (SelectDocumentsResponse);
+	rpc RegisterDocument(CanolaRegisterDocumentRequest) returns (CanolaRegisterDocumentResponse);
 }

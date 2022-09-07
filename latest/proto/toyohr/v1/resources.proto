@@ -6,82 +6,173 @@ package nn.npln.toyohr.v1;
 import "google/protobuf/timestamp.proto";
 import "proto/common/value.proto";
 
+message BankaraChallenge {
+	string name = 1;
+	nn.npln.common.MapValue attributes = 2;
+	google.protobuf.Timestamp timestamp1 = 3;
+	google.protobuf.Timestamp timestamp2 = 4;
+	string document = 5;
+}
+
+message BankaraSettings {
+	uint32 unk = 1;
+	bytes data = 2;
+	nn.npln.common.MapValue attributes = 3;
+}
+
+message CoopScenarioCode {
+	string name = 1;
+}
+
+message CoopSchedule {
+	message Normal {
+		uint32 unk1 = 1;
+		string boss = 2;
+		bytes data = 3;
+		uint32 unk4 = 4;
+		string reward_type = 5;
+		uint32 unk6 = 6;
+		nn.npln.common.MapValue attributes = 7;
+	}
+	
+	message BigRun {
+		uint32 unk1 = 1;
+		uint32 unk2 = 2;
+		string boss = 3;
+		bytes unk4 = 4;
+		uint32 unk5 = 5;
+		string reward_type = 6;
+		uint32 unk7 = 7;
+		bytes unk8 = 8;
+		nn.npln.common.MapValue attributes = 9;
+	}
+	
+	string name = 1;
+	uint32 unk = 2;
+	string schedule_set_id = 3;
+	google.protobuf.Timestamp start_time = 4;
+	google.protobuf.Timestamp end_time = 5;
+	Normal normal = 6;
+	BigRun big_run = 7;
+	string shift_id = 9;
+	google.protobuf.Timestamp timestamp = 10;
+}
+
+message LeagueSettings {
+	uint32 unk1 = 1;
+	uint32 unk2 = 2;
+	bytes unk3 = 3;
+	nn.npln.common.MapValue unk4 = 4;
+	nn.npln.common.MapValue unk5 = 5;
+}
+
 message FestDecryptionKey {
 	string name = 1;
-	string key1 = 2;
-	string key2 = 3;
-	string winner_key = 4;
-	string alpha_key = 5;
-	string bravo_key = 6;
-	string charlie_key = 7;
+	string notice_key = 2;
+	string start_key = 3;
+	string result_winning_team_key = 4;
+	string team_alpha_key = 5;
+	string team_bravo_key = 6;
+	string team_charlie_key = 7;
 	string winning_team = 8;
 }
 
 message FestEntry {
 	string name = 1;
-	string team = 2;
-	string region = 3;
+	string fest_team = 2;
+	string fest_region = 3;
+}
+
+message FestPowerMeasurement {
+	string name = 1;
+	nn.npln.common.MapValue attributes = 2;
+	google.protobuf.Timestamp timestamp1 = 3;
+	google.protobuf.Timestamp timestamp2 = 4;
+	string document = 5;
+}
+
+message FestPublishment {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
 }
 
 message FestResult {
 	string name = 1;
-	FestResultUnk1 unk1 = 2;
-	FestResultUnk2 unk2 = 3;
-	FestResultUnk3 unk3 = 4;
-	FestResultWinPoints win_points = 5;
-}
-
-message FestResultDouble {
-	string team = 1;
-	double score = 2;
-}
-
-message FestResultU64 {
-	string team = 1;
-	uint64 score = 2;
-}
-
-message FestResultUnk1 {
-	bool is_valid = 1;
-	repeated FestResultDouble data = 2;
-}
-
-message FestResultUnk2 {
-	bool is_valid = 1;
-	repeated FestResultDouble data = 2;
-}
-
-message FestResultUnk3 {
-	bool is_valid = 1;
-	repeated FestResultDouble data1 = 2;
-	repeated FestResultDouble data2 = 3;
-	repeated FestResultDouble data3 = 4;
-}
-
-message FestResultWinPoints {
-	bool is_valid = 1;
-	repeated FestResultU64 points = 2;
-	nn.npln.common.MapValue weigts = 3;
+	YobisaiResult yobisai = 2;
+	HonsaiMidtermResult honsai_midterm = 3;
+	HonsaiFinalResult honsai_final = 4;
+	OverallResult overall = 5;
 }
 
 message FestSchedule {
 	string name = 1;
-	string fest_name = 2;
-	string region = 3;
-	string type = 4;
-	string unk = 5;
-	string key = 6;
-	FestScheduleTimes times = 7;
-	// unknown unk8 = 8;
-	nn.npln.common.MapValue unk9 = 9;
+	string fest = 2;
+	string fest_regions = 3;
+	string target = 4;
+	string fest_game_data = 5;
+	string fest_game_data_revision = 6;
+	FestTimetable timetable = 7;
+	map<string, FestPublishment> fest_publishments = 8;
+	nn.npln.common.MapValue attributes = 9;
 }
 
-message FestScheduleTimes {
-	google.protobuf.Timestamp publish_time = 1;
+message FestTeamPoint {
+	string fest_team = 1;
+	uint64 points = 2;
+}
+
+message FestTeamRatio {
+	string fest_team = 1;
+	double ratio = 2;
+}
+
+message FestTimetable {
+	google.protobuf.Timestamp open_time = 1;
 	google.protobuf.Timestamp start_time = 2;
 	google.protobuf.Timestamp mid_time = 3;
 	google.protobuf.Timestamp end_time = 4;
-	google.protobuf.Timestamp hide_time = 5;
+	google.protobuf.Timestamp close_time = 5;
+}
+
+message HonsaiFinalResult {
+	bool is_valid = 1;
+	repeated FestTeamRatio team_ratios1 = 2;
+	repeated FestTeamRatio team_ratios2 = 3;
+	repeated FestTeamRatio team_ratios3 = 4;
+}
+
+message HonsaiMidtermResult {
+	bool is_valid = 1;
+	repeated FestTeamRatio team_ratios = 2;
+}
+
+message OverallResult {
+	bool is_valid = 1;
+	repeated FestTeamPoint points = 2;
+	nn.npln.common.MapValue weigts = 3;
+}
+
+message RegularSettings {
+	bytes data = 1;
+	nn.npln.common.MapValue attributes = 2;
+}
+
+message ReplayCode {
+	string name = 1;
+	string document = 2;
+	google.protobuf.Timestamp timestamp = 3;
+}
+
+message Report {
+	string name = 1;
+	string category = 2;
+	string reason = 3;
+	string language_code = 4;
+	google.protobuf.Timestamp timestamp = 5;
+	string screening_target = 6;
+	string unk = 7;
+	nn.npln.common.MapValue attributes = 8;
+	string screening_target_type = 9;
 }
 
 message SaveRecord {
@@ -89,4 +180,44 @@ message SaveRecord {
 	nn.npln.common.MapValue attributes = 2;
 	google.protobuf.Timestamp create_time = 3;
 	google.protobuf.Timestamp update_time = 4;
+}
+
+message SeasonSchedule {
+	string name = 1;
+	uint32 unk2 = 2;
+	uint32 unk3 = 3;
+	google.protobuf.Timestamp start_time = 4;
+	google.protobuf.Timestamp end_time = 5;
+	nn.npln.common.MapValue attributes = 6;
+	string schedule_set_id = 7;
+}
+
+message VsParams {
+	string name = 1;
+	google.protobuf.Timestamp timestamp1 = 2;
+	google.protobuf.Timestamp timestamp2 = 3;
+	nn.npln.common.MapValue attributes = 4;
+	string params_set_id = 5;
+}
+
+message VsSchedule {
+	string name = 1;
+	google.protobuf.Timestamp start_time = 2;
+	google.protobuf.Timestamp end_time = 3;
+	RegularSettings regular_settings = 4;
+	repeated BankaraSettings bankara_settings = 5;
+	XSettings x_settings = 6;
+	LeagueSettings league_settings = 7;
+	string schedule_set_id = 8;
+}
+
+message XSettings {
+	uint32 unk = 1;
+	bytes data = 2;
+	nn.npln.common.MapValue attributes = 3;
+}
+
+message YobisaiResult {
+	bool is_valid = 1;
+	repeated FestTeamRatio team_ratios = 2;
 }

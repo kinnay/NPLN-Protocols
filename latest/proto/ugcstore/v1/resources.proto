@@ -1,0 +1,14 @@
+
+syntax = "proto3";
+
+package nn.npln.ugcstore.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
+
+message Document {
+	string name = 1;
+	nn.npln.common.MapValue attributes = 2;
+	google.protobuf.Timestamp timestamp1 = 3;
+	google.protobuf.Timestamp timestamp2 = 4;
+}

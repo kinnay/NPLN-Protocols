@@ -1,0 +1,63 @@
+
+syntax = "proto3";
+
+package nn.npln.ugcstore.v1;
+
+import "google/protobuf/wrappers.proto";
+import "proto/common/value.proto";
+
+message Cursor {
+	nn.npln.common.Value value = 1;
+	bool unk = 2;
+}
+
+message StructuredQuery {
+	message FieldReference {
+		string field_path = 2;
+	}
+	
+	message Projection {
+		repeated FieldReference fields = 1;
+	}
+	
+	message CollectionSelector {
+		string collection_id = 2;
+		bool unk = 3;
+	}
+	
+	message CompositeFilter {
+		uint32 unk = 1;
+		repeated Filter filter = 2;
+	}
+	
+	message FieldFilter {
+		FieldReference field = 1;
+		uint32 unk = 2;
+		nn.npln.common.Value value = 3;
+	}
+	
+	message UnaryFilter {
+		uint32 unk = 1;
+		FieldReference field = 2;
+	}
+	
+	message Filter {
+		repeated CompositeFilter composite_filter = 1;
+		repeated FieldFilter field_filter = 2;
+		repeated UnaryFilter unary_filter = 3;
+	}
+	
+	message Order {
+		FieldReference field = 1;
+		uint32 unk = 2;
+	}
+	
+	Projection projection = 1;
+	CollectionSelector collection_selector = 2;
+	Filter filter = 3;
+	Order order = 4;
+	google.protobuf.Int32Value count = 5;
+	uint32 unk = 6;
+	Cursor cursor1 = 7;
+	Cursor cursor2 = 8;
+}

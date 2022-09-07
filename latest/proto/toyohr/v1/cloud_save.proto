@@ -37,16 +37,16 @@ message ChangeUserNameRequest {
 }
 
 message ChangeUserNameResponse {
-	string unk1 = 1;
-	google.protobuf.Timestamp unk2 = 2;
-	google.protobuf.Timestamp unk3 = 3;
+	string identifier = 1;
+	google.protobuf.Timestamp timestamp1 = 2;
+	google.protobuf.Timestamp timestamp2 = 3;
 }
 
 service CloudSave {
 	rpc CreateSaveRecord(CreateSaveRecordRequest) returns (SaveRecord);
 	rpc GetSaveRecord(GetSaveRecordRequest) returns (SaveRecord);
-	// rpc ValidateSaveRecord
+	// [UNKNOWN] rpc ValidateSaveRecord
 	rpc WriteSaveRecord(WriteSaveRecordRequest) returns (WriteSaveRecordResponse);
 	rpc ChangeUserName(ChangeUserNameRequest) returns (ChangeUserNameResponse);
-	// rpc DeleteSaveRecord
+	// [UNKNOWN] rpc DeleteSaveRecord
 }

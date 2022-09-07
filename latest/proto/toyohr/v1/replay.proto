@@ -3,8 +3,27 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "proto/toyohr/v1/resources.proto";
+import "proto/ugcstore/v1/resources.proto";
+
+message ReplayRegisterDocumentRequest {
+	string name = 1;
+}
+
+message ReplayRegisterDocumentResponse {
+	ReplayCode code = 1;
+}
+
+message ResolveReplayCodeRequest {
+	string name = 1;
+}
+
+message ResolveReplayCodeResponse {
+	nn.npln.ugcstore.v1.Document document = 1;
+}
+
 service Replay {
-	// rpc RegisterDocument
-	// rpc ResolveReplayCode
-	// rpc FulfillReservations
+	rpc RegisterDocument(ReplayRegisterDocumentRequest) returns (ReplayRegisterDocumentResponse);
+	rpc ResolveReplayCode(ResolveReplayCodeRequest) returns (ResolveReplayCodeResponse);
+	// [UNKNOWN] rpc FulfillReservations
 }
