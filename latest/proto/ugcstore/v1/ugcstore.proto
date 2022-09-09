@@ -13,12 +13,26 @@ import "proto/ugcstore/v1/write.proto";
 
 message GetDocumentRequest {
 	string name = 1;
-	google.protobuf.FieldMask field_mask = 2;
+	google.protobuf.FieldMask read_mask = 2;
+}
+
+message BulkGetDocumentsRequest {
+	// [UNKNOWN]
+}
+
+message BulkGetDocumentsResponse {
+	oneof result {
+		Document found = 1;
+		string missing = 2;
+	}
+	google.protobuf.Timestamp read_time = 4;
 }
 
 message RunQueryRequest {
 	string parent = 1;
-	StructuredQuery query = 2;
+	oneof query_type {
+		StructuredQuery structured_query = 2;
+	}
 }
 
 message RunQueryResponse {
@@ -32,13 +46,15 @@ message CommitDocumentsRequest {
 
 message CommitDocumentsResponse {
 	repeated WriteResult write_results = 1;
-	google.protobuf.Timestamp timestamp = 2;
+	google.protobuf.Timestamp commit_time = 2;
 }
 
 message IssueAttachmentUriRequest {
 	string parent = 1;
-	google.protobuf.Timestamp timestamp = 2;
-	google.protobuf.Duration duration = 3;
+	oneof expiration {
+		google.protobuf.Timestamp expire_time = 2;
+		google.protobuf.Duration ttl = 3;
+	}
 }
 
 message IssueAttachmentUriResponse {
@@ -55,12 +71,12 @@ message IssueUploadUriResponse {
 
 service Ugcstore {
 	rpc GetDocument(GetDocumentRequest) returns (Document);
-	// [UNKNOWN] rpc BulkGetDocuments
+	rpc BulkGetDocuments(BulkGetDocumentsRequest) returns (stream BulkGetDocumentsResponse);
 	rpc RunQuery(RunQueryRequest) returns (RunQueryResponse);
 	rpc CommitDocuments(CommitDocumentsRequest) returns (CommitDocumentsResponse);
 	rpc IssueAttachmentUri(IssueAttachmentUriRequest) returns (IssueAttachmentUriResponse);
-	// rpc BulkIssueAttachmentUri
+	// [UNKNOWN] rpc BulkIssueAttachmentUri
 	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
-	// rpc CreateDocumentShortAlias
-	// rpc GetDocumentShortAlias
+	// [UNKNOWN] rpc CreateDocumentShortAlias
+	// [UNKNOWN] rpc GetDocumentShortAlias
 }

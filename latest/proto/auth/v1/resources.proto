@@ -23,6 +23,11 @@ message Account {
 	google.protobuf.Timestamp update_time = 3;
 }
 
+message AccountExternalId {
+	string name = 1;
+	ExternalId external_id = 2;
+}
+
 message User {
 	string name = 1;
 	string account = 2;
