@@ -3,6 +3,7 @@ syntax = "proto3";
 
 package nn.npln.maintenance.v1;
 
+import "google/protobuf/timestamp.proto";
 import "proto/maintenance/v1/resources.proto";
 
 message SubscribeMaintenanceSchedulesRequest {
@@ -10,11 +11,18 @@ message SubscribeMaintenanceSchedulesRequest {
 }
 
 message SubscribeMaintenanceSchedulesResponse {
-	// [UNKNOWN] unknown = 1
-	// [UNKNOWN] unknown = 2
+	oneof response {
+		SubscribeMaintenanceSchedulesResponseMessage message = 1;
+		KeepAlive keep_alive = 2;
+	}
 }
 
 message KeepAlive {
+}
+
+message SubscribeMaintenanceSchedulesResponseMessage {
+	google.protobuf.Timestamp timestamp = 1;
+	MaintenanceSchedule schedule = 2;
 }
 
 service MaintenanceScheduleService {

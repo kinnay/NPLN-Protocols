@@ -14,6 +14,13 @@ message Leaderboard {
 		EXCEED = 1;
 		ALWAYS = 2;
 	}
+
+	enum ShrinkState {
+		SHRINK_STATE_UNSPECIFIED = 0;
+		NOT_YET = 1;
+		SHRINKING = 2;
+		SHRUNK = 3;
+	}
 	
 	string season = 1;
 	repeated ScoreHolder scores = 2;
@@ -26,22 +33,23 @@ message Leaderboard {
 	bool score_order_asc = 9;
 	bool update_time_order_asc = 10;
 	UpdateType update_type = 11;
+	ShrinkState shrink_state = 12;
 }
 
-message UserLeaderboardFilter {
+message NearLeaderboardFilter {
 	string target_holder = 1;
 	int32 page_size = 2;
 	string page_token = 3;
 }
 
-message NearLeaderboardFilter {
+message RangeLeaderboardFilter {
 	int32 offset = 1;
 	int32 page_size = 2;
 	string page_token = 3;
 	string move_top_holder = 4;
 }
 
-message RangeLeaderboardFilter {
+message UserLeaderboardFilter {
 	repeated string holders = 1;
 	string order_by = 2;
 }
