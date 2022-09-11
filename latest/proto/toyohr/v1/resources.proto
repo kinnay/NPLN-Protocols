@@ -58,14 +58,6 @@ message CoopSchedule {
 	google.protobuf.Timestamp timestamp = 10;
 }
 
-message LeagueSettings {
-	uint32 unk1 = 1;
-	uint32 unk2 = 2;
-	bytes unk3 = 3;
-	nn.npln.common.MapValue unk4 = 4;
-	nn.npln.common.MapValue unk5 = 5;
-}
-
 message FestDecryptionKey {
 	string name = 1;
 	string notice_key = 2;
@@ -146,10 +138,18 @@ message HonsaiMidtermResult {
 	repeated FestTeamRatio team_ratios = 2;
 }
 
+message LeagueSettings {
+	uint32 unk1 = 1;
+	uint32 unk2 = 2;
+	bytes unk3 = 3;
+	nn.npln.common.MapValue unk4 = 4;
+	nn.npln.common.MapValue unk5 = 5;
+}
+
 message OverallResult {
 	bool is_valid = 1;
 	repeated FestTeamPoint points = 2;
-	nn.npln.common.MapValue weigts = 3;
+	nn.npln.common.MapValue weights = 3;
 }
 
 message RegularSettings {
