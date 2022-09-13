@@ -3,6 +3,7 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "google/protobuf/timestamp.proto";
 import "proto/toyohr/v1/resources.proto";
 import "proto/ugcstore/v1/resources.proto";
 
@@ -22,8 +23,18 @@ message ResolveReplayCodeResponse {
 	nn.npln.ugcstore.v1.Document document = 1;
 }
 
+message FulfillReservationsRequest {
+	string user = 1;
+	google.protobuf.Timestamp timestamp = 2;
+}
+
+message FulfillReservationsResponse {
+	nn.npln.ugcstore.v1.Document document = 1;
+	google.protobuf.Timestamp timestamp = 2;
+}
+
 service Replay {
 	rpc RegisterDocument(ReplayRegisterDocumentRequest) returns (ReplayRegisterDocumentResponse);
 	rpc ResolveReplayCode(ResolveReplayCodeRequest) returns (ResolveReplayCodeResponse);
-	// [UNKNOWN] rpc FulfillReservations
+	rpc FulfillReservations(FulfillReservationsRequest) returns (FulfillReservationsResponse);
 }
