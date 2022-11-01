@@ -25,6 +25,8 @@ message NError {
 	
 	enum NotFoundDetailCode {
 		NOT_FOUND_GENERIC = 0;
+		NOT_FOUND_USER_NOT_FOUND = 1;
+		NOT_FOUND_USER_MISMATCH = 2;
 	}
 	
 	enum AlreadyExistsDetailCode {
@@ -33,6 +35,7 @@ message NError {
 	
 	enum PermissionDeniedDetailCode {
 		PERMISSION_DENIED_GENERIC = 0;
+		PERMISSION_DENIED_GAME_SESSION_WRONG_PASSWORD = 1;
 	}
 	
 	enum ResourceExhaustedDetailCode {
@@ -43,6 +46,7 @@ message NError {
 	enum FailedPreconditionDetailCode {
 		FAILED_PRECONDITION_GENERIC = 0;
 		FAILED_PRECONDITION_USER_CREATION_LIMIT_EXCEEDED = 1;
+		FAILED_PRECONDITION_GAME_SESSION_IS_FULL = 2;
 	}
 	
 	enum AbortedDetailCode {
@@ -79,6 +83,8 @@ message NError {
 		UNAUTHENTICATED_UNAUTHENTICATED_DEVICE = 3;
 		UNAUTHENTICATED_TOKEN_INVALID = 4;
 		UNAUTHENTICATED_NEED_SUBSCRIPTION = 5;
+		UNAUTHENTICATED_INVALID_ACCOUNT = 6;
+		UNAUTHENTICATED_APPLICATION_NOT_PERMITTED = 7;
 	}
 	
 	string trace_id = 1;

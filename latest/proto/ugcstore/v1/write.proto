@@ -44,6 +44,10 @@ message DeleteDocumentRequest {
 message SetAttachmentRequest {
 	string parent = 1;
 	bytes body = 2;
+	oneof precondition {
+		bool exists = 3;
+	}
+	string mime_type = 4;
 }
 
 message UnsetAttachmentRequest {
