@@ -1,0 +1,195 @@
+
+syntax = "proto3";
+
+package nn.npln.timber.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/wrappers.proto";
+
+import "proto/timber/v1/resources.proto";
+
+message GetCompetitionRequest {
+	string name = 1;
+	int32 unk = 2;
+}
+
+message CreateCompetitionRequest {
+	// [UNKNOWN]
+}
+
+message UpdateCompetitionRequest {
+	// [UNKNOWN]
+}
+
+message DeleteCompetitionRequest {
+	// [UNKNOWN]
+}
+
+message SearchCompetitionsRequest {
+	string tenant = 1;
+	int32 unk2 = 2;
+	string page_token = 3;
+	int32 unk4 = 4;
+	// [UNKNOWN] = 5
+	// [UNKNOWN] = 6
+}
+
+message SearchCompetitionsResponse {
+	string next_page_token = 1;
+	repeated Competition competitions = 2;
+}
+
+message HostCompetitionRequest {
+	string tenant = 1;
+	Competition competition = 2;
+	CompetitionParticipant participant = 3;
+}
+
+message HostCompetitionResponse {
+	Competition competition = 1;
+	CompetitionParticipant participant = 2;
+}
+
+message FinalizeCompetitionRequest {
+	// [UNKNOWN]
+}
+
+message GetCompetitionAliasRequest {
+	string name = 1;
+}
+
+message GetCompetitionInvitationRequest {
+	string name = 1;
+}
+
+message CreateCompetitionInvitationRequest {
+	// [UNKNOWN]
+}
+
+message ListCompetitionInvitationsRequest {
+	// [UNKNOWN]
+}
+
+message ListCompetitionInvitationsResponse {
+	// [UNKNOWN]
+}
+
+message DeleteCompetitionInvitationRequest {
+	// [UNKNOWN]
+}
+
+message BatchCreateCompetitionInvitationsRequest {
+	// [UNKNOWN]
+}
+
+message BatchCreateCompetitionInvitationsResponse {
+	// [UNKNOWN]
+}
+
+message GetCompetitionParticipantRequest {
+	string name = 1;
+}
+
+message CreateCompetitionParticipantRequest {
+	string parent = 1;
+	CompetitionParticipant participant = 2;
+}
+
+message ActivateCompetitionParticipantRequest {
+	string name = 1;
+	google.protobuf.BytesValue value = 2;
+}
+
+message DeactivateCompetitionParticipantRequest {
+	string name = 1;
+	google.protobuf.BytesValue value = 2;
+}
+
+message CancelCompetitionParticipantRequest {
+	string name = 1;
+	google.protobuf.BytesValue value = 2;
+}
+
+message GetCompetitionNotificationRequest {
+	// [UNKNOWN]
+}
+
+message UpdateCompetitionNotificationRequest {
+	// [UNKNOWN]
+}
+
+message ReceiveCompetitionNotificationRequest {
+	// [UNKNOWN]
+}
+
+message ReceiveCompetitionNotificationResponse {
+	// [UNKNOWN]
+}
+
+message InvalidateCompetitionNotificationRequest {
+	// [UNKNOWN]
+}
+
+message GetCompetitionUserRequest {
+	string name = 1;
+	google.protobuf.FieldMask mask = 2;
+}
+
+message CreateCompetitionUserRequest {
+	string parent = 1;
+	CompetitionUser user = 2;
+}
+
+message UpdateCompetitionUserRequest {
+	CompetitionUser user = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message GetCompetitionUserBattleRecordRequest {
+	// [UNKNOWN]
+}
+
+message CreateCompetitionUserBattleRecordRequest {
+	// [UNKNOWN]
+}
+
+message UpdateCompetitionUserBattleRecordRequest {
+	// [UNKNOWN]
+}
+
+message FinishCompetitionUserBattleRecordRequest {
+	// [UNKNOWN]
+}
+
+service CompetitionService {
+	rpc GetCompetition(GetCompetitionRequest) returns (Competition);
+	rpc CreateCompetition(CreateCompetitionRequest) returns (Competition);
+	rpc UpdateCompetition(UpdateCompetitionRequest) returns (Competition);
+	rpc DeleteCompetition(DeleteCompetitionRequest) returns (google.protobuf.Empty);
+	rpc SearchCompetitions(SearchCompetitionsRequest) returns (SearchCompetitionsResponse);
+	rpc HostCompetition(HostCompetitionRequest) returns (HostCompetitionResponse);
+	rpc FinalizeCompetition(FinalizeCompetitionRequest) returns (Competition);
+	rpc GetCompetitionAlias(GetCompetitionAliasRequest) returns (CompetitionAlias);
+	rpc GetCompetitionInvitation(GetCompetitionInvitationRequest) returns (CompetitionInvitation);
+	rpc CreateCompetitionInvitation(CreateCompetitionInvitationRequest) returns (CompetitionInvitation);
+	rpc ListCompetitionInvitations(ListCompetitionInvitationsRequest) returns (ListCompetitionInvitationsResponse);
+	rpc DeleteCompetitionInvitation(DeleteCompetitionInvitationRequest) returns (google.protobuf.Empty);
+	rpc BatchCreateCompetitionInvitations(BatchCreateCompetitionInvitationsRequest) returns (BatchCreateCompetitionInvitationsResponse);
+	rpc GetCompetitionParticipant(GetCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc CreateCompetitionParticipant(CreateCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc ActivateCompetitionParticipant(ActivateCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc DeactivateCompetitionParticipant(DeactivateCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc CancelCompetitionParticipant(CancelCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc GetCompetitionNotification(GetCompetitionNotificationRequest) returns (CompetitionNotification);
+	rpc UpdateCompetitionNotification(UpdateCompetitionNotificationRequest) returns (CompetitionNotification);
+	rpc ReceiveCompetitionNotification(ReceiveCompetitionNotificationRequest) returns (stream ReceiveCompetitionNotificationResponse);
+	rpc InvalidateCompetitionNotification(InvalidateCompetitionNotificationRequest) returns (CompetitionNotification);
+	rpc GetCompetitionUser(GetCompetitionUserRequest) returns (CompetitionUser);
+	rpc CreateCompetitionUser(CreateCompetitionUserRequest) returns (CompetitionUser);
+	rpc UpdateCompetitionUser(UpdateCompetitionUserRequest) returns (CompetitionUser);
+	rpc GetCompetitionUserBattleRecord(GetCompetitionUserBattleRecordRequest) returns (CompetitionUserBattleRecord);
+	rpc CreateCompetitionUserBattleRecord(CreateCompetitionUserBattleRecordRequest) returns (CompetitionUserBattleRecord);
+	rpc UpdateCompetitionUserBattleRecord(UpdateCompetitionUserBattleRecordRequest) returns (CompetitionUserBattleRecord);
+	rpc FinishCompetitionUserBattleRecord(FinishCompetitionUserBattleRecordRequest) returns (CompetitionUserBattleRecord);
+}

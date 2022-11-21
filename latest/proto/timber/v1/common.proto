@@ -1,0 +1,10 @@
+
+syntax = "proto3";
+
+package nn.npln.timber.v1;
+
+import "google/protobuf/duration.proto";
+
+message KeepAlive {
+	google.protobuf.Duration duration = 1;
+}

@@ -1,0 +1,42 @@
+
+syntax = "proto3";
+
+package nn.npln.timber.v1;
+
+import "google/protobuf/empty.proto";
+import "proto/timber/v1/common.proto";
+import "proto/timber/v1/resources.proto";
+
+message CreateTradeBoxRequest {
+	string parent = 1;
+	TradeBox trade_box = 2;
+	string trade_box_id = 3;
+}
+
+message DeleteTradeBoxRequest {
+	string name = 1;
+}
+
+message CancelTradeBoxRequest {
+	string name = 1;
+}
+
+message CancelTradeBoxResponse {
+}
+
+message TrackTradeBoxRequest {
+	string name = 1;
+}
+
+message TrackTradeBoxResponse {
+	TradeBox trade_box = 1;
+	bool unk = 2;
+	KeepAlive keep_alive = 3;
+}
+
+service TradeBoxService {
+	rpc CreateTradeBox(CreateTradeBoxRequest) returns (TradeBox);
+	rpc DeleteTradeBox(DeleteTradeBoxRequest) returns (google.protobuf.Empty);
+	rpc CancelTradeBox(CancelTradeBoxRequest) returns (CancelTradeBoxResponse);
+	rpc TrackTradeBox(TrackTradeBoxRequest) returns (stream TrackTradeBoxResponse);
+}
