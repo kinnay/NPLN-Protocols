@@ -229,6 +229,6 @@ message TradeBox {
 	string name = 1;
 	State state = 2;
 	google.protobuf.Timestamp timestamp = 3;
-	bytes unk4 = 4;
-	bytes unk5 = 5;
+	bytes payload = 4;
+	bytes signature = 5;
 }
