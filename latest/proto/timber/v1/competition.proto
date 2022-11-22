@@ -11,28 +11,31 @@ import "proto/timber/v1/resources.proto";
 
 message GetCompetitionRequest {
 	string name = 1;
-	int32 unk = 2;
+	int32 view = 2;
 }
 
 message CreateCompetitionRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	Competition competition = 2;
+	string competition_id = 3;
 }
 
 message UpdateCompetitionRequest {
-	// [UNKNOWN]
+	Competition competition = 1;
+	google.protobuf.FieldMask update_mask = 2;
 }
 
 message DeleteCompetitionRequest {
-	// [UNKNOWN]
+	string name = 1;
+	bool force = 2;
 }
 
 message SearchCompetitionsRequest {
 	string tenant = 1;
-	int32 unk2 = 2;
+	int32 page_size = 2;
 	string page_token = 3;
-	int32 unk4 = 4;
-	// [UNKNOWN] = 5
-	// [UNKNOWN] = 6
+	int32 view = 4;
+	repeated CompetitionType competition_types = 6;
 }
 
 message SearchCompetitionsResponse {
@@ -43,7 +46,7 @@ message SearchCompetitionsResponse {
 message HostCompetitionRequest {
 	string tenant = 1;
 	Competition competition = 2;
-	CompetitionParticipant participant = 3;
+	CompetitionParticipant competition_participant = 3;
 }
 
 message HostCompetitionResponse {
@@ -52,7 +55,8 @@ message HostCompetitionResponse {
 }
 
 message FinalizeCompetitionRequest {
-	// [UNKNOWN]
+	string name = 1;
+	bool force = 2;
 }
 
 message GetCompetitionAliasRequest {
@@ -64,11 +68,15 @@ message GetCompetitionInvitationRequest {
 }
 
 message CreateCompetitionInvitationRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	CompetitionInvitation competition_invitation = 2;
+	string competition_invitation_id = 3;
 }
 
 message ListCompetitionInvitationsRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
 }
 
 message ListCompetitionInvitationsResponse {
@@ -76,11 +84,12 @@ message ListCompetitionInvitationsResponse {
 }
 
 message DeleteCompetitionInvitationRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message BatchCreateCompetitionInvitationsRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	repeated CompetitionInvitation requests = 2;
 }
 
 message BatchCreateCompetitionInvitationsResponse {
@@ -93,34 +102,35 @@ message GetCompetitionParticipantRequest {
 
 message CreateCompetitionParticipantRequest {
 	string parent = 1;
-	CompetitionParticipant participant = 2;
+	CompetitionParticipant competition_participant = 2;
 }
 
 message ActivateCompetitionParticipantRequest {
 	string name = 1;
-	google.protobuf.BytesValue value = 2;
+	google.protobuf.BytesValue participant_binary = 2;
 }
 
 message DeactivateCompetitionParticipantRequest {
 	string name = 1;
-	google.protobuf.BytesValue value = 2;
+	google.protobuf.BytesValue participant_binary = 2;
 }
 
 message CancelCompetitionParticipantRequest {
 	string name = 1;
-	google.protobuf.BytesValue value = 2;
+	google.protobuf.BytesValue participant_binary = 2;
 }
 
 message GetCompetitionNotificationRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message UpdateCompetitionNotificationRequest {
-	// [UNKNOWN]
+	CompetitionNotification competition_notification = 1;
+	google.protobuf.FieldMask update_mask = 2;
 }
 
 message ReceiveCompetitionNotificationRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message ReceiveCompetitionNotificationResponse {
@@ -128,38 +138,41 @@ message ReceiveCompetitionNotificationResponse {
 }
 
 message InvalidateCompetitionNotificationRequest {
-	// [UNKNOWN]
+	string name = 1;
+	string e_tag = 2;
 }
 
 message GetCompetitionUserRequest {
 	string name = 1;
-	google.protobuf.FieldMask mask = 2;
+	google.protobuf.FieldMask read_mask = 2;
 }
 
 message CreateCompetitionUserRequest {
 	string parent = 1;
-	CompetitionUser user = 2;
+	CompetitionUser competition_user = 2;
 }
 
 message UpdateCompetitionUserRequest {
-	CompetitionUser user = 1;
+	CompetitionUser competition_user = 1;
 	google.protobuf.FieldMask update_mask = 2;
 }
 
 message GetCompetitionUserBattleRecordRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 message CreateCompetitionUserBattleRecordRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	CompetitionUserBattleRecord competition_user_battle_record = 2;
 }
 
 message UpdateCompetitionUserBattleRecordRequest {
-	// [UNKNOWN]
+	CompetitionUserBattleRecord competition_user_battle_record = 1;
+	google.protobuf.FieldMask update_mask = 2;
 }
 
 message FinishCompetitionUserBattleRecordRequest {
-	// [UNKNOWN]
+	string name = 1;
 }
 
 service CompetitionService {

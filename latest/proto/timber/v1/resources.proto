@@ -216,7 +216,8 @@ message CompetitionUser {
 }
 
 message CompetitionUserBattleRecord {
-	// [UNKNOWN]
+	string name = 1;
+	bool disconnect = 2;
 }
 
 message TradeBox {
