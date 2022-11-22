@@ -89,7 +89,7 @@ message DeleteCompetitionInvitationRequest {
 
 message BatchCreateCompetitionInvitationsRequest {
 	string parent = 1;
-	repeated CompetitionInvitation requests = 2;
+	repeated CreateCompetitionInvitationRequest requests = 2;
 }
 
 message BatchCreateCompetitionInvitationsResponse {

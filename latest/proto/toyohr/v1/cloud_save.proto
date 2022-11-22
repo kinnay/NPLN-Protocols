@@ -33,7 +33,7 @@ message ChangeUserNameRequest {
 	string save_record = 1;
 	string user_name = 2;
 	google.protobuf.Timestamp update_time = 3;
-	string unk = 4;
+	bytes unk = 4;
 }
 
 message ChangeUserNameResponse {

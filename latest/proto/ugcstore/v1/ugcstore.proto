@@ -17,7 +17,9 @@ message GetDocumentRequest {
 }
 
 message BulkGetDocumentsRequest {
-	// [UNKNOWN]
+	string parent = 1;
+	repeated string names = 2;
+	google.protobuf.FieldMask read_mask = 3;
 }
 
 message BulkGetDocumentsResponse {
@@ -69,14 +71,23 @@ message IssueUploadUriResponse {
 	string uri = 1;
 }
 
+message CreateDocumentShortAliasRequest {
+	string parent = 1;
+	DocumentShortAlias document_short_alias = 2;
+}
+
+message GetDocumentShortAliasRequest {
+	string name = 1;
+}
+
 service Ugcstore {
 	rpc GetDocument(GetDocumentRequest) returns (Document);
 	rpc BulkGetDocuments(BulkGetDocumentsRequest) returns (stream BulkGetDocumentsResponse);
 	rpc RunQuery(RunQueryRequest) returns (RunQueryResponse);
 	rpc CommitDocuments(CommitDocumentsRequest) returns (CommitDocumentsResponse);
 	rpc IssueAttachmentUri(IssueAttachmentUriRequest) returns (IssueAttachmentUriResponse);
-	// [UNKNOWN] rpc BulkIssueAttachmentUri
+	rpc BulkIssueAttachmentUri(stream IssueAttachmentUriRequest) returns (stream IssueAttachmentUriResponse);
 	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
-	// [UNKNOWN] rpc CreateDocumentShortAlias
-	// [UNKNOWN] rpc GetDocumentShortAlias
+	rpc CreateDocumentShortAlias(CreateDocumentShortAliasRequest) returns (DocumentShortAlias);
+	rpc GetDocumentShortAlias(GetDocumentShortAliasRequest) returns (DocumentShortAlias);
 }

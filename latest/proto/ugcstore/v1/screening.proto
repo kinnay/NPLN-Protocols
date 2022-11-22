@@ -3,7 +3,39 @@ syntax = "proto3";
 
 package nn.npln.ugcstore.v1;
 
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/ugcstore/v1/ugcstore.proto";
+
+message Context {
+	// [UNKNOWN] fields = 1;
+}
+
+message AttachmentContext {
+	string key = 1;
+	string attachment_document = 2;
+	string upload_uri = 3;
+}
+
+message Report {
+	string name = 1;
+	string category = 2;
+	string reason = 3;
+	string language_code = 4;
+	google.protobuf.Timestamp create_time = 5;
+	string screening_target = 6;
+	string screening_target_type = 7;
+	Context context = 8;
+	bool use_attachment = 9;
+	AttachmentContext attachment_context = 10;
+}
+
+message CreateReportRequest {
+	string parent = 1;
+	Report report = 2;
+}
+
 service Screening {
-	// rpc CreateReport
-	// rpc IssueUploadUri
+	rpc CreateReport(CreateReportRequest) returns (google.protobuf.Empty);
+	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
 }
