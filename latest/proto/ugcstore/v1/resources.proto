@@ -14,12 +14,7 @@ message Document {
 }
 
 message DocumentShortAlias {
-	float a = 1;
-	float b = 2;
-	float c = 3;
-	float d = 4;
-	float e = 5;
-	float f = 6;
-	float g = 7;
-	float h = 8;
+	string name = 1;
+	Document document = 2;
+	string scope = 3;
 }
