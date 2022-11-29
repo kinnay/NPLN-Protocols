@@ -99,7 +99,7 @@ message FestResult {
 message FestSchedule {
 	string name = 1;
 	string fest = 2;
-	string fest_regions = 3;
+	repeated string fest_regions = 3;
 	string target = 4;
 	string fest_game_data = 5;
 	string fest_game_data_revision = 6;
