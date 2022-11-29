@@ -15,6 +15,6 @@ message Document {
 
 message DocumentShortAlias {
 	string name = 1;
-	Document document = 2;
+	string document = 2;
 	string scope = 3;
 }
