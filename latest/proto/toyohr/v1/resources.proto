@@ -26,23 +26,23 @@ message CoopScenarioCode {
 
 message CoopSchedule {
 	message Normal {
-		uint32 unk1 = 1;
+		uint32 stage = 1;
 		string boss = 2;
-		bytes data = 3;
-		uint32 unk4 = 4;
+		repeated int64 main_weapons = 3;
+		uint32 kuma_weapon = 4;
 		string reward_type = 5;
-		uint32 unk6 = 6;
+		uint32 reward_gear_id = 6;
 		nn.npln.common.MapValue attributes = 7;
 	}
 	
 	message BigRun {
 		uint32 unk1 = 1;
-		uint32 unk2 = 2;
+		uint32 stage = 2;
 		string boss = 3;
-		bytes unk4 = 4;
-		uint32 unk5 = 5;
+		repeated int64 main_weapons = 4;
+		uint32 kuma_weapon = 5;
 		string reward_type = 6;
-		uint32 unk7 = 7;
+		uint32 reward_gear_id = 7;
 		bytes unk8 = 8;
 		nn.npln.common.MapValue attributes = 9;
 	}
