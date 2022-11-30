@@ -1,0 +1,10 @@
+
+syntax = "proto3";
+
+package nn.npln.toyohr.v1;
+
+service LobbyMessaging {
+	// [UNKNOWN] rpc RecvMessage
+	// [UNKNOWN] rpc SendMessage
+	// [UNKNOWN] rpc SendLobbyMessage
+}
