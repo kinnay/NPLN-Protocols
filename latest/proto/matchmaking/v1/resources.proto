@@ -21,7 +21,7 @@ extend google.protobuf.FileOptions {
 enum DelegationAction {
 	DELEGATION_ACTION_UNSPECIFIED = 0;
 	ANY_PARTICIPATION = 1;
-	ACCEPTION = 2;
+	ACCEPTANCE = 2;
 	INCLUDE_ID_TOKEN_FOR_SAME_CLIENT = 3;
 }
 
