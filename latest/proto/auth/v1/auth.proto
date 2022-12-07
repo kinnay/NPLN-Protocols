@@ -51,7 +51,7 @@ message IssuePrearrangedUserTokenResponse {
 
 message IssueAnonymousUserTokenRequest {
 	string tenant = 1;
-	ExternalIdToken token = 2;
+	ExternalIdToken external_id_token = 2;
 }
 
 message IssueAnonymousUserTokenResponse {
