@@ -97,9 +97,9 @@ message DeleteScoreRequest {
 message BrowseLeaderboardRequest {
 	string season = 1;
 	oneof filter {
-		UserLeaderboardFilter user_leaderboard = 2;
-		NearLeaderboardFilter near_leaderboard = 3;
-		RangeLeaderboardFilter range_leaderboard = 4;
+		UserLeaderboardFilter user_leaderboard = 3;
+		NearLeaderboardFilter near_leaderboard = 4;
+		RangeLeaderboardFilter range_leaderboard = 5;
 	}
 }
 
