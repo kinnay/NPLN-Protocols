@@ -39,8 +39,8 @@ message SearchCompetitionsRequest {
 }
 
 message SearchCompetitionsResponse {
-	string next_page_token = 1;
-	repeated Competition competitions = 2;
+	repeated Competition competitions = 1;
+	string next_page_token = 2;
 }
 
 message HostCompetitionRequest {
