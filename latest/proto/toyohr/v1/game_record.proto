@@ -14,7 +14,7 @@ message CreateBankaraChallengeRequest {
 message InitializeAttributesRequest {
 	message InitialVs {
 		uint32 unk1 = 1;
-		uint32 unk2 = 2;
+		double unk2 = 2;
 		bool unk3 = 3;
 	}
 	

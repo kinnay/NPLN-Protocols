@@ -15,8 +15,8 @@ message BankaraChallenge {
 }
 
 message BankaraSettings {
-	uint32 unk = 1;
-	bytes data = 2;
+	uint32 rule = 1;
+	repeated int32 stages = 2;
 	nn.npln.common.MapValue attributes = 3;
 }
 
@@ -43,7 +43,7 @@ message CoopSchedule {
 		uint32 kuma_weapon = 5;
 		string reward_type = 6;
 		uint32 reward_gear_id = 7;
-		bytes unk8 = 8;
+		repeated int64 rewards = 8;
 		nn.npln.common.MapValue attributes = 9;
 	}
 	
@@ -140,8 +140,8 @@ message HonsaiMidtermResult {
 
 message LeagueSettings {
 	uint32 unk1 = 1;
-	uint32 unk2 = 2;
-	bytes unk3 = 3;
+	uint32 rule = 2;
+	repeated int32 stages = 3;
 	nn.npln.common.MapValue unk4 = 4;
 	nn.npln.common.MapValue unk5 = 5;
 }
@@ -153,7 +153,7 @@ message OverallResult {
 }
 
 message RegularSettings {
-	bytes data = 1;
+	repeated int32 stages = 1;
 	nn.npln.common.MapValue attributes = 2;
 }
 
@@ -170,7 +170,7 @@ message Report {
 	string language_code = 4;
 	google.protobuf.Timestamp timestamp = 5;
 	string screening_target = 6;
-	string unk = 7;
+	double unk = 7;
 	nn.npln.common.MapValue attributes = 8;
 	string screening_target_type = 9;
 }
@@ -212,8 +212,8 @@ message VsSchedule {
 }
 
 message XSettings {
-	uint32 unk = 1;
-	bytes data = 2;
+	uint32 rule = 1;
+	repeated int32 stages = 2;
 	nn.npln.common.MapValue attributes = 3;
 }
 
