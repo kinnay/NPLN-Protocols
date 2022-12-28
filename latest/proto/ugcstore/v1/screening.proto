@@ -5,11 +5,8 @@ package nn.npln.ugcstore.v1;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
 import "proto/ugcstore/v1/ugcstore.proto";
-
-message Context {
-	// [UNKNOWN] fields = 1;
-}
 
 message AttachmentContext {
 	string key = 1;
@@ -25,9 +22,9 @@ message Report {
 	google.protobuf.Timestamp create_time = 5;
 	string screening_target = 6;
 	string screening_target_type = 7;
-	Context context = 8;
+	nn.npln.common.MapValue context = 8;
 	bool use_attachment = 9;
-	AttachmentContext attachment_context = 10;
+	repeated AttachmentContext attachment_context = 10;
 }
 
 message CreateReportRequest {
@@ -36,6 +33,6 @@ message CreateReportRequest {
 }
 
 service Screening {
-	rpc CreateReport(CreateReportRequest) returns (google.protobuf.Empty);
+	rpc CreateReport(CreateReportRequest) returns (Report);
 	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
 }
