@@ -57,6 +57,7 @@ message UnsetAttachmentRequest {
 message ImportAttachmentRequest {
 	string parent = 1;
 	string uri = 2;
+	string mime_type = 3;
 }
 
 message TransformDocumentRequest {
