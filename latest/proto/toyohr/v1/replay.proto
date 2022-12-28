@@ -29,7 +29,7 @@ message FulfillReservationsRequest {
 }
 
 message FulfillReservationsResponse {
-	nn.npln.ugcstore.v1.Document document = 1;
+	repeated nn.npln.ugcstore.v1.Document document = 1;
 	google.protobuf.Timestamp timestamp = 2;
 }
 
