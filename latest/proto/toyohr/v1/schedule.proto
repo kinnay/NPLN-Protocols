@@ -10,8 +10,8 @@ import "proto/toyohr/v1/resources.proto";
 message SelectVsParamsRequest {
 	string target = 1;
 	string etag = 2;
-	google.protobuf.Timestamp timestamp = 3;
-	uint32 unk = 4;
+	google.protobuf.Timestamp current_time = 3;
+	int32 vs_params_count = 4;
 }
 
 message SelectVsParamsResponse {
@@ -23,8 +23,8 @@ message SelectVsParamsResponse {
 message SelectVsSchedulesRequest {
 	string target = 1;
 	string etag = 2;
-	google.protobuf.Timestamp timestamp = 3;
-	google.protobuf.Duration duration = 4;
+	google.protobuf.Timestamp current_time = 3;
+	google.protobuf.Duration select_duration = 4;
 }
 
 message SelectVsSchedulesResponse {
@@ -36,8 +36,7 @@ message SelectVsSchedulesResponse {
 message SelectCoopSchedulesRequest {
 	string target = 1;
 	string etag = 2;
-	google.protobuf.Timestamp timestamp = 3;
-	uint32 unk = 4;
+	google.protobuf.Timestamp current_time = 3;
 }
 
 message SelectCoopSchedulesResponse {
@@ -49,8 +48,8 @@ message SelectCoopSchedulesResponse {
 message SelectSeasonSchedulesRequest {
 	string tenant = 1;
 	string etag = 2;
-	google.protobuf.Timestamp timestamp = 3;
-	uint32 unk = 4;
+	google.protobuf.Timestamp current_time = 3;
+	int32 season_schedule_count = 4;
 }
 
 message SelectSeasonSchedulesResponse {

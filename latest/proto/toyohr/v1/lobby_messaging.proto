@@ -3,8 +3,33 @@ syntax = "proto3";
 
 package nn.npln.toyohr.v1;
 
+import "google/protobuf/empty.proto";
+import "proto/toyohr/v1/resources.proto";
+
+message RecvMessageRequest {
+	string user = 1;
+	string lobby = 2;
+	string message_resume_token = 3;
+}
+
+message RecvMessageResponse {
+	// [UNKNOWN]
+}
+
+message SendMessageRequest {
+	string user = 1;
+	repeated string receiver_users = 2;
+	MessageBody message_body = 3;
+}
+
+message SendLobbyMessageRequest {
+	string user = 1;
+	string lobby = 2;
+	MessageBody message_body = 3;
+}
+
 service LobbyMessaging {
-	// [UNKNOWN] rpc RecvMessage
-	// [UNKNOWN] rpc SendMessage
-	// [UNKNOWN] rpc SendLobbyMessage
+	rpc RecvMessage(RecvMessageRequest) returns (stream RecvMessageResponse);
+	rpc SendMessage(SendMessageRequest) returns (google.protobuf.Empty);
+	rpc SendLobbyMessage(SendLobbyMessageRequest) returns (google.protobuf.Empty);
 }

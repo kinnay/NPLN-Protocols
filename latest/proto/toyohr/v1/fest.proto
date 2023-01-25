@@ -7,7 +7,7 @@ import "proto/toyohr/v1/resources.proto";
 
 message CreateFestEntryRequest {
 	string parent = 1;
-	FestEntry entry = 2;
+	FestEntry fest_entry = 2;
 }
 
 message GetFestEntryRequest {

@@ -10,8 +10,25 @@ message CreateReportRequest {
 	Report report = 2;
 }
 
+message GetViolationRequest {
+	string name = 1;
+}
+
+message GetViolationResponse {
+	// [UNKNOWN]
+}
+
+message SelectSnapshotRequest {
+	string user = 1;
+	string string_value = 2;
+}
+
+message SelectSnapshotResponse {
+	// [UNKNOWN]
+}
+
 service UserScreening {
 	rpc CreateReport(CreateReportRequest) returns (Report);
-	// [UNKNOWN] rpc GetViolation
-	// [UNKNOWN] rpc SelectSnapshot
+	rpc GetViolation(GetViolationRequest) returns (GetViolationResponse);
+	rpc SelectSnapshot(SelectSnapshotRequest) returns (SelectSnapshotResponse);
 }

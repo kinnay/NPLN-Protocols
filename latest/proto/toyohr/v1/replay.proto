@@ -25,7 +25,7 @@ message ResolveReplayCodeResponse {
 
 message FulfillReservationsRequest {
 	string user = 1;
-	google.protobuf.Timestamp timestamp = 2;
+	google.protobuf.Timestamp last_fulfill_time = 2;
 }
 
 message FulfillReservationsResponse {

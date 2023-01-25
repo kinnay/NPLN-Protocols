@@ -8,14 +8,14 @@ import "proto/common/value.proto";
 
 message BankaraChallenge {
 	string name = 1;
-	nn.npln.common.MapValue attributes = 2;
-	google.protobuf.Timestamp timestamp1 = 3;
-	google.protobuf.Timestamp timestamp2 = 4;
+	nn.npln.common.MapValue fields = 2;
+	google.protobuf.Timestamp create_time = 3;
+	google.protobuf.Timestamp update_time = 4;
 	string document = 5;
 }
 
 message BankaraSettings {
-	uint32 rule = 1;
+	int32 rule = 1;
 	repeated int32 stages = 2;
 	nn.npln.common.MapValue attributes = 3;
 }
@@ -26,29 +26,29 @@ message CoopScenarioCode {
 
 message CoopSchedule {
 	message Normal {
-		uint32 stage = 1;
+		int32 stage = 1;
 		string boss = 2;
 		repeated int64 main_weapons = 3;
-		uint32 kuma_weapon = 4;
+		int32 kuma_weapon = 4;
 		string reward_type = 5;
-		uint32 reward_gear_id = 6;
+		int32 reward_gear_id = 6;
 		nn.npln.common.MapValue attributes = 7;
 	}
 	
 	message BigRun {
-		uint32 unk1 = 1;
-		uint32 stage = 2;
+		int32 unk1 = 1;
+		int32 stage = 2;
 		string boss = 3;
 		repeated int64 main_weapons = 4;
-		uint32 kuma_weapon = 5;
+		int32 kuma_weapon = 5;
 		string reward_type = 6;
-		uint32 reward_gear_id = 7;
+		int32 reward_gear_id = 7;
 		repeated int64 rewards = 8;
 		nn.npln.common.MapValue attributes = 9;
 	}
 	
 	string name = 1;
-	uint32 unk = 2;
+	int32 unk = 2;
 	string schedule_set_id = 3;
 	google.protobuf.Timestamp start_time = 4;
 	google.protobuf.Timestamp end_time = 5;
@@ -77,9 +77,9 @@ message FestEntry {
 
 message FestPowerMeasurement {
 	string name = 1;
-	nn.npln.common.MapValue attributes = 2;
-	google.protobuf.Timestamp timestamp1 = 3;
-	google.protobuf.Timestamp timestamp2 = 4;
+	nn.npln.common.MapValue fields = 2;
+	google.protobuf.Timestamp create_time = 3;
+	google.protobuf.Timestamp update_time = 4;
 	string document = 5;
 }
 
@@ -110,7 +110,7 @@ message FestSchedule {
 
 message FestTeamPoint {
 	string fest_team = 1;
-	uint64 points = 2;
+	int64 points = 2;
 }
 
 message FestTeamRatio {
@@ -139,11 +139,17 @@ message HonsaiMidtermResult {
 }
 
 message LeagueSettings {
-	uint32 unk1 = 1;
-	uint32 rule = 2;
+	int32 unk1 = 1;
+	int32 rule = 2;
 	repeated int32 stages = 3;
 	nn.npln.common.MapValue unk4 = 4;
 	nn.npln.common.MapValue unk5 = 5;
+}
+
+message MessageBody {
+	string message_request_id = 1;
+	nn.npln.common.MapValue fields = 2;
+	string message_type = 3;
 }
 
 message OverallResult {
@@ -168,24 +174,24 @@ message Report {
 	string category = 2;
 	string reason = 3;
 	string language_code = 4;
-	google.protobuf.Timestamp timestamp = 5;
+	google.protobuf.Timestamp create_time = 5;
 	string screening_target = 6;
-	double unk = 7;
-	nn.npln.common.MapValue attributes = 8;
+	double weight = 7;
+	nn.npln.common.MapValue context = 8;
 	string screening_target_type = 9;
 }
 
 message SaveRecord {
 	string name = 1;
-	nn.npln.common.MapValue attributes = 2;
+	nn.npln.common.MapValue save_data = 2;
 	google.protobuf.Timestamp create_time = 3;
 	google.protobuf.Timestamp update_time = 4;
 }
 
 message SeasonSchedule {
 	string name = 1;
-	uint32 unk2 = 2;
-	uint32 unk3 = 3;
+	int32 unk2 = 2;
+	int32 unk3 = 3;
 	google.protobuf.Timestamp start_time = 4;
 	google.protobuf.Timestamp end_time = 5;
 	nn.npln.common.MapValue attributes = 6;
@@ -212,7 +218,7 @@ message VsSchedule {
 }
 
 message XSettings {
-	uint32 rule = 1;
+	int32 rule = 1;
 	repeated int32 stages = 2;
 	nn.npln.common.MapValue attributes = 3;
 }

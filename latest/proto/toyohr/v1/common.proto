@@ -16,7 +16,7 @@ message IkasuDocumentResponse {
 message SelectDocumentsRequest {
 	string tenant = 1;
 	string type = 2;
-	nn.npln.common.MapValue attributes = 3;
+	nn.npln.common.MapValue params = 3;
 }
 
 message SelectDocumentsResponse {

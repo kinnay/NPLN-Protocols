@@ -8,14 +8,14 @@ import "proto/toyohr/v1/resources.proto";
 
 message CreateBankaraChallengeRequest {
 	string parent = 1;
-	BankaraChallenge challenge = 2;
+	BankaraChallenge bankara_challenge = 2;
 }
 
 message InitializeAttributesRequest {
 	message InitialVs {
-		uint32 unk1 = 1;
-		double unk2 = 2;
-		bool unk3 = 3;
+		int32 season_id = 1;
+		double initial_rate = 2;
+		bool transferred = 3;
 	}
 	
 	message Area {}
@@ -36,17 +36,17 @@ message InitializeAttributesRequest {
 	}
 	
 	message CoopGrade {
-		uint32 unk = 1;
+		int32 total_grade_point = 1;
 	}
 	
 	message NewSeason {
-		uint32 unk = 1;
+		int32 season_id = 1;
 	}
 	
 	string user = 1;
 	string initialize_type = 2;
-	uint32 unk1 = 3;
-	uint32 unk2 = 4;
+	int32 unk1 = 3;
+	int32 unk2 = 4;
 	string season = 5;
 	InitialVs initial_vs = 6;
 	Area area = 7;
@@ -70,14 +70,44 @@ message InitializeAttributesResponse {
 
 message CreateFestPowerMeasurementRequest {
 	string parent = 1;
-	FestPowerMeasurement measurement = 2;
+	FestPowerMeasurement fest_power_measurement = 2;
+}
+
+message InitializeTagRequest {
+	string tenant = 1;
+	repeated string users = 2;
+	string league_schedule = 3;
+	int32 game_rule = 4;
+}
+
+message InitializeTagResponse {
+	// [UNKNOWN]
+}
+
+message GetTagRequest {
+	string name = 1;
+}
+
+message GetTagResponse {
+	// [UNKNOWN]
+}
+
+message SelectTagsRequest {
+	string tenant = 1;
+	string user = 2;
+	int32 page_size = 3;
+	string page_token = 4;
+}
+
+message SelectTagsResponse {
+	// [UNKNOWN]
 }
 
 service GameRecord {
 	rpc CreateBankaraChallenge(CreateBankaraChallengeRequest) returns (BankaraChallenge);
 	rpc InitializeAttributes(InitializeAttributesRequest) returns (InitializeAttributesResponse);
 	rpc CreateFestPowerMeasurement(CreateFestPowerMeasurementRequest) returns (FestPowerMeasurement);
-	// [UNKNOWN] rpc InitializeTag
-	// [UNKNOWN] rpc GetTag
-	// [UNKNOWN] rpc SelectTags
+	rpc InitializeTag(InitializeTagRequest) returns (InitializeTagResponse);
+	rpc GetTag(GetTagRequest) returns (GetTagResponse);
+	rpc SelectTags(SelectTagsRequest) returns (SelectTagsResponse);
 }

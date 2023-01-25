@@ -17,11 +17,20 @@ message GetSaveRecordRequest {
 	string name = 1;
 }
 
+message ValidateSaveRecordRequest {
+	string name = 1;
+	google.protobuf.Timestamp update_time = 2;
+}
+
+message ValidateSaveRecordResponse {
+	// [UNKNOWN]
+}
+
 message WriteSaveRecordRequest {
 	string name = 1;
 	google.protobuf.Timestamp update_time = 2;
 	string save_event_type = 3;
-	nn.npln.common.MapValue attributes = 4;
+	nn.npln.common.MapValue event_param = 4;
 	SaveRecord save_record = 5;
 }
 
@@ -33,7 +42,7 @@ message ChangeUserNameRequest {
 	string save_record = 1;
 	string user_name = 2;
 	google.protobuf.Timestamp update_time = 3;
-	bytes unk = 4;
+	bytes language_code = 4;
 }
 
 message ChangeUserNameResponse {
@@ -42,11 +51,19 @@ message ChangeUserNameResponse {
 	google.protobuf.Timestamp timestamp2 = 3;
 }
 
+message DeleteSaveRecordRequest {
+	string name = 1;
+}
+
+message DeleteSaveRecordResponse {
+	// [UNKNOWN]
+}
+
 service CloudSave {
 	rpc CreateSaveRecord(CreateSaveRecordRequest) returns (SaveRecord);
 	rpc GetSaveRecord(GetSaveRecordRequest) returns (SaveRecord);
-	// [UNKNOWN] rpc ValidateSaveRecord
+	rpc ValidateSaveRecord(ValidateSaveRecordRequest) returns (ValidateSaveRecordResponse);
 	rpc WriteSaveRecord(WriteSaveRecordRequest) returns (WriteSaveRecordResponse);
 	rpc ChangeUserName(ChangeUserNameRequest) returns (ChangeUserNameResponse);
-	// [UNKNOWN] rpc DeleteSaveRecord
+	rpc DeleteSaveRecord(DeleteSaveRecordRequest) returns (DeleteSaveRecordResponse);
 }
