@@ -14,5 +14,6 @@ message MaintenanceSchedule {
 	oneof updater {
 		string updater_service_account = 6;
 		string updater_user = 7;
+		string updater_application_schedule = 8;
 	}
 }

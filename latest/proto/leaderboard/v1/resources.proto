@@ -55,7 +55,3 @@ message ScoreHolder {
 	Holder holder_detail = 7;
 	Rank rank = 8;
 }
-
-message Season {
-	// [UNKNOWN]
-}

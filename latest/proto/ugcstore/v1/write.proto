@@ -69,10 +69,10 @@ message WriteOperation {
 	oneof operation_type {
 		UpdateDocumentRequest update_document = 1;
 		DeleteDocumentRequest delete_document = 2;
+		TransformDocumentRequest transform_document = 6;
 		SetAttachmentRequest set_attachment = 3;
 		UnsetAttachmentRequest unset_attachment = 4;
 		ImportAttachmentRequest import_attachment = 5;
-		TransformDocumentRequest transform_document = 6;
 	}
 }
 

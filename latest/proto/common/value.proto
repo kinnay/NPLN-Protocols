@@ -22,6 +22,7 @@ message Value {
 		bytes bytes_value = 8;
 		ArrayValue array_value = 9;
 		MapValue map_value = 10;
+		string reference_value = 11;
 	}
 }
 

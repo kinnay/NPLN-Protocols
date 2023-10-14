@@ -54,6 +54,17 @@ message UserLeaderboardFilter {
 	string order_by = 2;
 }
 
+message FindRankScore {
+	string request_score = 1;
+	bool found = 2;
+	ScoreHolder rank_score = 3;
+}
+
+message PercentileScore {
+	double request_percentile = 1;
+	ScoreHolder score = 2;
+}
+
 message CreateHolderRequest {
 	string parent = 1;
 	Holder holder = 2;
@@ -144,6 +155,31 @@ message BatchGetChartsResponse {
 	repeated Chart charts = 1;
 }
 
+message FetchRankScoreRequest {
+	// [UNKNOWN]
+}
+
+message FetchRankScoreResponse {
+	ScoreHolder rank_score = 1;
+}
+
+message FindRankScoresRequest {
+	// [UNKNOWN]
+}
+
+message FindRankScoresResponse {
+	repeated FindRankScore find_rank_scores = 1;
+}
+
+message RetrieveScoresByPercentilesRequest {
+	// [UNKNOWN]
+}
+
+message RetrieveScoresByPercentilesResponse {
+	repeated PercentileScore percentile_score = 1;
+	google.protobuf.Timestamp rank_update_time = 3;
+}
+
 service LeaderboardService {
 	rpc CreateHolder(CreateHolderRequest) returns (Holder);
 	rpc UpdateHolder(UpdateHolderRequest) returns (Holder);
@@ -159,4 +195,7 @@ service LeaderboardService {
 	rpc GetCategory(GetCategoryRequest) returns (Category);
 	rpc GetChart(GetChartRequest) returns (Chart);
 	rpc BatchGetCharts(BatchGetChartsRequest) returns (BatchGetChartsResponse);
+	rpc FetchRankScore(FetchRankScoreRequest) returns (FetchRankScoreResponse);
+	rpc FindRankScores(FindRankScoresRequest) returns (FindRankScoresResponse);
+	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse);
 }
