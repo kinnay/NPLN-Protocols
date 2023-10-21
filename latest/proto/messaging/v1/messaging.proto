@@ -6,6 +6,7 @@ package nn.npln.messaging.v1;
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "proto/common/resources.proto";
 import "proto/common/value.proto";
@@ -72,6 +73,7 @@ message AckBody {
 }
 
 message KeepAlive {
+	google.protobuf.Duration idle_timeout = 1;
 }
 
 service Messaging {
