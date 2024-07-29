@@ -45,7 +45,7 @@ message Rank {
 	int32 index = 2;
 }
 
-message ScoreHolder {
+message Score {
 	string name = 1;
 	string holder = 2;
 	int64 score = 3;

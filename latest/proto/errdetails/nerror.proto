@@ -51,6 +51,7 @@ message NError {
 	
 	enum AbortedDetailCode {
 		ABORTED_GENERIC = 0;
+		ABORTED_GAME_SESSION_EXPIRED = 1;
 	}
 	
 	enum OutOfRangeDetailCode {

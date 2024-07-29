@@ -1,0 +1,147 @@
+
+syntax = "proto3";
+
+package nn.npln.globalcounter.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "proto/globalcounter/v1/resources.proto";
+
+message GetCounterRequest {
+	string name = 1;
+}
+
+message QueryCountersRequest {
+	string parent = 1;
+	string filter = 2;
+	int32 page_size = 3;
+	string page_token = 4;
+}
+
+message QueryCountersResponse {
+	repeated Counter counters = 1;
+	string next_page_token = 2;
+}
+
+message CreateHolderRequest {
+	string parent = 1;
+	Holder holder = 2;
+	string request_id = 3;
+}
+
+message UpdateHolderRequest {
+	Holder holder = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message GetHolderRequest {
+	string name = 1;
+}
+
+message DeleteHolderRequest {
+	string name = 1;
+	bool force = 2;
+}
+
+message ListHoldersRequest {
+	string parent = 1;
+	int32 page_size = 3;
+	string page_token = 4;
+}
+
+message ListHoldersResponse {
+	repeated Holder holders = 1;
+	string next_page_token = 2;
+}
+
+message GetSeasonRequest {
+	string name = 1;
+}
+
+message BatchGetSeasonsRequest {
+	string parent = 1;
+	repeated string names = 2;
+}
+
+message BatchGetSeasonsResponse {
+	repeated Season seasons = 1;
+}
+
+message ListSeasonsRequest {
+	string parent = 1;
+	int32 page_size = 3;
+	string page_token = 4;
+}
+
+message ListSeasonsResponse {
+	repeated Season seasons = 1;
+	string next_page_token = 2;
+}
+
+message GetCountRequest {
+	string name = 1;
+}
+
+message DeleteCountRequest {
+	string name = 1;
+}
+
+message ListCountsRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListCountsResponse {
+	repeated Count counts = 1;
+	string next_page_token = 2;
+}
+
+message UpdateCountRequest {
+	Count count = 1;
+	google.protobuf.FieldMask update_mask = 2;
+	bool allow_missing = 3;
+}
+
+message AddCountRequest {
+	string season = 1;
+	int64 count = 2;
+	string request_id = 3;
+}
+
+message MoveCountRequest {
+	Count count = 1;
+	string destination_season = 2;
+}
+
+message PurgeCountHoldersRequest {
+	string parent = 1;
+	string filter = 2;
+	string holder = 3;
+	bool force = 4;
+}
+
+message PurgeCountHoldersResponse {
+	int32 purge_count = 1;
+	repeated string purge_sample = 2;
+}
+
+service GlobalCounterService {
+	rpc GetCounter(GetCounterRequest) returns (Counter);
+	rpc QueryCounters(QueryCountersRequest) returns (QueryCountersResponse);
+	rpc CreateHolder(CreateHolderRequest) returns (Holder);
+	rpc UpdateHolder(UpdateHolderRequest) returns (Holder);
+	rpc GetHolder(GetHolderRequest) returns (Holder);
+	rpc DeleteHolder(DeleteHolderRequest) returns (google.protobuf.Empty);
+	rpc ListHolders(ListHoldersRequest) returns (ListHoldersResponse);
+	rpc GetSeason(GetSeasonRequest) returns (Season);
+	rpc BatchGetSeasons(BatchGetSeasonsRequest) returns (BatchGetSeasonsResponse);
+	rpc ListSeasons(ListSeasonsRequest) returns (ListSeasonsResponse);
+	rpc GetCount(GetCountRequest) returns (Count);
+	rpc DeleteCount(DeleteCountRequest) returns (google.protobuf.Empty);
+	rpc ListCounts(ListCountsRequest) returns (ListCountsResponse);
+	rpc UpdateCount(UpdateCountRequest) returns (Count);
+	rpc AddCount(AddCountRequest) returns (Count);
+	rpc MoveCount(MoveCountRequest) returns (Count);
+	rpc PurgeCountHolders(PurgeCountHoldersRequest) returns (PurgeCountHoldersResponse);
+}

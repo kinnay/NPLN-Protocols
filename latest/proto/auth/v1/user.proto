@@ -1,0 +1,55 @@
+
+syntax = "proto3";
+
+package nn.npln.auth.v1;
+
+import "proto/auth/v1/resources.proto";
+
+message QueryUserExternalIdsRequest {
+	message ExternalIdCondition {
+		repeated string users = 1;
+		repeated ExternalIdType external_id_types = 2 [packed=true];
+	}
+
+	message UserCondition {
+		repeated ExternalId external_ids = 1;
+	}
+
+	string tenant = 1;
+	oneof condition {
+		UserCondition user_condition = 2;
+		ExternalIdCondition external_id_condition = 3;
+	}
+	int32 page_size = 4;
+	string page_token = 5;
+}
+
+message QueryUserExternalIdsResponse {
+	repeated UserExternalId user_external_ids = 1;
+	string next_page_token = 2;
+}
+
+message QueryUserShortIdsRequest {
+	message ShortIds {
+		repeated int64 ids = 1 [packed=true];
+	}
+
+	message UserIds {
+		repeated string ids = 1;
+	}
+
+	string tenant = 1;
+	oneof condition {
+		UserIds user_ids = 2;
+		ShortIds short_ids = 3;
+	}
+}
+
+message QueryUserShortIdsResponse {
+	message UserShortId {
+		string user_id = 1;
+		int64 short_id = 2;
+	}
+
+	repeated UserShortId user_short_ids = 1;
+}

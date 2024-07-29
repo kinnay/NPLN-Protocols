@@ -38,7 +38,9 @@ message RunQueryRequest {
 }
 
 message RunQueryResponse {
-	// [UNKNOWN]
+	Document document = 1;
+	google.protobuf.Timestamp read_time = 3;
+	int32 skipped_results = 4;
 }
 
 message CommitDocumentsRequest {
@@ -61,6 +63,14 @@ message IssueAttachmentUriRequest {
 
 message IssueAttachmentUriResponse {
 	string uri = 1;
+}
+
+message BulkIssueAttachmentUriRequest {
+	repeated IssueAttachmentUriRequest requests = 1;
+}
+
+message BulkIssueAttachmentUriResponse {
+	repeated string uri = 1;
 }
 
 message IssueUploadUriRequest {

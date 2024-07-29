@@ -23,7 +23,7 @@ message Leaderboard {
 	}
 	
 	string season = 1;
-	repeated ScoreHolder scores = 2;
+	repeated Score scores = 2;
 	string prev_page_token = 3;
 	string next_page_token = 4;
 	google.protobuf.Timestamp rank_update_time = 5;
@@ -57,12 +57,12 @@ message UserLeaderboardFilter {
 message FindRankScore {
 	string request_score = 1;
 	bool found = 2;
-	ScoreHolder rank_score = 3;
+	Score rank_score = 3;
 }
 
 message PercentileScore {
 	double request_percentile = 1;
-	ScoreHolder score = 2;
+	Score score = 2;
 }
 
 message CreateHolderRequest {
@@ -80,7 +80,11 @@ message GetHolderRequest {
 }
 
 message SearchHoldersRequest {
-	string tenant = 1;
+	string parent = 1;
+	repeated string owners = 2;
+	string filter = 3;
+	int32 page_size = 4;
+	string page_token = 5;
 }
 
 message SearchHoldersResponse {
@@ -93,7 +97,7 @@ message DeleteHolderRequest {
 }
 
 message RegisterScoreRequest {
-	ScoreHolder score = 1;
+	Score score = 1;
 	bool force = 2;
 }
 
@@ -132,6 +136,7 @@ message PurgeScoreHoldersResponse {
 
 message PurgeUserScoresRequest {
 	string user = 1;
+	bool force = 2;
 }
 
 message PurgeUserScoresResponse {
@@ -148,7 +153,8 @@ message GetChartRequest {
 }
 
 message BatchGetChartsRequest {
-	repeated string names = 1;
+	string parent = 1;
+	repeated string names = 2;
 }
 
 message BatchGetChartsResponse {
@@ -156,15 +162,16 @@ message BatchGetChartsResponse {
 }
 
 message FetchRankScoreRequest {
-	// [UNKNOWN]
+	string score = 1;
 }
 
 message FetchRankScoreResponse {
-	ScoreHolder rank_score = 1;
+	Score rank_score = 1;
 }
 
 message FindRankScoresRequest {
-	// [UNKNOWN]
+	string season = 1;
+	repeated string names = 2;
 }
 
 message FindRankScoresResponse {
@@ -172,7 +179,8 @@ message FindRankScoresResponse {
 }
 
 message RetrieveScoresByPercentilesRequest {
-	// [UNKNOWN]
+	string season = 1;
+	double percentile = 2;
 }
 
 message RetrieveScoresByPercentilesResponse {
@@ -186,8 +194,8 @@ service LeaderboardService {
 	rpc GetHolder(GetHolderRequest) returns (Holder);
 	rpc SearchHolders(SearchHoldersRequest) returns (SearchHoldersResponse);
 	rpc DeleteHolder(DeleteHolderRequest) returns (google.protobuf.Empty);
-	rpc RegisterScore(RegisterScoreRequest) returns (ScoreHolder);
-	rpc GetScore(GetScoreRequest) returns (ScoreHolder);
+	rpc RegisterScore(RegisterScoreRequest) returns (Score);
+	rpc GetScore(GetScoreRequest) returns (Score);
 	rpc DeleteScore(DeleteScoreRequest) returns (google.protobuf.Empty);
 	rpc BrowseLeaderboard(BrowseLeaderboardRequest) returns (BrowseLeaderboardResponse);
 	rpc PurgeScoreHolders(PurgeScoreHoldersRequest) returns (PurgeScoreHoldersResponse);

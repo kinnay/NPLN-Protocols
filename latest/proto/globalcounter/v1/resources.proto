@@ -1,0 +1,47 @@
+
+syntax = "proto3";
+
+package nn.npln.globalcounter.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "proto/common/value.proto";
+
+message Count {
+	string name = 1;
+	string holder = 2;
+	Holder holder_detail = 3;
+	int64 count = 4;
+	google.protobuf.Timestamp update_time = 5;
+	string resource_link = 6;
+	nn.npln.common.MapValue fields = 7;
+}
+
+message Counter {
+	string name = 1;
+	int32 current_season_id = 2;
+	int32 min_season_id = 3;
+}
+
+message Holder {
+	string name = 1;
+	string display_name = 2;
+	int64 type = 3;
+	string owner = 4;
+	google.protobuf.Timestamp create_time = 5;
+	google.protobuf.Timestamp update_time = 6;
+	string resource_link = 7;
+	nn.npln.common.MapValue fields = 8;
+}
+
+message Season {
+	string name = 1;
+	int64 count = 2;
+	int64 uniq_user = 3;
+	google.protobuf.Timestamp season_start_time = 4;
+	google.protobuf.Timestamp season_end_time = 5;
+	bool read_final_permission = 6;
+	bool write_final_permission = 7;
+	google.protobuf.BoolValue read_setting_permission = 8;
+	google.protobuf.BoolValue write_setting_permission = 9;
+}

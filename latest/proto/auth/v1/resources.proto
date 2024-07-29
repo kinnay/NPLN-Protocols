@@ -33,6 +33,7 @@ message User {
 	string account = 2;
 	google.protobuf.Timestamp create_time = 3;
 	google.protobuf.Timestamp last_login_time = 4;
+	int64 short_id = 5;
 }
 
 message UserExternalId {
