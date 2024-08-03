@@ -29,6 +29,10 @@ message QueryUserExternalIdsResponse {
 	string next_page_token = 2;
 }
 
+message GetUserRequest {
+	string name = 1;
+}
+
 message QueryUserShortIdsRequest {
 	message ShortIds {
 		repeated int64 ids = 1 [packed=true];
@@ -52,4 +56,10 @@ message QueryUserShortIdsResponse {
 	}
 
 	repeated UserShortId user_short_ids = 1;
+}
+
+service UserService {
+	rpc QueryUserExternalIds(QueryUserExternalIdsRequest) returns (QueryUserExternalIdsResponse);
+	rpc GetUser(GetUserRequest) returns (User);
+	rpc QueryUserShortIds(QueryUserShortIdsRequest) returns (QueryUserShortIdsResponse);
 }
