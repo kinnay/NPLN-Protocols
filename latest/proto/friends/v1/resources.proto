@@ -28,9 +28,16 @@ enum Range {
 }
 
 message FriendUser {
+	message Relationship {
+		bool favorite = 1;
+		bool presence_deliverable = 2;
+		bool presence_receivable = 3;
+	}
+	
 	string name = 1;
 	string friend_user = 2;
 	string nsa_id = 3;
+	Relationship relationship = 4;
 }
 
 message BlockingUser {
@@ -40,11 +47,16 @@ message BlockingUser {
 }
 
 message Presence {
+	message DebugInfo {
+		bool debug = 1;
+	}
+
 	string name = 1;
 	State state = 2;
 	map<string, nn.npln.common.Value> attributes = 3;
 	google.protobuf.Timestamp last_online_time = 4;
 	bool unsubscribed = 5;
+	DebugInfo debug_info = 6;
 }
 
 message FriendNsa {

@@ -20,6 +20,7 @@ message FieldTransform {
 		nn.npln.common.Value increment = 3;
 		nn.npln.common.Value maximum = 4;
 		nn.npln.common.Value minimum = 5;
+		nn.npln.common.Value buffered_increment = 6;
 	}
 }
 
@@ -77,6 +78,6 @@ message WriteOperation {
 }
 
 message WriteResult {
-	google.protobuf.Timestamp update_time = 1;
+	google.protobuf.Timestamp update_Time = 1;
 	repeated nn.npln.common.Value transform_results = 2;
 }

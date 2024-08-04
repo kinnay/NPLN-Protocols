@@ -7,6 +7,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
+import "proto/common/value.proto";
 import "proto/ugcstore/v1/query.proto";
 import "proto/ugcstore/v1/resources.proto";
 import "proto/ugcstore/v1/write.proto";
@@ -14,12 +15,14 @@ import "proto/ugcstore/v1/write.proto";
 message GetDocumentRequest {
 	string name = 1;
 	google.protobuf.FieldMask read_mask = 2;
+	nn.npln.common.MapValue rule_context = 3;
 }
 
 message BulkGetDocumentsRequest {
 	string parent = 1;
 	repeated string names = 2;
 	google.protobuf.FieldMask read_mask = 3;
+	nn.npln.common.MapValue rule_context = 4;
 }
 
 message BulkGetDocumentsResponse {
@@ -35,6 +38,7 @@ message RunQueryRequest {
 	oneof query_type {
 		StructuredQuery structured_query = 2;
 	}
+	nn.npln.common.MapValue rule_context = 3;
 }
 
 message RunQueryResponse {
@@ -46,6 +50,7 @@ message RunQueryResponse {
 message CommitDocumentsRequest {
 	string tenant = 1;
 	repeated WriteOperation write_operations = 2;
+	nn.npln.common.MapValue rule_context = 3;
 }
 
 message CommitDocumentsResponse {
@@ -59,6 +64,7 @@ message IssueAttachmentUriRequest {
 		google.protobuf.Timestamp expire_time = 2;
 		google.protobuf.Duration ttl = 3;
 	}
+	nn.npln.common.MapValue rule_context = 4;
 }
 
 message IssueAttachmentUriResponse {
@@ -74,7 +80,8 @@ message BulkIssueAttachmentUriResponse {
 }
 
 message IssueUploadUriRequest {
-	string parent = 1;
+	string tenant = 1;
+	bool resumable = 2;
 }
 
 message IssueUploadUriResponse {
@@ -93,7 +100,7 @@ message GetDocumentShortAliasRequest {
 service Ugcstore {
 	rpc GetDocument(GetDocumentRequest) returns (Document);
 	rpc BulkGetDocuments(BulkGetDocumentsRequest) returns (stream BulkGetDocumentsResponse);
-	rpc RunQuery(RunQueryRequest) returns (stream RunQueryResponse);
+	rpc RunQuery(RunQueryRequest) returns (RunQueryResponse);
 	rpc CommitDocuments(CommitDocumentsRequest) returns (CommitDocumentsResponse);
 	rpc IssueAttachmentUri(IssueAttachmentUriRequest) returns (IssueAttachmentUriResponse);
 	rpc BulkIssueAttachmentUri(stream IssueAttachmentUriRequest) returns (stream IssueAttachmentUriResponse);

@@ -88,7 +88,7 @@ message StructuredQuery {
 	}
 	
 	Projection select = 1;
-	repeated CollectionSelector from = 2;
+	CollectionSelector from = 2;
 	Filter where = 3;
 	repeated Order order_by = 4;
 	google.protobuf.Int32Value limit = 5;
