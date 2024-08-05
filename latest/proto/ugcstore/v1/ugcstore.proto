@@ -100,7 +100,7 @@ message GetDocumentShortAliasRequest {
 service Ugcstore {
 	rpc GetDocument(GetDocumentRequest) returns (Document);
 	rpc BulkGetDocuments(BulkGetDocumentsRequest) returns (stream BulkGetDocumentsResponse);
-	rpc RunQuery(RunQueryRequest) returns (RunQueryResponse);
+	rpc RunQuery(RunQueryRequest) returns (stream RunQueryResponse);
 	rpc CommitDocuments(CommitDocumentsRequest) returns (CommitDocumentsResponse);
 	rpc IssueAttachmentUri(IssueAttachmentUriRequest) returns (IssueAttachmentUriResponse);
 	rpc BulkIssueAttachmentUri(stream IssueAttachmentUriRequest) returns (stream IssueAttachmentUriResponse);

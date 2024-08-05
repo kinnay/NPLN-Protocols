@@ -78,6 +78,6 @@ message WriteOperation {
 }
 
 message WriteResult {
-	google.protobuf.Timestamp update_Time = 1;
+	google.protobuf.Timestamp update_time = 1;
 	repeated nn.npln.common.Value transform_results = 2;
 }
