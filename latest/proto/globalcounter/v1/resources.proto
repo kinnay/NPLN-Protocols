@@ -21,6 +21,7 @@ message Counter {
 	string name = 1;
 	int32 current_season_id = 2;
 	int32 min_season_id = 3;
+	string resource_link = 4;
 }
 
 message Holder {
