@@ -22,41 +22,27 @@ enum CompetitionUserCategory {
 	MASTER = 3;
 }
 
+enum CompetitionView {
+	COMPETITION_VIEW_UNSPECIFIED = 0;
+	BASIC = 1;
+	FULL = 2;
+	SMALL = 3;
+}
+
 message BattleDataLog {
+	message BattleReport {
+		string reporter = 1;
+		repeated PersonalBattleResult personal_battle_results = 2;
+		bytes log = 3;
+	}
+
 	string name = 1;
 	string competition = 2;
 	CompetitionType competition_type = 3;
-	repeated BattleResult normalized_battle_results = 4;
+	repeated PersonalBattleResult normalized_battle_results = 4;
 	google.protobuf.Timestamp create_time = 5;
 	repeated BattleReport battle_reports = 6;
 	string matching_key = 7;
-}
-
-message BattleReport {
-	string reporter = 1;
-	repeated BattleResult personal_battle_results = 2;
-	bytes log = 3;
-}
-
-message BattleResult {
-	enum Result {
-		BATTLE_LOSE = 0;
-		BATTLE_WIN = 1;
-		BATTLE_DRAW = 2;
-		BATTLE_NO_CONTEST = 3;
-	}
-	
-	enum Behavior {
-		BEHAVIOR_SUCCESSFUL = 0;
-		BEHAVIOR_DISCONNECTED = 1;
-		BEHAVIOR_CHEATED = 2;
-		BEHAVIOR_DISCONNECTED_AND_CHEATED = 3;
-		BEHAVIOR_NO_CONTEST = 4;
-	}
-	
-	string user = 1;
-	Result result = 2;
-	Behavior behavior = 3;
 }
 
 message Competition {
@@ -133,13 +119,9 @@ message CompetitionInvitation {
 }
 
 message CompetitionNotification {
-	message Invalid {
-	}
-	
-	message Elimination {
-	}
-	
-	message Schedule {
+	message CompetitionInvalidNotification {}
+	message CompetitionEliminationNotification {}
+	message CompetitionScheduleNotification {
 		google.protobuf.Timestamp start_battle_time = 1;
 	}
 	
@@ -147,10 +129,10 @@ message CompetitionNotification {
 	google.protobuf.Timestamp update_time = 2;
 	string etag = 99;
 	oneof notification {
-		Invalid invalid = 3;
+		CompetitionInvalidNotification invalid = 3;
 		string matching_key = 4;
-		Schedule schedule = 5;
-		Elimination elimination = 6;
+		CompetitionScheduleNotification schedule = 5;
+		CompetitionEliminationNotification elimination = 6;
 	}
 }
 
@@ -218,6 +200,27 @@ message CompetitionUser {
 message CompetitionUserBattleRecord {
 	string name = 1;
 	bool disconnect = 2;
+}
+
+message PersonalBattleResult {
+	enum Result {
+		BATTLE_LOSE = 0;
+		BATTLE_WIN = 1;
+		BATTLE_DRAW = 2;
+		BATTLE_NO_CONTEST = 3;
+	}
+	
+	enum Behavior {
+		BEHAVIOR_SUCCESSFUL = 0;
+		BEHAVIOR_DISCONNECTED = 1;
+		BEHAVIOR_CHEATED = 2;
+		BEHAVIOR_DISCONNECTED_AND_CHEATED = 3;
+		BEHAVIOR_NO_CONTEST = 4;
+	}
+	
+	string user = 1;
+	Result result = 2;
+	Behavior behavior = 3;
 }
 
 message TradeBox {

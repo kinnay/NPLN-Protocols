@@ -9,9 +9,10 @@ import "google/protobuf/wrappers.proto";
 
 import "proto/timber/v1/resources.proto";
 
+
 message GetCompetitionRequest {
 	string name = 1;
-	int32 view = 2;
+	CompetitionView view = 2;
 }
 
 message CreateCompetitionRequest {
@@ -93,7 +94,7 @@ message BatchCreateCompetitionInvitationsRequest {
 }
 
 message BatchCreateCompetitionInvitationsResponse {
-	// [UNKNOWN]
+	repeated CompetitionInvitation competition_invitations = 1;
 }
 
 message GetCompetitionParticipantRequest {
