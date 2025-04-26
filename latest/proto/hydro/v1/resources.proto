@@ -16,7 +16,7 @@ message Content {
 	
 	string name = 1;
 	string user = 2;
-	repeated ContentPermission permissions = 3;
+	repeated ContentPermission permissions = 3 [packed=true];
 	google.protobuf.Timestamp create_time = 4;
 	google.protobuf.Timestamp update_time = 5;
 	bytes payload = 6;
