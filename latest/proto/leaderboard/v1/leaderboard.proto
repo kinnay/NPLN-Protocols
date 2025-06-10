@@ -206,4 +206,6 @@ service LeaderboardService {
 	rpc FetchRankScore(FetchRankScoreRequest) returns (FetchRankScoreResponse);
 	rpc FindRankScores(FindRankScoresRequest) returns (FindRankScoresResponse);
 	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse);
+	// rpc RetrieveQuantileScore;
+	// rpc GetSeason;
 }

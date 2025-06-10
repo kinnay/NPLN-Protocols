@@ -1,0 +1,9 @@
+
+syntax = "proto3";
+
+package nn.npln.appconfig.v1;
+
+service Appconfig {
+	// rpc FindApplicationConfig;
+	// rpc PullModifiedApplicationConfig;
+}

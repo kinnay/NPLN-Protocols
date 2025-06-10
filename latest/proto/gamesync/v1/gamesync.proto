@@ -154,4 +154,5 @@ service Gamesync {
 	rpc CommitTransaction(CommitTransactionRequest) returns (CommitTransactionResponse);
 	rpc RollbackTransaction(RollbackTransactionRequest) returns (google.protobuf.Empty);
 	rpc KeepUserSession(stream KeepUserSessionRequest) returns (stream KeepUserSessionResponse);
+	// rpc CreateRound;
 }

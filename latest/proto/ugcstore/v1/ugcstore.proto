@@ -108,4 +108,5 @@ service Ugcstore {
 	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
 	rpc CreateDocumentShortAlias(CreateDocumentShortAliasRequest) returns (DocumentShortAlias);
 	rpc GetDocumentShortAlias(GetDocumentShortAliasRequest) returns (DocumentShortAlias);
+	// rpc BulkGetDocumentShortAliases;
 }
