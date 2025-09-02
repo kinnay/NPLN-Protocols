@@ -14,13 +14,6 @@ message Leaderboard {
 		EXCEED = 1;
 		ALWAYS = 2;
 	}
-
-	enum ShrinkState {
-		SHRINK_STATE_UNSPECIFIED = 0;
-		NOT_YET = 1;
-		SHRINKING = 2;
-		SHRUNK = 3;
-	}
 	
 	string season = 1;
 	repeated Score scores = 2;
@@ -63,6 +56,13 @@ message FindRankScore {
 message PercentileScore {
 	double request_percentile = 1;
 	Score score = 2;
+}
+
+message QuantileScore {
+	string season = 1;
+	double quantile = 2;
+	int64 score = 3;
+	google.protobuf.Timestamp rank_update_time = 4;
 }
 
 message CreateHolderRequest {
@@ -119,6 +119,15 @@ message BrowseLeaderboardRequest {
 }
 
 message BrowseLeaderboardResponse {
+	Leaderboard leaderboard = 1;
+}
+
+message BrowseIndexesLeaderboardRequest {
+	string season = 1;
+	repeated int32 indexes = 2 [packed=true];
+}
+
+message BrowseIndexesLeaderboardResponse {
 	Leaderboard leaderboard = 1;
 }
 
@@ -188,6 +197,19 @@ message RetrieveScoresByPercentilesResponse {
 	google.protobuf.Timestamp rank_update_time = 3;
 }
 
+message RetrieveQuantileScoresRequest {
+	string season = 1;
+	repeated QuantileScore quantile_scores = 2;
+}
+
+message RetrieveQuantileScoresResponse {
+	repeated QuantileScore quantil_scores = 1;
+}
+
+message GetSeasonRequest {
+	string name = 1;
+}
+
 service LeaderboardService {
 	rpc CreateHolder(CreateHolderRequest) returns (Holder);
 	rpc UpdateHolder(UpdateHolderRequest) returns (Holder);
@@ -198,6 +220,7 @@ service LeaderboardService {
 	rpc GetScore(GetScoreRequest) returns (Score);
 	rpc DeleteScore(DeleteScoreRequest) returns (google.protobuf.Empty);
 	rpc BrowseLeaderboard(BrowseLeaderboardRequest) returns (BrowseLeaderboardResponse);
+	rpc BrowseIndexesLeaderboard(BrowseIndexesLeaderboardRequest) returns (BrowseIndexesLeaderboardResponse);
 	rpc PurgeScoreHolders(PurgeScoreHoldersRequest) returns (PurgeScoreHoldersResponse);
 	rpc PurgeUserScores(PurgeUserScoresRequest) returns (PurgeUserScoresResponse);
 	rpc GetCategory(GetCategoryRequest) returns (Category);
@@ -206,6 +229,6 @@ service LeaderboardService {
 	rpc FetchRankScore(FetchRankScoreRequest) returns (FetchRankScoreResponse);
 	rpc FindRankScores(FindRankScoresRequest) returns (FindRankScoresResponse);
 	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse);
-	// rpc RetrieveQuantileScore;
-	// rpc GetSeason;
+	rpc RetrieveQuantileScores(RetrieveQuantileScoresRequest) returns (RetrieveQuantileScoresResponse);
+	rpc GetSeason(GetSeasonRequest) returns (Season);
 }

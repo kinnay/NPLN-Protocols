@@ -6,6 +6,13 @@ package nn.npln.leaderboard.v1;
 import "google/protobuf/timestamp.proto";
 import "proto/common/value.proto";
 
+enum ShrinkState {
+	SHRINK_STATE_UNSPECIFIED = 0;
+	NOT_YET = 1;
+	SHRINKING = 2;
+	SHRUNK = 3;
+}
+
 message Category {
 	string name = 1;
 	int32 current_season = 2;
@@ -54,4 +61,16 @@ message Score {
 	google.protobuf.Timestamp update_time = 6;
 	Holder holder_detail = 7;
 	Rank rank = 8;
+}
+
+message Season {
+	string name = 1;
+	bool read_final_permission = 2;
+	bool write_final_permission = 3;
+	google.protobuf.Timestamp rank_update_time = 4;
+	int32 count = 5;
+	google.protobuf.Timestamp season_start_time = 8;
+	google.protobuf.Timestamp season_end_time = 9;
+	ShrinkState shrink_state = 10;
+	bool registration_closed = 11;
 }
