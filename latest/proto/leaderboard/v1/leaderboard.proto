@@ -203,7 +203,7 @@ message RetrieveQuantileScoresRequest {
 }
 
 message RetrieveQuantileScoresResponse {
-	repeated QuantileScore quantil_scores = 1;
+	repeated QuantileScore quantile_scores = 1;
 }
 
 message GetSeasonRequest {
