@@ -210,6 +210,20 @@ message GetSeasonRequest {
 	string name = 1;
 }
 
+message EstimateScoreRankRequest {
+	string season = 1;
+	int64 score = 2;
+}
+
+message EstimateScoreRankResponse {
+	EstimatedScoreRank estimated_score_rank = 1;
+}
+
+message EstimatedScoreRank {
+	int64 score = 1;
+	int64 estimated_rank = 2;
+}
+
 service LeaderboardService {
 	rpc CreateHolder(CreateHolderRequest) returns (Holder);
 	rpc UpdateHolder(UpdateHolderRequest) returns (Holder);
@@ -231,4 +245,5 @@ service LeaderboardService {
 	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse);
 	rpc RetrieveQuantileScores(RetrieveQuantileScoresRequest) returns (RetrieveQuantileScoresResponse);
 	rpc GetSeason(GetSeasonRequest) returns (Season);
+	rpc EstimateScoreRank(EstimateScoreRankRequest) returns (EstimateScoreRankResponse);
 }
