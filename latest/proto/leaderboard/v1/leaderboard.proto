@@ -242,7 +242,7 @@ service LeaderboardService {
 	rpc BatchGetCharts(BatchGetChartsRequest) returns (BatchGetChartsResponse);
 	rpc FetchRankScore(FetchRankScoreRequest) returns (FetchRankScoreResponse);
 	rpc FindRankScores(FindRankScoresRequest) returns (FindRankScoresResponse);
-	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse);
+	rpc RetrieveScoresByPercentiles(RetrieveScoresByPercentilesRequest) returns (RetrieveScoresByPercentilesResponse); // Removed in 1.45.0
 	rpc RetrieveQuantileScores(RetrieveQuantileScoresRequest) returns (RetrieveQuantileScoresResponse);
 	rpc GetSeason(GetSeasonRequest) returns (Season);
 	rpc EstimateScoreRank(EstimateScoreRankRequest) returns (EstimateScoreRankResponse);

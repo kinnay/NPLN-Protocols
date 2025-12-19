@@ -72,5 +72,5 @@ message Season {
 	google.protobuf.Timestamp season_start_time = 8;
 	google.protobuf.Timestamp season_end_time = 9;
 	ShrinkState shrink_state = 10;
-	bool registration_closed = 11;
+	bool registration_closed = 12;
 }

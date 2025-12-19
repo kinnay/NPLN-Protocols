@@ -73,10 +73,19 @@ message IssueAttachmentUriResponse {
 
 message BulkIssueAttachmentUriRequest {
 	repeated IssueAttachmentUriRequest requests = 1;
+	bool allow_missing = 2;
 }
 
 message BulkIssueAttachmentUriResponse {
 	repeated string uri = 1;
+	repeated BulkIssueAttachmentUriResult results = 2;
+}
+
+message BulkIssueAttachmentUriResult {
+	oneof result {
+		string uri = 1;
+		string missing = 2;
+	}
 }
 
 message IssueUploadUriRequest {
@@ -98,6 +107,21 @@ message GetDocumentShortAliasRequest {
 	string name = 1;
 }
 
+message BulkGetDocumentShortAliasesRequest {
+	repeated GetDocumentShortAliasRequest requests = 1;
+}
+
+message BulkGetDocumentShortAliasesResponse {
+	repeated BulkGetDocumentShortAliasesResult results = 1;
+}
+
+message BulkGetDocumentShortAliasesResult {
+	oneof result {
+		DocumentShortAlias found = 1;
+		string missing = 2;
+	}
+}
+
 service Ugcstore {
 	rpc GetDocument(GetDocumentRequest) returns (Document);
 	rpc BulkGetDocuments(BulkGetDocumentsRequest) returns (stream BulkGetDocumentsResponse);
@@ -108,5 +132,5 @@ service Ugcstore {
 	rpc IssueUploadUri(IssueUploadUriRequest) returns (IssueUploadUriResponse);
 	rpc CreateDocumentShortAlias(CreateDocumentShortAliasRequest) returns (DocumentShortAlias);
 	rpc GetDocumentShortAlias(GetDocumentShortAliasRequest) returns (DocumentShortAlias);
-	// rpc BulkGetDocumentShortAliases;
+	rpc BulkGetDocumentShortAliases(BulkGetDocumentShortAliasesRequest) returns (BulkGetDocumentShortAliasesResponse);
 }

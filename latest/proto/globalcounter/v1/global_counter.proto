@@ -5,6 +5,7 @@ package nn.npln.globalcounter.v1;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/wrappers.proto";
 import "proto/globalcounter/v1/resources.proto";
 
 message GetCounterRequest {
@@ -124,6 +125,11 @@ message PurgeCountHoldersRequest {
 message PurgeCountHoldersResponse {
 	int32 purge_count = 1;
 	repeated string purge_sample = 2;
+}
+
+message ForwardCurrentSeasonRequest {
+	string counter = 1;
+	google.protobuf.Int32Value current_season_id = 2;
 }
 
 service GlobalCounterService {

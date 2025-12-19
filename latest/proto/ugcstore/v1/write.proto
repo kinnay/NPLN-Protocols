@@ -20,7 +20,14 @@ message FieldTransform {
 		nn.npln.common.Value increment = 3;
 		nn.npln.common.Value maximum = 4;
 		nn.npln.common.Value minimum = 5;
-		nn.npln.common.Value buffered_increment = 6;
+		nn.npln.common.Value buffered_increment = 6; // Removed in 1.46.0
+	}
+}
+
+message BufferedFieldTransform {
+	string field_path = 1;
+	oneof transform_type {
+		nn.npln.common.Value increment = 2;
 	}
 }
 
@@ -53,6 +60,7 @@ message SetAttachmentRequest {
 
 message UnsetAttachmentRequest {
 	string parent = 1;
+	bool force = 3;
 }
 
 message ImportAttachmentRequest {
@@ -64,6 +72,7 @@ message ImportAttachmentRequest {
 message TransformDocumentRequest {
 	string name = 1;
 	repeated FieldTransform field_transforms = 2;
+	repeated BufferedFieldTransform buffered_field_transforms = 3;
 }
 
 message WriteOperation {
