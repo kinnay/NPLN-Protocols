@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/wrappers.proto";
 
+import "proto/common/value.proto";
 import "proto/timber/v1/resources.proto";
 
 
@@ -37,6 +38,8 @@ message SearchCompetitionsRequest {
 	string page_token = 3;
 	int32 view = 4;
 	repeated CompetitionType competition_types = 6;
+	string query_type = 7;
+	nn.npln.common.MapValue query_params = 8;
 }
 
 message SearchCompetitionsResponse {
@@ -81,7 +84,8 @@ message ListCompetitionInvitationsRequest {
 }
 
 message ListCompetitionInvitationsResponse {
-	// [UNKNOWN]
+	repeated CompetitionInvitation competition_invitations = 1;
+	string next_page_token = 2;
 }
 
 message DeleteCompetitionInvitationRequest {
