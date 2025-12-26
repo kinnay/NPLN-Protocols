@@ -1,0 +1,144 @@
+
+syntax = "proto3";
+
+package nn.npln.ikaros.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "proto/common/value.proto";
+import "proto/ikaros/v1/resources.proto";
+
+
+message BatchCreateCompetitionInvitationsRequest {
+	string parent = 1;
+	repeated CreateCompetitionInvitationRequest requests = 2;
+}
+
+message BatchCreateCompetitionInvitationsResponse {
+	repeated CompetitionInvitation competition_invitations = 1;
+}
+
+message CreateCompetitionInvitationRequest {
+	string parent = 1;
+	CompetitionInvitation competition_invitation = 2;
+	string competition_invitation_id = 3;
+}
+
+message CreateCompetitionRequest {
+	string parent = 1;
+	Competition competition = 2;
+	string competition_id = 3;
+}
+
+message DeleteCompetitionInvitationRequest {
+	string name = 1;
+}
+
+message DeleteCompetitionRequest {
+	string name = 1;
+	bool force = 2;
+}
+
+message FinalizeCompetitionRequest {
+	string name = 1;
+	bool force = 2;
+}
+
+message GetCompetitionAliasRequest {
+	string name = 1;
+}
+
+message GetCompetitionInvitationRequest {
+	string name = 1;
+}
+
+message GetCompetitionNotificationRequest {
+	string name = 1;
+}
+
+message GetCompetitionParticipantRequest {
+	string name = 1;
+}
+
+message GetCompetitionRequest {
+	string name = 1;
+	CompetitionView view = 2;
+}
+
+message GetCompetitionUserRequest {
+	string name = 1;
+	google.protobuf.FieldMask read_mask = 2;
+}
+
+message ListCompetitionInvitationsRequest {
+	string parent = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+}
+
+message ListCompetitionInvitationsResponse {
+	repeated CompetitionInvitation competition_invitations = 1;
+	string next_page_token = 2;
+}
+
+message SearchCompetitionsRequest {
+	string tenant = 1;
+	int32 page_size = 2;
+	string page_token = 3;
+	CompetitionView view = 4;
+	repeated CompetitionType competition_types = 6 [packed=true];
+	string query_type = 7;
+	nn.npln.common.MapValue query_params = 8;
+}
+
+message SearchCompetitionsResponse {
+	repeated Competition competitions = 1;
+	string next_page_token = 2;
+}
+
+message UpdateCompetitionNotificationRequest {
+	CompetitionNotification competition_notification = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateCompetitionRequest {
+	Competition competition = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateCompetitionUserRequest {
+	CompetitionUser competition_user = 1;
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+service CompetitionService {
+	rpc GetCompetition(GetCompetitionRequest) returns (Competition);
+	rpc CreateCompetition(CreateCompetitionRequest) returns (Competition);
+	rpc UpdateCompetition(UpdateCompetitionRequest) returns (Competition);
+	rpc DeleteCompetition(DeleteCompetitionRequest) returns (google.protobuf.Empty);
+	rpc SearchCompetitions(SearchCompetitionsRequest) returns (SearchCompetitionsResponse);
+	// rpc HostCompetition(?) returns (?)
+	// rpc FinalizeCompetition(FinalizeCompetitionRequest) returns (?);
+	rpc GetCompetitionAlias(GetCompetitionAliasRequest) returns (CompetitionAlias);
+	rpc GetCompetitionInvitation(GetCompetitionInvitationRequest) returns (CompetitionInvitation);
+	rpc CreateCompetitionInvitation(CreateCompetitionInvitationRequest) returns (CompetitionInvitation);
+	rpc ListCompetitionInvitations(ListCompetitionInvitationsRequest) returns (ListCompetitionInvitationsResponse);
+	rpc DeleteCompetitionInvitation(DeleteCompetitionInvitationRequest) returns (google.protobuf.Empty);
+	rpc BatchCreateCompetitionInvitations(BatchCreateCompetitionInvitationsRequest) returns (BatchCreateCompetitionInvitationsResponse);
+	rpc GetCompetitionParticipant(GetCompetitionParticipantRequest) returns (CompetitionParticipant);
+	rpc CreateCompetitionParticipant(CreateCompetitionInvitationRequest) returns (CompetitionParticipant);
+	// rpc ActivateCompetitionParticipant(?) returns (?)
+	// rpc DeactivateCompetitionParticipant(?) returns (?)
+	// rpc CancelCompetitionParticipant(?) returns (?)
+	rpc GetCompetitionNotification(GetCompetitionNotificationRequest) returns (CompetitionNotification);
+	rpc UpdateCompetitionNotification(UpdateCompetitionNotificationRequest) returns (CompetitionNotification);
+	// rpc ReceiveCompetitionNtoification(?) returns (?)
+	// rpc InvalidateCompetitionNotification(?) returns (?)
+	rpc GetCompetitionUser(GetCompetitionUserRequest) returns (CompetitionUser);
+	// rpc CreateCompetitionUser(?) returns (?)
+	rpc UpdateCompetitionUser(UpdateCompetitionUserRequest) returns (CompetitionUser);
+	// rpc GetCompetitionUserBattleRecord(?) returns (?)
+	// rpc CreateCompetitionUserBattleRecord(?) returns (?)
+	// rpc UpdateCompetitionUserBattleRecord(?) returns (?)
+	// rpc FinishCompetitionUserBattleRecord(?) returns (?)
+}

@@ -1,0 +1,231 @@
+
+syntax = "proto3";
+
+package nn.npln.ikaros.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/value.proto";
+
+
+enum BattleBehavior {
+	option allow_alias = true;
+	BATTLE_BEHAVIOR_UNSPECIFIED = 0;
+	BEHAVIOR_SUCCESSFUL = 0;
+	BEHAVIOR_DISCONNECTED = 1;
+	BEHAVIOR_CHEATED = 2;
+	BEHAVIOR_DISCONNECTED_AND_CHEATED = 3;
+	BEHAVIOR_NO_CONTEST = 4;
+}
+
+enum BattleResult {
+	option allow_alias = true;
+	BATTLE_RESULT_UNSPECIFIED = 0;
+	BATTLE_LOSE = 0;
+	BATTLE_WIN = 1;
+	BATTLE_DRAW = 2;
+	BATTLE_NO_CONTEST = 3;
+}
+
+enum CompetitionType {
+	COMPETITION_TYPE_UNSPECIFIED = 0;
+	OFFICIAL = 1;
+	FRIENDLY = 2;
+	RANKED_SINGLES = 3;
+	RANKED_DOUBLES = 4;
+	CASUAL = 5;
+}
+
+enum CompetitionUserCategory {
+	COMPETITION_USER_CATEGORY_UNSPECIFIED = 0;
+	JUNIOR = 1;
+	SENIOR = 2;
+	MASTER = 3;
+}
+
+enum CompetitionView {
+	COMPETITION_VIEW_UNSPECIFIED = 0;
+	BASIC = 1;
+	FULL = 2;
+	SMALL = 3;
+}
+
+enum InviteeType {
+	INVITEE_TYPE_UNSPECIFIED = 0;
+	PLAYER = 1;
+	SPECTATOR = 2;
+}
+
+enum MatchingKeyCreator {
+	MATCHING_KEY_CREATOR_UNSPECIFIED = 0;
+	SERVER = 1;
+	OPERATOR = 2;
+}
+
+enum Permission {
+	PERMISSION_UNSPECIFIED = 0;
+	OWNER = 1;
+	INVITEES = 2;
+	ANYBODY = 3;
+}
+
+enum State {
+	STATE_UNSPECIFIED = 0;
+	ACCEPTED = 1;
+	ACTIVE = 2;
+	INACTIVE = 3;
+	CANCELLED = 4;
+	DELETED = 5;
+}
+
+message BattleDataLog {
+	string name = 1;
+	string competition = 2;
+	CompetitionType competition_type = 3;
+	repeated PersonalBattleResult normalized_battle_results = 4;
+	google.protobuf.Timestamp create_time = 5;
+	repeated BattleReport battle_reports = 6;
+	string matching_key = 7;
+}
+
+message BattleReport {
+	string reporter = 1;
+	repeated PersonalBattleResult personal_battle_results = 2;
+	bytes log = 3;
+}
+
+message Competition {
+	string name = 1;
+	string competition_alias = 2;
+	CompetitionType competition_type = 33;
+	int32 season = 5;
+	map<string, string> main_titles = 6;
+	map<string, string> sub_titles = 7;
+	Permission read_permission = 8;
+	Permission write_permission = 9;
+	bool searchable = 10;
+	repeated int32 participant_areas = 11 [packed=true];
+	repeated CompetitionUserCategory participant_categories = 34 [packed=true];
+	string max_participant_birthmonth = 12;
+	string min_participant_birthmonth = 13;
+	int32 participant_count = 14;
+	int32 max_participant_count = 15;
+	int32 min_participant_count = 16;
+	string matchmaking_config = 17;
+	MatchingKeyCreator matching_key_creator = 18;
+	repeated int32 matching_hours = 19 [packed=true];
+	int32 max_match_count = 20;
+	int32 max_daily_match_count = 21;
+	int32 required_match_count = 35;
+	int32 maintenance = 22;
+	bool explicit_finalization = 23;
+	nn.npln.common.MapValue application_data = 24;
+	google.protobuf.Timestamp create_time = 25;
+	google.protobuf.Timestamp update_time = 36;
+	google.protobuf.Timestamp start_participate_time = 26;
+	google.protobuf.Timestamp end_participate_time = 27;
+	google.protobuf.Timestamp start_battle_time = 28;
+	google.protobuf.Timestamp end_battle_time = 29;
+	google.protobuf.Timestamp aggregate_time = 30;
+	google.protobuf.Timestamp finalize_time = 31;
+	string owner_participant = 32;
+}
+
+message CompetitionAlias {
+	string name = 1;
+	string competition = 2;
+}
+
+message CompetitionAlternativeResult {
+	string name = 1;
+	int32 rank = 2;
+	string etag = 99;
+}
+
+message CompetitionInvitation {
+	string name = 1;
+	InviteeType invitee_type = 2;
+	google.protobuf.Timestamp create_time = 3;
+}
+
+message CompetitionNotification {
+	message CompetitionEliminationNotification {}
+	message CompetitionInvalidNotification {}
+	message CompetitionScheduleNotification {
+		google.protobuf.Timestamp start_battle_time = 1;
+	}
+
+	string name = 1;
+	google.protobuf.Timestamp update_time = 2;
+	string etag = 99;
+	oneof notification {
+		CompetitionInvalidNotification invalid = 3;
+		string matching_key = 4;
+		CompetitionScheduleNotification schedule = 5;
+		CompetitionEliminationNotification elimination = 6;
+	}
+}
+
+message CompetitionParticipant {
+	string name = 1;
+	int32 slot = 2;
+	string device_id = 3;
+	string utc_offset = 4;
+	bytes participant_binary = 5;
+	State state = 6;
+	google.protobuf.Timestamp create_time = 7;
+	google.protobuf.Timestamp activate_time = 8;
+	google.protobuf.Timestamp deactivate_time = 9;
+	google.protobuf.Timestamp cancel_time = 10;
+	google.protobuf.Timestamp delete_time = 11;
+	bool finalized = 12;
+	int32 rating = 13;
+	int32 rank = 14;
+	int32 match_count = 15;
+	int32 win_count = 16;
+	int32 lose_count = 17;
+	int32 draw_count = 18;
+	int32 disconnect_count = 19;
+	int32 no_contest_count = 20;
+	int32 win_streak_count = 21;
+	int32 lose_streak_count = 22;
+	int32 point = 23;
+	int32 max_point = 24;
+	CompetitionUserCategory category = 25;
+	int32 area = 26;
+}
+
+message CompetitionUser {
+	message BattleStats {
+		int32 battle_count = 1;
+		int32 disconnect_count = 2;
+	}
+
+	string name = 1;
+	CompetitionUserCategory category = 14;
+	string birthmonth = 2;
+	int32 area = 3;
+	string language_code = 4;
+	string current_official_competition = 5;
+	string last_official_competition = 6;
+	string current_friendly_competition = 7;
+	string last_friendly_competition = 8;
+	string current_ranked_singles_competition = 15;
+	string last_ranked_singles_competition = 16;
+	string current_ranked_doubles_competition = 17;
+	string last_ranked_doubles_competition = 18;
+	BattleStats battle_stats = 13;
+	google.protobuf.Timestamp create_time = 19;
+}
+
+message CompetitionUserBattleRecord {
+	string name = 1;
+	bool disconnect = 2;
+}
+
+message PersonalBattleResult {
+	string user = 1;
+	BattleResult result = 2;
+	BattleBehavior behavior = 3;
+	int32 rank = 4;
+	int32 point = 5;
+}
