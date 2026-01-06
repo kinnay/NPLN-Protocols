@@ -63,4 +63,5 @@ service Schedule {
 	rpc SelectVsSchedules(SelectVsSchedulesRequest) returns (SelectVsSchedulesResponse);
 	rpc SelectCoopSchedules(SelectCoopSchedulesRequest) returns (SelectCoopSchedulesResponse);
 	rpc SelectSeasonSchedules(SelectSeasonSchedulesRequest) returns (SelectSeasonSchedulesResponse);
+	// rpc SelectLeagueSchedules(?) returns (?);
 }

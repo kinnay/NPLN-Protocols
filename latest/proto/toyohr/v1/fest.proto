@@ -39,4 +39,5 @@ service FestService {
 	rpc GetFestResult(GetFestResultRequest) returns (FestResult);
 	rpc SelectFestSchedule(SelectFestScheduleRequest) returns (SelectFestScheduleResponse);
 	rpc GetFestDecryptionKey(GetFestDecryptionKeyRequest) returns (FestDecryptionKey);
+	// rpc SelectFestBreakingNews(?) returns (?);
 }

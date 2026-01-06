@@ -108,6 +108,10 @@ service GameRecord {
 	rpc InitializeAttributes(InitializeAttributesRequest) returns (InitializeAttributesResponse);
 	rpc CreateFestPowerMeasurement(CreateFestPowerMeasurementRequest) returns (FestPowerMeasurement);
 	rpc InitializeTag(InitializeTagRequest) returns (InitializeTagResponse);
+	// rpc PrepareTag(?) returns (?);
 	rpc GetTag(GetTagRequest) returns (GetTagResponse);
 	rpc SelectTags(SelectTagsRequest) returns (SelectTagsResponse);
+	// rpc PrepareBankaraPowerMeasurement(?) returns (?);
+	// rpc PrepareLeaguePowerMeasurement(?) returns (?);
+	// rpc ResetUdemae(?) returns (?);
 }
