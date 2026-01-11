@@ -24,7 +24,9 @@ message SelectSnapshotRequest {
 }
 
 message SelectSnapshotResponse {
-	// [UNKNOWN]
+	string name = 1;
+	string string_value = 2;
+	string language = 3;
 }
 
 service UserScreening {
