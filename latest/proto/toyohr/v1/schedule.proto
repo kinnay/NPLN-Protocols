@@ -59,10 +59,19 @@ message SelectSeasonSchedulesResponse {
 	string etag = 3;
 }
 
+message SelectLeagueSchedulesRequest {
+    string target = 1;
+    google.protobuf.Timestamp current_time = 2;
+}
+
+message SelectLeagueSchedulesResponse {
+    repeated LeagueSchedule schedules = 1;
+}
+
 service Schedule {
 	rpc SelectVsParams(SelectVsParamsRequest) returns (SelectVsParamsResponse);
 	rpc SelectVsSchedules(SelectVsSchedulesRequest) returns (SelectVsSchedulesResponse);
 	rpc SelectCoopSchedules(SelectCoopSchedulesRequest) returns (SelectCoopSchedulesResponse);
 	rpc SelectSeasonSchedules(SelectSeasonSchedulesRequest) returns (SelectSeasonSchedulesResponse);
-	// rpc SelectLeagueSchedules(?) returns (?);
+	rpc SelectLeagueSchedules(SelectLeagueSchedulesRequest) returns (SelectLeagueSchedulesResponse);
 }
