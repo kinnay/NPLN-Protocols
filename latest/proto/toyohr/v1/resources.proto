@@ -67,6 +67,24 @@ message CoopSchedule {
 	google.protobuf.Timestamp timestamp = 10;
 }
 
+message LeagueSchedule {
+	message Slot {
+		string name = 1;
+		google.protobuf.Timestamp start_time = 2;
+		google.protobuf.Timestamp end_time = 3;
+	}
+
+	string name = 1;
+	int32 rule = 2;
+	repeated int32 stages = 3;
+	nn.npln.common.MapValue attributes = 4;
+	string schedule_set_id = 5;
+	google.protobuf.Timestamp timestamp = 6;
+	repeated Slot slots = 7;
+	google.protobuf.Timestamp start_time = 8;
+	google.protobuf.Timestamp end_time = 9;
+}
+
 message FestDecryptionKey {
 	string name = 1;
 	string notice_key = 2;
