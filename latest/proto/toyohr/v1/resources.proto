@@ -46,6 +46,14 @@ message CoopSchedule {
 		repeated int64 rewards = 8;
 		nn.npln.common.MapValue attributes = 9;
 	}
+
+	message TeamContest {
+		int32 stage = 2;
+		repeated int64 main_weapons = 4;
+		int32 kuma_weapon = 5;
+		repeated int64 rewards = 7;
+		nn.npln.common.MapValue attributes = 8;
+	}
 	
 	string name = 1;
 	int32 unk = 2;
@@ -54,6 +62,7 @@ message CoopSchedule {
 	google.protobuf.Timestamp end_time = 5;
 	Normal normal = 6;
 	BigRun big_run = 7;
+	TeamContest team_contest = 8;
 	string shift_id = 9;
 	google.protobuf.Timestamp timestamp = 10;
 }
