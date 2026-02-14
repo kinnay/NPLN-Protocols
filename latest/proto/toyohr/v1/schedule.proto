@@ -50,6 +50,7 @@ message SelectSeasonSchedulesRequest {
 	string etag = 2;
 	google.protobuf.Timestamp current_time = 3;
 	int32 season_schedule_count = 4;
+	string target = 5;
 }
 
 message SelectSeasonSchedulesResponse {
