@@ -13,7 +13,22 @@ message RecvMessageRequest {
 }
 
 message RecvMessageResponse {
-	// [UNKNOWN]
+	oneof payload {
+		ReceivedMessage message = 1;
+		KeepAlive keep_alive = 2;
+  	}
+}
+
+message ReceivedMessage {
+  MessageBody message_body = 1;
+  string sender_user = 2;
+  string message_resume_token = 4;
+  google.protobuf.Timestamp send_time = 5;
+}
+
+message KeepAlive {
+  google.protobuf.Duration idle_timeout = 1;
+  string message_resume_token = 2;
 }
 
 message SendMessageRequest {
