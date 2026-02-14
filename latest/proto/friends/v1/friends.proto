@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "proto/friends/v1/resources.proto";
 import "proto/common/resources.proto";
+import "google/protobuf/duration.proto";
 
 option go_package = "npln.nintendo.net/npln-practice/proto/friends/v1;friends";
 option cc_enable_arenas = true;
@@ -58,6 +59,7 @@ message SubscribeFriendUsersResponse {
 	
 	repeated FriendAccount friend_accounts = 1;
 	repeated BlockingAccount blocking_accounts = 2;
+	google.protobuf.Duration keep_alive_interval = 3;
 }
 
 service Friends {
