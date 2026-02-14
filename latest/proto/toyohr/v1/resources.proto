@@ -94,6 +94,7 @@ message FestResult {
 	HonsaiMidtermResult honsai_midterm = 3;
 	HonsaiFinalResult honsai_final = 4;
 	OverallResult overall = 5;
+	int32 unk = 6;
 }
 
 message FestSchedule {
