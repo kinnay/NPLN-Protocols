@@ -177,3 +177,11 @@ message Token {
 	string refresh_token = 3;
 	google.protobuf.Duration ttl = 4;
 }
+
+message Round {
+	string unk1 = 1;
+	string unk2 = 2;
+	string unk3 = 3;
+	repeated string unk4 = 4;
+	nn.npln.common.MapValue fields = 5;
+}

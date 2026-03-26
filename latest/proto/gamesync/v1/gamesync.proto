@@ -141,6 +141,10 @@ message DeleteTargetRequest {
 	string name = 1;
 }
 
+message CreateRoundRequest {
+	Round round = 1;
+}
+
 service Gamesync {
 	rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse);
 	rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
@@ -154,5 +158,5 @@ service Gamesync {
 	rpc CommitTransaction(CommitTransactionRequest) returns (CommitTransactionResponse);
 	rpc RollbackTransaction(RollbackTransactionRequest) returns (google.protobuf.Empty);
 	rpc KeepUserSession(stream KeepUserSessionRequest) returns (stream KeepUserSessionResponse);
-	// rpc CreateRound;
+	rpc CreateRound(CreateRoundRequest) returns (Round);
 }
